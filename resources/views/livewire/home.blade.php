@@ -4,8 +4,8 @@
             <img
                 src="{{ asset('images/home-hero.jpg') }}"
                 alt="Potret M. Natsir Kongah berdiri di ruang kerja"
-                width="1600"
-                height="900"
+                width="1200"
+                height="675"
                 fetchpriority="high"
                 class="absolute inset-0 h-full w-full object-cover object-[72%_center] sm:object-[70%_center]"
             >
