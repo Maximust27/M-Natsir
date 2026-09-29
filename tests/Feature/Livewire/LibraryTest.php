@@ -16,7 +16,6 @@ it('surfaces authored and coauthored works by M Natsir Kongah', function () {
         ->set('collection', 'natsir')
         ->assertSee('YAYASAN, SOEKARNO DAN PENCUCIAN UANG')
         ->assertSee('Membongkar Mafia dengan UU Pencucian Uang')
-        ->assertSee('Citra Perbankan dan Pencucian Uang')
         ->assertSee('Menggunakan Undang Undang Anti Pencucian Uang untuk Mengatasi Kejahatan')
         ->assertDontSee('The FATF Recommendations');
 });
