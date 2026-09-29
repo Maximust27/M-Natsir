@@ -21,11 +21,11 @@
                 Knowledge Pillars
             </h2>
             <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
-                <a href="#knowledge-pillars" class="min-h-8 transition hover:text-ink">Anti-Money Laundering</a>
-                <a href="#knowledge-pillars" class="min-h-8 transition hover:text-ink">Professional Money Laundering</a>
-                <a href="#featured-writings" class="min-h-8 transition hover:text-ink">Financial Intelligence</a>
-                <a href="#featured-writings" class="min-h-8 transition hover:text-ink">White-Collar Crime</a>
-                <a href="#knowledge-pillars" class="min-h-8 transition hover:text-ink">Future Crime (AI &amp; Crypto)</a>
+                <a href="{{ route('home') }}#knowledge-pillars" class="min-h-8 transition hover:text-ink">Anti-Money Laundering</a>
+                <a href="{{ route('home') }}#knowledge-pillars" class="min-h-8 transition hover:text-ink">Professional Money Laundering</a>
+                <a href="{{ route('home') }}#featured-writings" class="min-h-8 transition hover:text-ink">Financial Intelligence</a>
+                <a href="{{ route('home') }}#featured-writings" class="min-h-8 transition hover:text-ink">White-Collar Crime</a>
+                <a href="{{ route('home') }}#knowledge-pillars" class="min-h-8 transition hover:text-ink">Future Crime (AI &amp; Crypto)</a>
             </div>
         </div>
 
@@ -34,10 +34,10 @@
                 Navigasi Situs
             </h2>
             <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
-                <a href="#featured-writings" class="min-h-8 transition hover:text-ink">Articles Archive</a>
-                <a href="#spotlight" class="min-h-8 transition hover:text-ink">Sources Library</a>
-                <a href="#about" class="min-h-8 font-semibold text-ink transition hover:text-black">About</a>
-                <a href="#contact" class="min-h-8 transition hover:text-ink">Contact &amp; Media Hub</a>
+                <a href="{{ route('home') }}#featured-writings" class="min-h-8 transition hover:text-ink">Articles Archive</a>
+                <a href="{{ route('home') }}#spotlight" class="min-h-8 transition hover:text-ink">Sources Library</a>
+                <a href="{{ route('about') }}" wire:navigate class="min-h-8 font-semibold text-ink transition hover:text-black">About</a>
+                <a href="{{ route('home') }}#contact" class="min-h-8 transition hover:text-ink">Contact &amp; Media Hub</a>
             </div>
             <div class="mt-7 grid gap-2 text-sm leading-6 text-slate-600">
                 <a href="#" class="min-h-8 transition hover:text-ink">Privacy Policy</a>

@@ -138,7 +138,8 @@
                 </blockquote>
 
                 <a
-                    href="#"
+                    href="{{ route('about') }}"
+                    wire:navigate
                     class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-semibold text-ink hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                 >
                     Baca Profil Lengkap
