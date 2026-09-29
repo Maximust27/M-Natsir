@@ -44,7 +44,6 @@
             <x-ui.nav-link :href="route('about')" :active="request()->routeIs('about')" wire:navigate>About</x-ui.nav-link>
             <x-ui.nav-link :href="route('home') . '#featured-writings'">Articles</x-ui.nav-link>
             <x-ui.nav-link :href="route('home') . '#spotlight'">Library</x-ui.nav-link>
-            <x-ui.nav-link :href="route('home') . '#featured-writings'">Cases</x-ui.nav-link>
             <x-ui.nav-link :href="route('home') . '#contact'">Media</x-ui.nav-link>
 
             <x-ui.button :href="route('home') . '#contact'" variant="primary" size="md" class="ml-2">
