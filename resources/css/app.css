@@ -1,9 +1,62 @@
 @import 'tailwindcss';
 
+@source '../views/**/*.blade.php';
+@source '../../app/**/*.php';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-serif: 'Newsreader', Georgia, Cambria, 'Times New Roman', serif;
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    --color-paper: #fbfbfa;
+    --color-ink: #0e1c2f;
+    --color-line: #dfe5eb;
+    --color-accent: #b7662c;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        margin: 0;
+        background: var(--color-paper);
+        color: #3f4650;
+        font-family: var(--font-sans);
+        text-rendering: optimizeLegibility;
+    }
+
+    button,
+    a {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    .site-container {
+        width: min(calc(100% - 2rem), 102.5rem);
+        margin-inline: auto;
+    }
+}
+
+@media (min-width: 64rem) {
+    .site-container {
+        width: min(calc(100% - 5.5rem), 102.5rem);
+    }
+}
+
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
 }
