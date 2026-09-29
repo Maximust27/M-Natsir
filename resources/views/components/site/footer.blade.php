@@ -34,7 +34,7 @@
                 Navigasi Situs
             </h2>
             <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
-                <a href="{{ route('home') }}#featured-writings" class="min-h-8 transition hover:text-ink">Articles Archive</a>
+                <a href="{{ route('articles') }}" wire:navigate class="min-h-8 transition hover:text-ink">Articles Archive</a>
                 <a href="{{ route('home') }}#spotlight" class="min-h-8 transition hover:text-ink">Sources Library</a>
                 <a href="{{ route('about') }}" wire:navigate class="min-h-8 font-semibold text-ink transition hover:text-black">About</a>
                 <a href="{{ route('home') }}#contact" class="min-h-8 transition hover:text-ink">Contact &amp; Media Hub</a>
