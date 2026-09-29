@@ -1,15 +1,15 @@
 <header class="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur" x-data="{ mobileOpen: false }">
-    <div class="site-container flex min-h-24 items-center justify-between gap-6 py-4">
+    <div class="site-container flex min-h-20 items-center justify-between gap-6 py-3">
         <a
             href="{{ route('home') }}"
             wire:navigate
             class="shrink-0 rounded-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
             aria-label="M. Natsir Kongah - Home"
         >
-            <span class="block font-serif text-[1.75rem] font-semibold leading-none tracking-[-0.035em] sm:text-[1.95rem]">
+            <span class="block font-serif text-[1.45rem] font-semibold leading-none tracking-[-0.035em] sm:text-[1.65rem]">
                 M. NATSIR KONGAH
             </span>
-            <span class="mt-2 block font-mono text-[11px] font-medium leading-[1.45] tracking-[0.045em] text-slate-500 sm:text-xs">
+            <span class="mt-2 block font-mono text-[10px] font-medium leading-[1.45] tracking-[0.045em] text-slate-500 sm:text-[11px]">
                 Financial Intelligence Hub
             </span>
         </a>
