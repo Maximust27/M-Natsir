@@ -1,9 +1,10 @@
-name: Verify Articles
+name: Verify Site Features
 
 on:
   push:
     branches:
       - feat/articles-livewire
+      - feat/library-livewire
   pull_request:
     branches:
       - main
