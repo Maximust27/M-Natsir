@@ -43,7 +43,7 @@
             </x-ui.nav-link>
             <x-ui.nav-link :href="route('about')" :active="request()->routeIs('about')" wire:navigate>About</x-ui.nav-link>
             <x-ui.nav-link :href="route('articles')" :active="request()->routeIs('articles')" wire:navigate>Articles</x-ui.nav-link>
-            <x-ui.nav-link :href="route('home') . '#spotlight'">Library</x-ui.nav-link>
+            <x-ui.nav-link :href="route('library')" :active="request()->routeIs('library')" wire:navigate>Library</x-ui.nav-link>
             <x-ui.nav-link :href="route('home') . '#contact'">Media</x-ui.nav-link>
 
             <x-ui.button :href="route('home') . '#contact'" variant="primary" size="md" class="ml-2">
@@ -82,7 +82,7 @@
             </x-ui.nav-link>
             <x-ui.nav-link :href="route('about')" :active="request()->routeIs('about')" wire:navigate class="w-full justify-start px-3" @click="mobileOpen = false">About</x-ui.nav-link>
             <x-ui.nav-link :href="route('articles')" :active="request()->routeIs('articles')" wire:navigate class="w-full justify-start px-3" @click="mobileOpen = false">Articles</x-ui.nav-link>
-            <x-ui.nav-link :href="route('home') . '#spotlight'" class="w-full justify-start px-3" @click="mobileOpen = false">Library</x-ui.nav-link>
+            <x-ui.nav-link :href="route('library')" :active="request()->routeIs('library')" wire:navigate class="w-full justify-start px-3" @click="mobileOpen = false">Library</x-ui.nav-link>
             <x-ui.nav-link :href="route('home') . '#featured-writings'" class="w-full justify-start px-3" @click="mobileOpen = false">Cases</x-ui.nav-link>
             <x-ui.nav-link :href="route('home') . '#contact'" class="w-full justify-start px-3" @click="mobileOpen = false">Media</x-ui.nav-link>
 
