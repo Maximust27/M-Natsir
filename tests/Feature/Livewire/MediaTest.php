@@ -84,3 +84,10 @@ it('links media navigation to the top level route', function () {
         ->assertSee('Articles')
         ->assertSee('Library');
 });
+
+it('does not duplicate the featured appearance in the default archive grid', function () {
+    $component = Livewire::test(Media::class);
+
+    expect(substr_count($component->html(), 'Sinergi PPATK dan Pikiran Rakyat: Membangun Kesadaran Publik Akan Bahayanya Pencucian Uang'))
+        ->toBe(1);
+});
