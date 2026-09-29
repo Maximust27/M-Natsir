@@ -19,6 +19,20 @@ it('filters articles by category', function () {
         ->assertDontSee('Ketika Judi Online Bertemu Kripto');
 });
 
+it('includes older verified media columns by M Natsir Kongah', function () {
+    Livewire::test(Articles::class)
+        ->set('search', 'watergate')
+        ->assertSee('Campaign funding: Lesson from Watergate')
+        ->assertDontSee('Ketika Judi Online Bertemu Kripto');
+});
+
+it('includes bibliographically verified media writing when the original page is unavailable', function () {
+    Livewire::test(Articles::class)
+        ->set('search', 'penegakan hukum pencucian uang')
+        ->assertSee('Penegakan Hukum Pencucian Uang')
+        ->assertSee('Jejak bibliografi');
+});
+
 it('searches across article titles and summaries', function () {
     Livewire::test(Articles::class)
         ->set('search', 'judi online')
@@ -35,15 +49,11 @@ it('ignores unknown article categories', function () {
 it('paginates the article archive within valid bounds', function () {
     Livewire::test(Articles::class)
         ->assertSet('page', 1)
-        ->call('nextPage')
-        ->assertSet('page', 2)
-        ->call('nextPage')
-        ->assertSet('page', 2)
-        ->call('previousPage')
-        ->assertSet('page', 1)
-        ->call('previousPage')
-        ->assertSet('page', 1)
         ->call('goToPage', 99)
+        ->assertSet('page', 3)
+        ->call('nextPage')
+        ->assertSet('page', 3)
+        ->call('previousPage')
         ->assertSet('page', 2)
         ->call('goToPage', 0)
         ->assertSet('page', 1);
