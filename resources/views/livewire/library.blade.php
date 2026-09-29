@@ -1,7 +1,7 @@
 <div>
     <section class="border-b border-line bg-white">
         <div class="site-container py-14 sm:py-16 lg:py-20">
-            <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
+            <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_30rem] lg:items-end">
                 <div class="max-w-4xl">
                     <p class="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-accent">
                         Research Desk
@@ -12,22 +12,26 @@
                     </h1>
 
                     <p class="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
-                        Koleksi sumber primer, pedoman, penilaian risiko, dan referensi untuk riset kejahatan keuangan.
+                        Karya M. Natsir Kongah, kontribusi institusional, dan sumber rujukan untuk riset kejahatan keuangan.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-3 divide-x divide-line border border-line bg-paper">
+                <div class="grid grid-cols-2 divide-x divide-y divide-line border border-line bg-paper sm:grid-cols-4 sm:divide-y-0">
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $totalResources }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Sumber</span>
+                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Total</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ count($institutions) - 1 }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Institusi</span>
+                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $natsirWorksCount }}</span>
+                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Karya Natsir</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ count($resourceTypes) - 1 }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Jenis</span>
+                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $institutionalCount }}</span>
+                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Institusional</span>
+                    </div>
+                    <div class="px-4 py-4 text-center">
+                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $referenceCount }}</span>
+                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Referensi</span>
                     </div>
                 </div>
             </div>
@@ -36,7 +40,29 @@
 
     <section class="site-container py-8 sm:py-10" aria-label="Filter library">
         <div class="border border-line bg-white p-5 sm:p-6">
-            <div class="grid gap-4 lg:grid-cols-[minmax(16rem,1.6fr)_repeat(3,minmax(10rem,1fr))]">
+            <div>
+                <span class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    Koleksi
+                </span>
+
+                <div class="scrollbar-none flex gap-2.5 overflow-x-auto pb-1">
+                    @foreach ($collections as $key => $item)
+                        <x-ui.filter-chip
+                            wire:key="library-collection-{{ $key }}"
+                            wire:click="$set('collection', '{{ $key }}')"
+                            :active="$collection === $key"
+                            :inactive-classes="$item['classes']"
+                        >
+                            <span>{{ $item['label'] }}</span>
+                            <span class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-[10px] leading-none {{ $collection === $key ? 'bg-white/15 text-white' : '' }}">
+                                {{ $item['count'] }}
+                            </span>
+                        </x-ui.filter-chip>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="mt-6 grid gap-4 border-t border-line pt-6 lg:grid-cols-[minmax(16rem,1.6fr)_repeat(3,minmax(10rem,1fr))]">
                 <div>
                     <label for="library-search" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Cari referensi
@@ -59,7 +85,7 @@
                             id="library-search"
                             type="search"
                             wire:model.live.debounce.350ms="search"
-                            placeholder="Judul, topik, institusi…"
+                            placeholder="Judul, topik, penulis, sumber…"
                             autocomplete="off"
                             class="min-h-12 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 text-[15px] text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                         >
@@ -83,7 +109,7 @@
 
                 <div>
                     <label for="resource-institution" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
-                        Institusi
+                        Institusi / sumber
                     </label>
                     <select
                         id="resource-institution"
@@ -121,11 +147,11 @@
                     {{ count($resources) }} referensi ditemukan
                 </p>
                 <p class="mt-1 text-xs leading-6 text-slate-500">
-                    Sumber diarahkan ke halaman publikasi atau dokumen resmi pemilik sumber.
+                    Atribusi dibedakan antara karya personal, kontribusi institusional, dan sumber referensi eksternal.
                 </p>
             </div>
 
-            @if ($search !== '' || $resourceType !== 'all' || $institution !== 'all' || $topic !== 'all')
+            @if ($search !== '' || $collection !== 'all' || $resourceType !== 'all' || $institution !== 'all' || $topic !== 'all')
                 <x-ui.button wire:click="clearFilters" variant="ghost" size="sm">
                     Reset filter
                     <span aria-hidden="true">↺</span>
@@ -136,7 +162,7 @@
         <div
             class="mt-7 grid gap-5 md:grid-cols-2"
             wire:loading.class="opacity-60"
-            wire:target="search,resourceType,institution,topic,clearFilters"
+            wire:target="search,collection,resourceType,institution,topic,clearFilters"
         >
             @forelse ($resources as $resource)
                 <x-library.resource-card
@@ -175,13 +201,14 @@
                     Cara membaca Library
                 </p>
                 <h2 id="library-note-title" class="mt-2 font-serif text-2xl font-medium tracking-[-0.02em] text-ink">
-                    Evidence, bukan opini.
+                    Arsip, kontribusi, referensi.
                 </h2>
             </div>
 
             <p class="max-w-4xl text-[15px] leading-7 text-slate-600">
-                Library berfungsi sebagai rak referensi: standar, regulasi, guidance, risk assessment, typology, dan handbook.
-                Untuk tulisan opini atau analisis M. Natsir Kongah, gunakan halaman
+                <strong class="font-semibold text-ink">Karya M. Natsir Kongah</strong> memuat paper, makalah, dan tulisan arsip yang atribusinya dapat ditelusuri.
+                <strong class="font-semibold text-ink">Kontribusi Institusional</strong> mencatat peran editorial atau kontribusi pada publikasi lembaga tanpa menyebutnya sebagai karya tunggal.
+                <strong class="font-semibold text-ink">Reference Sources</strong> adalah bahan rujukan eksternal. Untuk kolom dan opini media, gunakan halaman
                 <a href="{{ route('articles') }}" wire:navigate class="font-semibold text-ink underline decoration-slate-300 underline-offset-4 transition hover:decoration-ink">
                     Articles
                 </a>.
