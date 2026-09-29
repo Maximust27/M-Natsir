@@ -14,7 +14,7 @@
 
     <h2
         @if ($headingId) id="{{ $headingId }}" @endif
-        class="@if ($eyebrow) mt-4 @endif max-w-4xl font-serif text-3xl font-medium leading-tight tracking-[-0.025em] text-black sm:text-4xl lg:text-[2.65rem]"
+        class="@if ($eyebrow) mt-4 @endif max-w-4xl font-serif text-[1.9rem] font-medium leading-tight tracking-[-0.025em] text-black sm:text-[2.2rem] lg:text-[2.35rem]"
     >
         {{ $title }}
     </h2>
