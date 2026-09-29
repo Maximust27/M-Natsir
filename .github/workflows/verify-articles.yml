@@ -5,6 +5,7 @@ on:
     branches:
       - feat/articles-livewire
       - feat/library-livewire
+      - feat/media-livewire
   pull_request:
     branches:
       - main
