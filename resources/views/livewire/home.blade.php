@@ -1,8 +1,8 @@
 <div>
-    <section class="mx-auto w-full max-w-[108rem] border-b border-line" aria-labelledby="home-hero-title">
+    <section class="mx-auto w-full border-b border-line" aria-labelledby="home-hero-title">
         <div class="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-slate-100">
             <img
-                src="{{ asset('images/home-hero.jpg') }}"
+                src="{{ asset('images/home-hero.jpeg') }}"
                 alt="Potret M. Natsir Kongah berdiri di ruang kerja"
                 width="1200"
                 height="675"

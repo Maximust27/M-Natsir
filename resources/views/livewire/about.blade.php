@@ -1,10 +1,10 @@
 <div>
     <section class="site-container py-16 sm:py-20 lg:py-28" aria-labelledby="about-title">
-        <div class="grid items-center gap-10 lg:grid-cols-[20rem_minmax(0,1fr)] lg:gap-20 xl:gap-28">
+        <div class="mx-auto grid w-full max-w-5xl items-center gap-12 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-20">
             <figure class="mx-auto w-full max-w-80 lg:mx-0">
                 <div class="overflow-hidden border border-line bg-slate-100">
                     <img
-                        src="{{ asset('images/home-hero.jpg') }}"
+                        src="{{ asset('images/about-hero.jpeg') }}"
                         alt="Potret M. Natsir Kongah"
                         width="1200"
                         height="675"
