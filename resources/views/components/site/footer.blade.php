@@ -37,7 +37,8 @@
                 <a href="{{ route('articles') }}" wire:navigate class="min-h-8 transition hover:text-ink">Articles Archive</a>
                 <a href="{{ route('library') }}" wire:navigate class="min-h-8 transition hover:text-ink">Sources Library</a>
                 <a href="{{ route('about') }}" wire:navigate class="min-h-8 font-semibold text-ink transition hover:text-black">About</a>
-                <a href="{{ route('home') }}#contact" class="min-h-8 transition hover:text-ink">Contact &amp; Media Hub</a>
+                <a href="{{ route('media') }}" wire:navigate class="min-h-8 transition hover:text-ink">Media &amp; Appearances</a>
+                <a href="{{ route('home') }}#contact" class="min-h-8 transition hover:text-ink">Contact</a>
             </div>
             <div class="mt-7 grid gap-2 text-sm leading-6 text-slate-600">
                 <a href="#" class="min-h-8 transition hover:text-ink">Privacy Policy</a>
