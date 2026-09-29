@@ -37,11 +37,19 @@ class Media extends Component
     {
         $allAppearances = $this->appearances();
         $appearances = $this->filteredAppearances();
+        $featuredAppearance = $allAppearances[0];
+
+        if (trim($this->search) === '' && $this->activeCategory === 'all') {
+            $appearances = array_values(array_filter(
+                $appearances,
+                fn (array $appearance): bool => $appearance['title'] !== $featuredAppearance['title'],
+            ));
+        }
 
         return view('livewire.media', [
             'categories' => $this->categories(),
             'appearances' => $appearances,
-            'featuredAppearance' => $allAppearances[0],
+            'featuredAppearance' => $featuredAppearance,
             'resultCount' => count($appearances),
             'totalAppearances' => count($allAppearances),
             'interviewCount' => count(array_filter(
