@@ -1,7 +1,86 @@
 <?php
 
+use App\Livewire\Media;
+use Livewire\Livewire;
+
 it('renders the media appearances archive', function () {
-    $this->get('/media')
+    $this->get(route('media'))
         ->assertOk()
-        ->assertSee('MEDIA & APPEARANCES');
+        ->assertSee('MEDIA & APPEARANCES')
+        ->assertSee('Public Record')
+        ->assertSeeLivewire(Media::class);
+});
+
+it('filters interviews and broadcasts', function () {
+    Livewire::test(Media::class)
+        ->call('selectCategory', 'interviews')
+        ->assertSet('activeCategory', 'interviews')
+        ->assertSee('PPATK: Mayoritas Pelaku Judi Online Berpenghasilan Rendah')
+        ->assertSee('Gunakan QRIS, PPATK Bongkar Modus Baru Judi Online')
+        ->assertDontSee('Sinergi PPATK dan Pikiran Rakyat');
+});
+
+it('filters talks panels and media visits', function () {
+    Livewire::test(Media::class)
+        ->call('selectCategory', 'talks')
+        ->assertSee('Berbagi Pengalaman Keterbukaan Informasi Publik Bersama PIP KPK')
+        ->assertSee('Peringati Hari Anti Korupsi Sedunia, Semen Padang Gelar Seminar')
+        ->assertDontSee('Rangkul Pers, Pimpinan PPATK Sambang The Jakarta Post')
+        ->call('selectCategory', 'media-visits')
+        ->assertSee('Rangkul Pers, Pimpinan PPATK Sambang The Jakarta Post')
+        ->assertSee('Sinergi PPATK dan Pikiran Rakyat')
+        ->assertDontSee('Berbagi Pengalaman Keterbukaan Informasi Publik Bersama PIP KPK');
+});
+
+it('keeps recognition appearances distinct', function () {
+    Livewire::test(Media::class)
+        ->call('selectCategory', 'recognition')
+        ->assertSee('PPATK Sabet Penghargaan Gatra Awards 2023')
+        ->assertSee('PPATK Teguhkan Komitmen Sebagai Badan Publik Informatif')
+        ->assertDontSee('Gunakan QRIS, PPATK Bongkar Modus Baru Judi Online');
+});
+
+it('searches titles outlets roles topics and summaries', function () {
+    Livewire::test(Media::class)
+        ->set('search', 'qris')
+        ->assertSee('Gunakan QRIS, PPATK Bongkar Modus Baru Judi Online')
+        ->assertDontSee('PPATK Sabet Penghargaan Gatra Awards 2023')
+        ->set('search', 'keterbukaan informasi')
+        ->assertSee('Berbagi Pengalaman Keterbukaan Informasi Publik Bersama PIP KPK');
+});
+
+it('ignores unknown media categories', function () {
+    Livewire::test(Media::class)
+        ->call('selectCategory', 'unknown')
+        ->assertSet('activeCategory', 'all');
+});
+
+it('clears media filters', function () {
+    Livewire::test(Media::class)
+        ->set('search', 'qris')
+        ->call('selectCategory', 'interviews')
+        ->call('clearFilters')
+        ->assertSet('search', '')
+        ->assertSet('activeCategory', 'all')
+        ->assertSee('PPATK Sabet Penghargaan Gatra Awards 2023');
+});
+
+it('shows a useful empty state', function () {
+    Livewire::test(Media::class)
+        ->set('search', 'zzzz-no-media-result')
+        ->assertSee('Appearance belum ditemukan')
+        ->assertSee('Reset filter');
+});
+
+it('does not treat press contact only mentions as appearances', function () {
+    Livewire::test(Media::class)
+        ->assertDontSee('NARAHUBUNG MEDIA');
+});
+
+it('links media navigation to the top level route', function () {
+    $this->get(route('media'))
+        ->assertOk()
+        ->assertSee('href="'.route('media').'"', false)
+        ->assertSee('Articles')
+        ->assertSee('Library');
 });
