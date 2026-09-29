@@ -31,3 +31,35 @@ it('ignores unknown article categories', function () {
         ->call('selectCategory', 'unknown')
         ->assertSet('activeCategory', 'all');
 });
+
+it('paginates the article archive within valid bounds', function () {
+    Livewire::test(Articles::class)
+        ->assertSet('page', 1)
+        ->call('nextPage')
+        ->assertSet('page', 2)
+        ->call('nextPage')
+        ->assertSet('page', 2)
+        ->call('previousPage')
+        ->assertSet('page', 1)
+        ->call('previousPage')
+        ->assertSet('page', 1)
+        ->call('goToPage', 99)
+        ->assertSet('page', 2)
+        ->call('goToPage', 0)
+        ->assertSet('page', 1);
+});
+
+it('resets pagination when search or category changes', function () {
+    Livewire::test(Articles::class)
+        ->call('nextPage')
+        ->assertSet('page', 2)
+        ->set('search', 'judi online')
+        ->assertSet('page', 1)
+        ->call('nextPage')
+        ->assertSet('page', 1)
+        ->set('search', '')
+        ->call('nextPage')
+        ->assertSet('page', 2)
+        ->call('selectCategory', 'pml')
+        ->assertSet('page', 1);
+});
