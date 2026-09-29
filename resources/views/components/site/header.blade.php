@@ -1,4 +1,27 @@
-<header class="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur" x-data="{ mobileOpen: false }">
+<header
+    class="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur transition-transform duration-300 ease-out will-change-transform"
+    x-data="{
+        mobileOpen: false,
+        hidden: false,
+        lastScrollY: window.scrollY,
+        handleScroll() {
+            const currentScrollY = window.scrollY;
+
+            if (this.mobileOpen || currentScrollY < 96) {
+                this.hidden = false;
+            } else if (currentScrollY > this.lastScrollY + 6) {
+                this.hidden = true;
+            } else if (currentScrollY < this.lastScrollY - 6) {
+                this.hidden = false;
+            }
+
+            this.lastScrollY = currentScrollY;
+        }
+    }"
+    @scroll.window.throttle.100ms="handleScroll()"
+    @keydown.escape.window="mobileOpen = false"
+    :class="{ '-translate-y-full': hidden }"
+>
     <div class="site-container flex min-h-20 items-center justify-between gap-6 py-3">
         <a
             href="{{ route('home') }}"
@@ -33,7 +56,7 @@
         <button
             type="button"
             class="inline-flex size-12 items-center justify-center rounded-sm border border-line bg-white text-ink transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:hidden"
-            @click="mobileOpen = ! mobileOpen"
+            @click="mobileOpen = ! mobileOpen; hidden = false"
             :aria-expanded="mobileOpen"
             aria-controls="mobile-navigation"
             aria-label="Buka navigasi"
