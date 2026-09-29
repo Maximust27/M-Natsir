@@ -1,6 +1,6 @@
 <div>
     <section class="mx-auto w-full max-w-[108rem] border-b border-line" aria-labelledby="home-hero-title">
-        <div class="relative min-h-[38rem] overflow-hidden bg-slate-100 sm:min-h-[42rem] lg:min-h-[46rem]">
+        <div class="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-slate-100">
             <img
                 src="{{ asset('images/home-hero.jpg') }}"
                 alt="Potret M. Natsir Kongah berdiri di ruang kerja"
@@ -11,20 +11,20 @@
             >
             <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/15 sm:from-white/88 sm:via-white/55 sm:to-transparent lg:from-white/72 lg:via-white/30"></div>
 
-            <div class="site-container relative z-10 flex min-h-[38rem] items-center sm:min-h-[42rem] lg:min-h-[46rem]">
-                <div class="max-w-4xl py-14 lg:py-20">
+            <div class="site-container relative z-10 flex min-h-[calc(100svh-5rem)] items-center">
+                <div class="max-w-4xl py-12 lg:py-16">
                     <h1
                         id="home-hero-title"
-                        class="max-w-3xl font-serif text-5xl font-semibold leading-[1.02] tracking-[-0.045em] text-black sm:text-6xl lg:text-[4.4rem]"
+                        class="max-w-3xl font-serif text-4xl font-semibold leading-[1.04] tracking-[-0.04em] text-black sm:text-5xl lg:text-[3.7rem]"
                     >
                         M. NATSIR KONGAH
                     </h1>
 
-                    <p class="mt-6 max-w-[60ch] font-serif text-xl italic leading-8 text-slate-600 sm:text-2xl sm:leading-9">
+                    <p class="mt-5 max-w-[60ch] font-serif text-lg italic leading-8 text-slate-600 sm:text-xl">
                         “Membaca jejak transaksi, menyingkap arsitektur kejahatan keuangan.”
                     </p>
 
-                    <p class="mt-9 max-w-[68ch] text-base leading-8 text-slate-700 sm:text-[17px]">
+                    <p class="mt-8 max-w-[68ch] text-[15px] leading-7 text-slate-700 sm:text-base sm:leading-8">
                         Analisis terkurasi dan perpustakaan intelijen yang didedikasikan untuk mengungkap jaringan pencucian uang profesional, menganalisis kerangka regulasi, dan mengantisipasi titik temu teknologi masa depan dan kejahatan finansial.
                     </p>
 
@@ -72,7 +72,7 @@
                             {{ $writing['badge'] }}
                         </x-ui.badge>
 
-                        <h3 class="mt-5 text-xl font-semibold leading-[1.4] tracking-[-0.025em] text-black lg:text-[1.4rem]">
+                        <h3 class="mt-5 text-lg font-semibold leading-[1.45] tracking-[-0.02em] text-black lg:text-xl">
                             {{ $writing['title'] }}
                         </h3>
 
@@ -133,7 +133,7 @@
             <article class="border border-line border-l-2 border-l-amber-600 bg-stone-50 p-8 sm:p-10 lg:min-h-[22rem]">
                 <span class="font-serif text-5xl leading-none text-amber-700/40" aria-hidden="true">“</span>
 
-                <blockquote class="mt-3 max-w-[58ch] font-serif text-xl italic leading-8 text-ink sm:text-[1.4rem] sm:leading-9">
+                <blockquote class="mt-3 max-w-[58ch] font-serif text-lg italic leading-8 text-ink sm:text-xl sm:leading-9">
                     “Two decades in financial intelligence have taught me that the complexity of the crime is always mirrored by the sophistication of its concealment. True oversight requires not just vigilance, but architectural understanding.”
                 </blockquote>
 
