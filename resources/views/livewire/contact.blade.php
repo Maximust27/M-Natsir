@@ -32,11 +32,11 @@
 
                 <form
                     class="mt-9"
+                    data-endpoint="{{ $web3formsEndpoint }}"
                     x-data="{
                         submitting: false,
                         status: '',
                         statusType: '',
-                        endpoint: @js($web3formsEndpoint),
                         async submit(event) {
                             if (this.submitting) return;
 
@@ -50,7 +50,7 @@
 
                             try {
                                 const payload = Object.fromEntries(new FormData(form));
-                                const response = await fetch(this.endpoint, {
+                                const response = await fetch(form.dataset.endpoint, {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
