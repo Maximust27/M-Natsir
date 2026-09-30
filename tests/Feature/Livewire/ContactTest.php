@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Contact;
+use Illuminate\Support\Facades\File;
 use Livewire\Livewire;
 
 beforeEach(function () {
@@ -96,10 +97,32 @@ it('renders configured whatsapp and cv actions', function () {
 
     Livewire::test(Contact::class)
         ->assertSee('https://wa.me/628123456789', false)
-        ->assertSee('/files/m-natsir-kongah-cv.pdf', false)
+        ->assertSee('/contact/cv', false)
         ->assertSee('Mulai Chat')
         ->assertSee('Download CV')
-        ->assertSee('download="M-Natsir-Kongah-CV.pdf"', false);
+        ->assertDontSee('target="_blank"', false);
+});
+
+it('serves the local cv as an attachment download', function () {
+    $directory = public_path('files');
+    $path = $directory.'/m-natsir-kongah-cv.pdf';
+    $original = File::exists($path) ? File::get($path) : null;
+
+    File::ensureDirectoryExists($directory);
+    File::put($path, "%PDF-1.4\ncontact-test\n");
+
+    try {
+        $this->get('/contact/cv')
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertDownload('M-Natsir-Kongah-CV.pdf');
+    } finally {
+        if ($original !== null) {
+            File::put($path, $original);
+        } else {
+            File::delete($path);
+        }
+    }
 });
 
 it('integrates contact into shared navigation and home teaser', function () {
