@@ -1,6 +1,6 @@
 # Contact Page Implementation Plan
 
-**Goal:** Build the dedicated `/contact` Livewire page from the approved Contact spec, with Web3Forms-backed delivery, graceful unconfigured states for email/WhatsApp/CV, and consistent navigation/footer styling.
+**Goal:** Build the dedicated `/contact` Livewire page from the approved Contact spec, with browser-side Web3Forms delivery, graceful unconfigured states for email/WhatsApp/CV, and consistent navigation/footer styling.
 
 **Branch:** `feat/contact-livewire`  
 **Base:** `main`  
@@ -23,11 +23,10 @@ Tests first:
 
 Run targeted test and confirm RED before implementation.
 
-## Task 2 — Add configuration and Web3Forms mail service
+## Task 2 — Add Web3Forms client configuration
 
 Files:
 - Create `config/contact.php`
-- Create `app/Services/ContactMailer.php`
 - Modify `.env.example`
 - Extend `tests/Feature/Livewire/ContactTest.php`
 
@@ -38,13 +37,13 @@ Configuration:
 
 Service behavior:
 - `configured(): bool`
-- Send through Laravel `Http` client to Web3Forms `https://api.web3forms.com/submit` endpoint.
-- Send the visitor name, email, institution, purpose, and optional message as Web3Forms fields.
-- Use the Web3Forms access key to route the submission to its configured destination email.
+- Submit from browser JavaScript to `https://api.web3forms.com/submit`.
+- Send the visitor name, email, institution, purpose, and optional message as browser form fields.
+- Render the Web3Forms access key in the client form so Web3Forms can route to its configured destination email.
 - Subject `[Website Contact] <Purpose> — <Name>`.
 - Return clean success/failure result; never expose provider details.
 
-Tests use `Http::fake()` and never call the live network.
+Tests verify rendered client behavior and never call the live network.
 
 ## Task 3 — Implement Livewire Contact form behavior
 
@@ -66,7 +65,6 @@ Behavior:
 - Purpose allowlist.
 - Mail-unconfigured guard.
 - Honeypot reject.
-- Rate limit: 3 submission attempts / 10 minutes per IP.
 - Provider success resets fields and shows success copy.
 - Provider failure preserves input and shows generic retry copy.
 
@@ -115,7 +113,7 @@ Verification:
 - `npm run build`
 - Verify no API key appears in rendered HTML.
 - Verify configured/unconfigured WhatsApp and CV states.
-- Verify Web3Forms request payload with HTTP fake.
+- Verify the rendered Web3Forms endpoint, access key, fields, honeypot, and client-side feedback contract.
 - Verify desktop/mobile page structure and keyboard focus markup.
 - Compare `main...feat/contact-livewire` for scope creep.
 - Confirm GitHub Actions green on latest branch head.
