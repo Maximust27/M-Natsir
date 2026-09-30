@@ -7,10 +7,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Livewire;
 
 beforeEach(function () {
-    config()->set('contact.email.to', null);
-    config()->set('contact.email.from', null);
-    config()->set('contact.email.from_name', 'M. Natsir Kongah');
-    config()->set('contact.resend.key', null);
+    config()->set('contact.web3forms.access_key', null);
     config()->set('contact.whatsapp_url', null);
     config()->set('contact.cv_url', null);
 
@@ -19,10 +16,7 @@ beforeEach(function () {
 
 function configureContactMail(): void
 {
-    config()->set('contact.email.to', 'inbox@example.com');
-    config()->set('contact.email.from', 'contact@example.com');
-    config()->set('contact.email.from_name', 'M. Natsir Kongah');
-    config()->set('contact.resend.key', 're_test_secret');
+    config()->set('contact.web3forms.access_key', 'web3forms_test_key');
 }
 
 function fillValidContactForm($component): mixed
@@ -82,11 +76,14 @@ it('shows a safe setup state while mail is unconfigured', function () {
     Http::assertNothingSent();
 });
 
-it('sends a valid message through resend with reply to and resets the form', function () {
+it('sends a valid message through web3forms and resets the form', function () {
     configureContactMail();
 
     Http::fake([
-        'https://api.resend.com/emails' => Http::response(['id' => 'email_123'], 200),
+        'https://api.web3forms.com/submit' => Http::response([
+            'success' => true,
+            'message' => 'Email sent successfully!',
+        ], 200),
     ]);
 
     fillValidContactForm(Livewire::test(Contact::class))
@@ -103,13 +100,13 @@ it('sends a valid message through resend with reply to and resets the form', fun
     Http::assertSent(function (Request $request): bool {
         $data = $request->data();
 
-        return $request->url() === 'https://api.resend.com/emails'
-            && $request->hasHeader('Authorization', 'Bearer re_test_secret')
-            && $data['from'] === 'M. Natsir Kongah <contact@example.com>'
-            && $data['to'] === ['inbox@example.com']
-            && $data['reply_to'] === 'rina@example.org'
+        return $request->url() === 'https://api.web3forms.com/submit'
+            && $data['access_key'] === 'web3forms_test_key'
             && $data['subject'] === '[Website Contact] Media / Interview — Rina Pratama'
-            && str_contains($data['text'], 'Media Nusantara');
+            && $data['name'] === 'Rina Pratama'
+            && $data['email'] === 'rina@example.org'
+            && $data['institution'] === 'Media Nusantara'
+            && $data['purpose'] === 'Media / Interview';
     });
 });
 
@@ -117,7 +114,10 @@ it('preserves form values when the provider fails', function () {
     configureContactMail();
 
     Http::fake([
-        'https://api.resend.com/emails' => Http::response(['message' => 'provider error'], 500),
+        'https://api.web3forms.com/submit' => Http::response([
+            'success' => false,
+            'message' => 'Invalid access key',
+        ], 422),
     ]);
 
     fillValidContactForm(Livewire::test(Contact::class))
@@ -144,7 +144,10 @@ it('rate limits repeated contact submissions', function () {
     configureContactMail();
 
     Http::fake([
-        'https://api.resend.com/emails' => Http::response(['id' => 'email_123'], 200),
+        'https://api.web3forms.com/submit' => Http::response([
+            'success' => true,
+            'message' => 'Email sent successfully!',
+        ], 200),
     ]);
 
     $component = Livewire::test(Contact::class);
@@ -160,11 +163,11 @@ it('rate limits repeated contact submissions', function () {
     $component->assertSee('Terlalu banyak percobaan. Silakan coba kembali dalam beberapa menit.');
 });
 
-it('never renders the resend api key', function () {
+it('never renders the web3forms access key', function () {
     configureContactMail();
 
     Livewire::test(Contact::class)
-        ->assertDontSee('re_test_secret');
+        ->assertDontSee('web3forms_test_key');
 });
 
 it('renders graceful whatsapp and cv fallbacks', function () {
