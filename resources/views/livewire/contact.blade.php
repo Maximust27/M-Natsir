@@ -30,17 +30,59 @@
                     </h2>
                 </div>
 
-                <form wire:submit="submit" class="mt-9">
-                    <div class="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden="true">
-                        <label for="contact-website">Website</label>
-                        <input
-                            id="contact-website"
-                            type="text"
-                            wire:model="website"
-                            tabindex="-1"
-                            autocomplete="off"
-                        >
-                    </div>
+                <form
+                    class="mt-9"
+                    x-data="{
+                        submitting: false,
+                        status: '',
+                        statusType: '',
+                        endpoint: @js($web3formsEndpoint),
+                        async submit(event) {
+                            if (this.submitting) return;
+
+                            const form = event.currentTarget;
+
+                            if (! form.reportValidity()) return;
+
+                            this.submitting = true;
+                            this.status = '';
+                            this.statusType = '';
+
+                            try {
+                                const payload = Object.fromEntries(new FormData(form));
+                                const response = await fetch(this.endpoint, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'Accept': 'application/json',
+                                    },
+                                    body: JSON.stringify(payload),
+                                });
+                                const result = await response.json().catch(() => ({}));
+
+                                if (! response.ok || result.success !== true) {
+                                    throw new Error('Web3Forms submission failed');
+                                }
+
+                                this.statusType = 'success';
+                                this.status = 'Pesan berhasil dikirim. Terima kasih — permintaan Anda akan ditinjau sesuai prioritas dan konteksnya.';
+                                form.reset();
+                            } catch (error) {
+                                this.statusType = 'error';
+                                this.status = 'Pesan belum dapat dikirim. Silakan coba kembali beberapa saat lagi.';
+                            } finally {
+                                this.submitting = false;
+                            }
+                        }
+                    }"
+                    @submit.prevent="submit($event)"
+                >
+                    @if ($mailConfigured)
+                        <input type="hidden" name="access_key" value="{{ $web3formsAccessKey }}">
+                        <input type="hidden" name="subject" value="Website Contact — M. Natsir Kongah">
+                    @endif
+
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" autocomplete="off">
 
                     <div class="grid gap-6 md:grid-cols-2">
                         <div>
@@ -50,14 +92,12 @@
                             <input
                                 id="contact-name"
                                 type="text"
-                                wire:model="name"
+                                name="name"
+                                required
+                                maxlength="120"
                                 autocomplete="name"
                                 class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
-                                aria-describedby="@error('name') contact-name-error @enderror"
                             >
-                            @error('name')
-                                <p id="contact-name-error" class="mt-2 text-sm text-rose-700">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         <div>
@@ -67,14 +107,12 @@
                             <input
                                 id="contact-email"
                                 type="email"
-                                wire:model="email"
+                                name="email"
+                                required
+                                maxlength="190"
                                 autocomplete="email"
                                 class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
-                                aria-describedby="@error('email') contact-email-error @enderror"
                             >
-                            @error('email')
-                                <p id="contact-email-error" class="mt-2 text-sm text-rose-700">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         <div>
@@ -84,14 +122,12 @@
                             <input
                                 id="contact-institution"
                                 type="text"
-                                wire:model="institution"
+                                name="institution"
+                                required
+                                maxlength="190"
                                 autocomplete="organization"
                                 class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
-                                aria-describedby="@error('institution') contact-institution-error @enderror"
                             >
-                            @error('institution')
-                                <p id="contact-institution-error" class="mt-2 text-sm text-rose-700">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         <div>
@@ -100,18 +136,15 @@
                             </label>
                             <select
                                 id="contact-purpose"
-                                wire:model="purpose"
+                                name="purpose"
+                                required
                                 class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
-                                aria-describedby="@error('purpose') contact-purpose-error @enderror"
                             >
                                 <option value="">Pilih Tujuan...</option>
-                                @foreach ($purposes as $value => $label)
-                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @foreach ($purposes as $label)
+                                    <option value="{{ $label }}">{{ $label }}</option>
                                 @endforeach
                             </select>
-                            @error('purpose')
-                                <p id="contact-purpose-error" class="mt-2 text-sm text-rose-700">{{ $message }}</p>
-                            @enderror
                         </div>
                     </div>
 
@@ -127,33 +160,32 @@
 
                         <textarea
                             id="contact-message"
-                            wire:model="message"
+                            name="message"
                             rows="7"
                             maxlength="3000"
                             class="w-full resize-y rounded-none border border-line bg-white px-4 py-3 text-[15px] leading-7 text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             placeholder="Jelaskan konteks pertanyaan, kebutuhan wawancara, atau tenggat waktu jika ada."
-                            aria-describedby="@error('message') contact-message-error @enderror"
                         ></textarea>
-                        @error('message')
-                            <p id="contact-message-error" class="mt-2 text-sm text-rose-700">{{ $message }}</p>
-                        @enderror
                     </div>
 
                     <div class="mt-8 border-t border-line pt-6">
-                        @if ($statusMessage)
-                            <div
-                                role="status"
-                                aria-live="polite"
-                                class="mb-5 border-l-2 px-4 py-3 text-sm leading-6 {{ $statusType === 'success' ? 'border-emerald-600 bg-emerald-50 text-emerald-900' : 'border-rose-600 bg-rose-50 text-rose-900' }}"
-                            >
-                                {{ $statusMessage }}
-                            </div>
-                        @endif
+                        <div
+                            x-show="status"
+                            x-cloak
+                            role="status"
+                            aria-live="polite"
+                            class="mb-5 border-l-2 px-4 py-3 text-sm leading-6"
+                            :class="statusType === 'success'
+                                ? 'border-emerald-600 bg-emerald-50 text-emerald-900'
+                                : 'border-rose-600 bg-rose-50 text-rose-900'"
+                        >
+                            <span x-text="status"></span>
+                        </div>
 
                         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                             <p class="max-w-md text-xs leading-6 text-slate-500">
                                 @if ($mailConfigured)
-                                    Pesan dikirim secara aman melalui layanan email transaksional.
+                                    Pesan dikirim langsung melalui Web3Forms ke email tujuan yang terhubung dengan access key.
                                 @else
                                     Layanan pengiriman sedang disiapkan.
                                 @endif
@@ -163,16 +195,15 @@
                                 type="submit"
                                 variant="primary"
                                 size="lg"
-                                wire:loading.attr="disabled"
-                                wire:target="submit"
+                                x-bind:disabled="submitting"
                                 :disabled="! $mailConfigured"
                                 @class([
                                     'shrink-0',
                                     'cursor-not-allowed opacity-50' => ! $mailConfigured,
                                 ])
                             >
-                                <span wire:loading.remove wire:target="submit">Kirim Pesan Terverifikasi</span>
-                                <span wire:loading wire:target="submit">Mengirim...</span>
+                                <span x-show="! submitting">Kirim Pesan Terverifikasi</span>
+                                <span x-show="submitting" x-cloak>Mengirim...</span>
                                 <span aria-hidden="true">▷</span>
                             </x-ui.button>
                         </div>
