@@ -15,7 +15,7 @@ The contact experience should:
 
 - look consistent with the approved Figma layout and the existing Home, About, Articles, Library, and Media pages;
 - provide one clear professional contact form for journalists, academics, consultants, and related inquiries;
-- use Web3Forms through the Laravel backend;
+- use Web3Forms directly from the browser on the free plan;
 - keep secrets and personal contact details out of Blade templates and source control;
 - allow WhatsApp and CV links to be added later by configuration only;
 - remain visually complete when those integrations are not yet configured;
@@ -30,7 +30,7 @@ The contact experience should:
 - class-based Livewire page `App\Livewire\Contact`;
 - contact form based on the approved Figma layout;
 - Laravel-side validation;
-- form-to-email delivery through the Web3Forms HTTP API;
+- browser-side form-to-email delivery through the Web3Forms HTTP API;
 - disabled/unavailable state while email configuration is incomplete;
 - basic honeypot protection and rate limiting;
 - success and failure feedback;
@@ -143,7 +143,7 @@ Validation errors render inline next to the relevant field and preserve submitte
 
 ## Email Delivery Architecture
 
-Use Web3Forms through Laravel's built-in HTTP client rather than placing the access key or third-party JavaScript in the browser.
+Use Web3Forms directly from browser JavaScript. The Web3Forms access key is intentionally client-side and routes submissions to the email associated with that key.
 
 Create a small isolated service, for example:
 
@@ -152,10 +152,10 @@ Create a small isolated service, for example:
 Responsibilities:
 
 - determine whether mail delivery is configured;
-- build the Web3Forms request payload;
-- call the Web3Forms API using the configured access key;
+- render the Web3Forms access key and endpoint into the contact form;
+- submit the form from browser JavaScript to the Web3Forms API using the configured access key;
 - return a clear success/failure result to the Livewire component;
-- never expose the Web3Forms access key to client-side markup.
+- render the Web3Forms access key only in the contact form as required by the provider.
 
 This keeps provider-specific code out of the Livewire component and makes a future provider swap localized.
 
@@ -201,7 +201,7 @@ When mail configuration is incomplete:
 - all form fields may still render;
 - the submit button remains visible but disabled;
 - supporting text states: `Layanan pengiriman sedang disiapkan.`;
-- no HTTP request to Web3Forms is attempted;
+- no browser submission to Web3Forms is attempted;
 - the page does not throw configuration exceptions.
 
 Once the environment variables are added and Laravel config is refreshed, the same button becomes active automatically.
@@ -228,7 +228,7 @@ Do not disclose internal rate-limit keys or provider details.
 
 ### Success
 
-After Web3Forms confirms delivery:
+After Web3Forms confirms the browser submission:
 
 - show a clear success notice;
 - reset the form;
@@ -383,7 +383,7 @@ Do not introduce a new UI component system unless repeated markup clearly justif
 - no API key is written into Blade, JavaScript, repository history, or browser-visible state;
 - form values are treated as untrusted input;
 - user-supplied content is escaped in rendered feedback;
-- Web3Forms request failures are logged without logging secrets;
+- Web3Forms failures are shown as generic client-side feedback without exposing provider details;
 - do not persist contact form submissions in the first version;
 - do not expose visitor email addresses in URLs.
 
@@ -410,7 +410,7 @@ Create `tests/Feature/Livewire/ContactTest.php` covering at least:
 - CV configured/unconfigured states render correctly;
 - Home contact CTA points to `/contact`.
 
-Use Laravel HTTP fakes for Web3Forms requests. Tests must not perform real network calls.
+Feature tests verify the rendered browser-side Web3Forms contract without performing real network calls.
 
 ## Verification
 
