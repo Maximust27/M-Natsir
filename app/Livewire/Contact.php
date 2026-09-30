@@ -21,7 +21,9 @@ class Contact extends Component
             'web3formsAccessKey' => $accessKey,
             'web3formsEndpoint' => config('contact.web3forms.endpoint'),
             'whatsappUrl' => config('contact.whatsapp_url'),
-            'cvUrl' => config('contact.cv_url'),
+            'cvUrl' => filled(config('contact.cv_url'))
+                ? route('contact.cv.download')
+                : null,
         ]);
     }
 
