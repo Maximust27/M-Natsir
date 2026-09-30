@@ -1,6 +1,6 @@
 # Contact Page Implementation Plan
 
-**Goal:** Build the dedicated `/contact` Livewire page from the approved Contact spec, with Resend-backed delivery, graceful unconfigured states for email/WhatsApp/CV, and consistent navigation/footer styling.
+**Goal:** Build the dedicated `/contact` Livewire page from the approved Contact spec, with Web3Forms-backed delivery, graceful unconfigured states for email/WhatsApp/CV, and consistent navigation/footer styling.
 
 **Branch:** `feat/contact-livewire`  
 **Base:** `main`  
@@ -23,7 +23,7 @@ Tests first:
 
 Run targeted test and confirm RED before implementation.
 
-## Task 2 — Add configuration and Resend mail service
+## Task 2 — Add configuration and Web3Forms mail service
 
 Files:
 - Create `config/contact.php`
@@ -32,18 +32,15 @@ Files:
 - Extend `tests/Feature/Livewire/ContactTest.php`
 
 Configuration:
-- `CONTACT_EMAIL_TO`
-- `CONTACT_EMAIL_FROM`
-- `CONTACT_EMAIL_FROM_NAME`
-- `RESEND_API_KEY`
+- `WEB3FORMS_ACCESS_KEY`
 - `CONTACT_WHATSAPP_URL`
 - `CONTACT_CV_URL`
 
 Service behavior:
 - `configured(): bool`
-- Send through Laravel `Http` client to Resend `/emails` endpoint.
-- Site-controlled verified sender in `from`.
-- Visitor email in `reply_to`.
+- Send through Laravel `Http` client to Web3Forms `https://api.web3forms.com/submit` endpoint.
+- Send the visitor name, email, institution, purpose, and optional message as Web3Forms fields.
+- Use the Web3Forms access key to route the submission to its configured destination email.
 - Subject `[Website Contact] <Purpose> — <Name>`.
 - Return clean success/failure result; never expose provider details.
 
@@ -118,7 +115,7 @@ Verification:
 - `npm run build`
 - Verify no API key appears in rendered HTML.
 - Verify configured/unconfigured WhatsApp and CV states.
-- Verify Resend request payload with HTTP fake.
+- Verify Web3Forms request payload with HTTP fake.
 - Verify desktop/mobile page structure and keyboard focus markup.
 - Compare `main...feat/contact-livewire` for scope creep.
 - Confirm GitHub Actions green on latest branch head.
