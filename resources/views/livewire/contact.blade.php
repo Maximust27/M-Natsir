@@ -35,6 +35,7 @@
                     data-endpoint="{{ $web3formsEndpoint }}"
                     x-data="{
                         submitting: false,
+                        configured: {{ $mailConfigured ? 'true' : 'false' }},
                         status: '',
                         statusType: '',
                         async submit(event) {
@@ -195,7 +196,7 @@
                                 type="submit"
                                 variant="primary"
                                 size="lg"
-                                x-bind:disabled="submitting"
+                                x-bind:disabled="submitting || ! configured"
                                 :disabled="! $mailConfigured"
                                 @class([
                                     'shrink-0',
