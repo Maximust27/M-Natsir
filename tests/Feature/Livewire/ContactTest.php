@@ -171,7 +171,8 @@ it('renders graceful whatsapp and cv fallbacks', function () {
     Livewire::test(Contact::class)
         ->assertSee('Segera tersedia')
         ->assertSee('CV segera tersedia')
-        ->assertDontSee('href="#"', false);
+        ->assertDontSee('Mulai Chat')
+        ->assertDontSee('Download CV');
 });
 
 it('renders configured whatsapp and cv actions', function () {
