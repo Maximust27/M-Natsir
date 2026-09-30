@@ -247,7 +247,7 @@ class Media extends Component
                 'topics' => ['Keterbukaan Informasi', 'Public Service', 'Recognition'],
                 'url' => 'https://ppid.ppatk.go.id/?p=15022',
                 'actionLabel' => 'View Event',
-                'thumbnail' => null,
+                'thumbnail' => 'https://ppid.ppatk.go.id/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-27-at-14.23.36-scaled-e1735284758952.jpeg',
                 'sourceNote' => 'Portal PPID PPATK mencatat penganugerahan berlangsung 17 Desember 2024 dan diterima oleh M. Natsir Kongah.',
             ],
             [
@@ -263,7 +263,7 @@ class Media extends Component
                 'topics' => ['Judi Online', 'Public Discussion', 'Financial Intelligence'],
                 'url' => 'https://finance.detik.com/berita-ekonomi-bisnis/d-7394555/fakta-fakta-yang-jarang-orang-tahu-soal-judi-online-di-ri',
                 'actionLabel' => 'Read Coverage',
-                'thumbnail' => null,
+                'thumbnail' => 'https://cdn.antaranews.com/cache/1200x800/2024/06/15/natsir-kongah.jpeg',
                 'sourceNote' => 'detikFinance mengutip paparan M. Natsir Kongah dari diskusi daring “Mati Melarat Karena Judi” pada 15 Juni 2024.',
             ],
             [
@@ -295,7 +295,7 @@ class Media extends Component
                 'topics' => ['Recognition', 'PPATK', 'Public Appearance'],
                 'url' => 'https://www.ppatk.go.id/news/read/1314/trees',
                 'actionLabel' => 'View Event',
-                'thumbnail' => null,
+                'thumbnail' => 'https://static.gatra.com/foldershared/images/2023/iwan/11-Nov/IMG_20231118_123815.jpg',
                 'sourceNote' => 'Berita resmi PPATK menyebut penghargaan diterima oleh M. Natsir Kongah pada 17 November 2023.',
             ],
             [
