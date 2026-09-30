@@ -1,31 +1,18 @@
 <?php
 
 use App\Livewire\Contact;
-use Illuminate\Http\Client\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Livewire;
 
 beforeEach(function () {
     config()->set('contact.web3forms.access_key', null);
+    config()->set('contact.web3forms.endpoint', 'https://api.web3forms.com/submit');
     config()->set('contact.whatsapp_url', null);
     config()->set('contact.cv_url', null);
-
-    RateLimiter::clear('contact-form:'.sha1('127.0.0.1'));
 });
 
-function configureContactMail(): void
+function configureContactForm(): void
 {
     config()->set('contact.web3forms.access_key', 'web3forms_test_key');
-}
-
-function fillValidContactForm($component): mixed
-{
-    return $component
-        ->set('name', 'Rina Pratama')
-        ->set('email', 'rina@example.org')
-        ->set('institution', 'Media Nusantara')
-        ->set('purpose', 'media');
 }
 
 it('renders the dedicated contact page', function () {
@@ -48,126 +35,49 @@ it('renders the configured form fields', function () {
         ->assertSee('Pesan & Tenggat Waktu');
 });
 
-it('validates required fields and supported purposes', function () {
-    configureContactMail();
+it('submits directly from the browser to web3forms when configured', function () {
+    configureContactForm();
 
     Livewire::test(Contact::class)
-        ->call('submit')
-        ->assertHasErrors([
-            'name' => 'required',
-            'email' => 'required',
-            'institution' => 'required',
-            'purpose' => 'required',
-        ]);
+        ->assertSee('name="access_key"', false)
+        ->assertSee('value="web3forms_test_key"', false)
+        ->assertSee('https://api.web3forms.com/submit', false)
+        ->assertSee('name="botcheck"', false)
+        ->assertSee('name="name"', false)
+        ->assertSee('name="email"', false)
+        ->assertSee('name="institution"', false)
+        ->assertSee('name="purpose"', false)
+        ->assertSee('name="message"', false)
+        ->assertSee('Kirim Pesan Terverifikasi')
+        ->assertDontSee('wire:submit', false);
 
-    fillValidContactForm(Livewire::test(Contact::class))
-        ->set('purpose', 'unsupported')
-        ->call('submit')
-        ->assertHasErrors(['purpose']);
+    expect(method_exists(Contact::class, 'submit'))->toBeFalse();
 });
 
-it('shows a safe setup state while mail is unconfigured', function () {
-    Http::fake();
-
-    fillValidContactForm(Livewire::test(Contact::class))
-        ->call('submit')
-        ->assertSee('Layanan pengiriman sedang disiapkan.');
-
-    Http::assertNothingSent();
+it('keeps the form disabled while the web3forms key is missing', function () {
+    Livewire::test(Contact::class)
+        ->assertSee('Layanan pengiriman sedang disiapkan.')
+        ->assertDontSee('name="access_key"', false)
+        ->assertSee('disabled', false);
 });
 
-it('sends a valid message through web3forms and resets the form', function () {
-    configureContactMail();
+it('uses browser validation and the web3forms honeypot', function () {
+    configureContactForm();
 
-    Http::fake([
-        'https://api.web3forms.com/submit' => Http::response([
-            'success' => true,
-            'message' => 'Email sent successfully!',
-        ], 200),
-    ]);
-
-    fillValidContactForm(Livewire::test(Contact::class))
-        ->set('message', '')
-        ->call('submit')
-        ->assertHasNoErrors()
-        ->assertSet('name', '')
-        ->assertSet('email', '')
-        ->assertSet('institution', '')
-        ->assertSet('purpose', '')
-        ->assertSet('message', '')
-        ->assertSee('Pesan berhasil dikirim.');
-
-    Http::assertSent(function (Request $request): bool {
-        $data = $request->data();
-
-        return $request->url() === 'https://api.web3forms.com/submit'
-            && $data['access_key'] === 'web3forms_test_key'
-            && $data['subject'] === '[Website Contact] Media / Interview — Rina Pratama'
-            && $data['name'] === 'Rina Pratama'
-            && $data['email'] === 'rina@example.org'
-            && $data['institution'] === 'Media Nusantara'
-            && $data['purpose'] === 'Media / Interview';
-    });
+    Livewire::test(Contact::class)
+        ->assertSee('required', false)
+        ->assertSee('maxlength="120"', false)
+        ->assertSee('maxlength="190"', false)
+        ->assertSee('maxlength="3000"', false)
+        ->assertSee('name="botcheck"', false);
 });
 
-it('preserves form values when the provider fails', function () {
-    configureContactMail();
+it('renders client side success and failure feedback copy', function () {
+    configureContactForm();
 
-    Http::fake([
-        'https://api.web3forms.com/submit' => Http::response([
-            'success' => false,
-            'message' => 'Invalid access key',
-        ], 422),
-    ]);
-
-    fillValidContactForm(Livewire::test(Contact::class))
-        ->set('message', 'Mohon wawancara sebelum Jumat.')
-        ->call('submit')
-        ->assertSet('name', 'Rina Pratama')
-        ->assertSet('email', 'rina@example.org')
-        ->assertSet('message', 'Mohon wawancara sebelum Jumat.')
+    Livewire::test(Contact::class)
+        ->assertSee('Pesan berhasil dikirim.')
         ->assertSee('Pesan belum dapat dikirim. Silakan coba kembali beberapa saat lagi.');
-});
-
-it('blocks honeypot submissions without contacting the provider', function () {
-    configureContactMail();
-    Http::fake();
-
-    fillValidContactForm(Livewire::test(Contact::class))
-        ->set('website', 'https://spam.example')
-        ->call('submit');
-
-    Http::assertNothingSent();
-});
-
-it('rate limits repeated contact submissions', function () {
-    configureContactMail();
-
-    Http::fake([
-        'https://api.web3forms.com/submit' => Http::response([
-            'success' => true,
-            'message' => 'Email sent successfully!',
-        ], 200),
-    ]);
-
-    $component = Livewire::test(Contact::class);
-
-    foreach (range(1, 4) as $attempt) {
-        fillValidContactForm($component)
-            ->set('name', 'Rina Pratama '.$attempt)
-            ->call('submit');
-    }
-
-    Http::assertSentCount(3);
-
-    $component->assertSee('Terlalu banyak percobaan. Silakan coba kembali dalam beberapa menit.');
-});
-
-it('never renders the web3forms access key', function () {
-    configureContactMail();
-
-    Livewire::test(Contact::class)
-        ->assertDontSee('web3forms_test_key');
 });
 
 it('renders graceful whatsapp and cv fallbacks', function () {
