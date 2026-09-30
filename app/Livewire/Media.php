@@ -183,7 +183,7 @@ class Media extends Component
                 'topics' => ['Judi Online', 'Financial Intelligence', 'Data Matching'],
                 'url' => 'https://www.metrotvnews.com/play/N4EC4731-ppatk-ungkap-571-ribu-penerima-bansos-aktif-main-judi-online-kemensos-siap-evaluasi',
                 'actionLabel' => 'Watch',
-                'thumbnail' => 'https://www.ppatk.go.id//backend/assets/images/berita_utama/1759453498_1534.jpeg',
+                'thumbnail' => null,
                 'sourceNote' => 'Liputan Metro TV/Medcom mengidentifikasi M. Natsir Kongah sebagai Ketua Tim Humas PPATK dan sumber utama dalam tayangan.',
             ],
             [
