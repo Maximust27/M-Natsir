@@ -124,6 +124,36 @@ it('serves the local cv as an attachment download', function () {
     }
 });
 
+
+
+it('streams the cv without byte range negotiation', function () {
+    $directory = public_path('files');
+    $path = $directory.'/m-natsir-kongah-cv.pdf';
+    $original = File::exists($path) ? File::get($path) : null;
+
+    File::ensureDirectoryExists($directory);
+    File::put($path, "%PDF-1.4\ncontact-range-test\n");
+
+    try {
+        $response = $this
+            ->withHeader('Range', 'bytes=0-')
+            ->get('/contact/cv');
+
+        $response
+            ->assertOk()
+            ->assertHeader('content-type', 'application/pdf')
+            ->assertDownload('M-Natsir-Kongah-CV.pdf');
+
+        expect($response->headers->has('accept-ranges'))->toBeFalse();
+    } finally {
+        if ($original !== null) {
+            File::put($path, $original);
+        } else {
+            File::delete($path);
+        }
+    }
+});
+
 it('integrates contact into shared navigation and home teaser', function () {
     $contactUrl = route('contact');
 
