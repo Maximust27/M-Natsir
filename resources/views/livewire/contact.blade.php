@@ -299,8 +299,7 @@
                         @if (filled($cvUrl))
                             <x-ui.button
                                 :href="$cvUrl"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                download="M-Natsir-Kongah-CV.pdf"
                                 variant="secondary"
                                 size="md"
                                 class="w-full"
