@@ -14,4 +14,16 @@ Route::livewire('/articles', Articles::class)->name('articles');
 Route::livewire('/library', Library::class)->name('library');
 Route::livewire('/media', Media::class)->name('media');
 
+Route::get('/contact/cv', function () {
+    $path = public_path('files/m-natsir-kongah-cv.pdf');
+
+    abort_unless(is_file($path), 404);
+
+    return response()->download(
+        $path,
+        'M-Natsir-Kongah-CV.pdf',
+        ['Content-Type' => 'application/pdf'],
+    );
+})->name('contact.cv.download');
+
 Route::livewire('/contact', Contact::class)->name('contact');
