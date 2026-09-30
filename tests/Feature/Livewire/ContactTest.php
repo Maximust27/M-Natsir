@@ -98,7 +98,8 @@ it('renders configured whatsapp and cv actions', function () {
         ->assertSee('https://wa.me/628123456789', false)
         ->assertSee('/files/m-natsir-kongah-cv.pdf', false)
         ->assertSee('Mulai Chat')
-        ->assertSee('Download CV');
+        ->assertSee('Download CV')
+        ->assertSee('download="M-Natsir-Kongah-CV.pdf"', false);
 });
 
 it('integrates contact into shared navigation and home teaser', function () {
