@@ -58,6 +58,8 @@ it('keeps the form disabled while the web3forms key is missing', function () {
     Livewire::test(Contact::class)
         ->assertSee('Layanan pengiriman sedang disiapkan.')
         ->assertDontSee('name="access_key"', false)
+        ->assertSee('configured: false', false)
+        ->assertSee('x-bind:disabled="submitting || ! configured"', false)
         ->assertSee('disabled', false);
 });
 
