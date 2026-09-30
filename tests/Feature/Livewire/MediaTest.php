@@ -91,3 +91,10 @@ it('does not duplicate the featured appearance in the default archive grid', fun
     expect(substr_count($component->html(), 'Sinergi PPATK dan Pikiran Rakyat: Membangun Kesadaran Publik Akan Bahayanya Pencucian Uang'))
         ->toBe(1);
 });
+
+it('renders verified appearance thumbnails from source-linked media', function () {
+    Livewire::test(Media::class)
+        ->assertSee('https://cdn.antaranews.com/cache/1200x800/2024/06/15/natsir-kongah.jpeg', false)
+        ->assertSee('https://static.gatra.com/foldershared/images/2023/iwan/11-Nov/IMG_20231118_123815.jpg', false)
+        ->assertSee('https://ppid.ppatk.go.id/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-27-at-14.23.36-scaled-e1735284758952.jpeg', false);
+});
