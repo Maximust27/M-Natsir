@@ -183,7 +183,7 @@ class Media extends Component
                 'topics' => ['Judi Online', 'Financial Intelligence', 'Data Matching'],
                 'url' => 'https://www.metrotvnews.com/play/N4EC4731-ppatk-ungkap-571-ribu-penerima-bansos-aktif-main-judi-online-kemensos-siap-evaluasi',
                 'actionLabel' => 'Watch',
-                'thumbnail' => null,
+                'thumbnail' => 'https://www.ppatk.go.id//backend/assets/images/berita_utama/1759453498_1534.jpeg',
                 'sourceNote' => 'Liputan Metro TV/Medcom mengidentifikasi M. Natsir Kongah sebagai Ketua Tim Humas PPATK dan sumber utama dalam tayangan.',
             ],
             [
@@ -215,7 +215,7 @@ class Media extends Component
                 'topics' => ['Judi Online', 'Crypto', 'Money Laundering'],
                 'url' => 'https://rri.co.id/hukum/1312532/ppatk-hasil-judol-melalui-kripto-capai-rp28-triliun',
                 'actionLabel' => 'Read Coverage',
-                'thumbnail' => null,
+                'thumbnail' => 'https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Pusat_Pemberitaan/o/1739065236541-natsir/id33lq6ssmo2rkr.jpeg',
                 'sourceNote' => 'RRI menyebut M. Natsir Kongah menyampaikan penjelasan tersebut dalam perbincangan Pro 3 RRI pada 9 Februari 2025.',
             ],
             [
@@ -231,7 +231,7 @@ class Media extends Component
                 'topics' => ['Judi Online', 'Dana Desa', 'Financial Intelligence'],
                 'url' => 'https://rri.co.id/hukum/anti-korupsi/1266305/ppatk-temukan-penyelewengan-dana-desa-untuk-judi-online',
                 'actionLabel' => 'Read Coverage',
-                'thumbnail' => null,
+                'thumbnail' => 'https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Pusat_Pemberitaan/o/1737344507040-natsir/4w3o4szadcmcvnz.jpeg',
                 'sourceNote' => 'RRI mengidentifikasi M. Natsir Kongah sebagai narasumber dalam perbincangan Pro 3 RRI pada 20 Januari 2025.',
             ],
             [
@@ -279,7 +279,7 @@ class Media extends Component
                 'topics' => ['Judi Online', 'Pinjaman Online', 'Public Awareness'],
                 'url' => 'https://rri.co.id/nasional/755379/faq.html',
                 'actionLabel' => 'Read Coverage',
-                'thumbnail' => null,
+                'thumbnail' => 'https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Pusat_Pemberitaan/o/1718278388869-natsir_kongah_PPATK/lie2qjmppm8tl7r.jpeg',
                 'sourceNote' => 'RRI secara eksplisit menyebut tulisan ini sebagai wawancara bersama M. Natsir Kongah.',
             ],
             [
@@ -295,7 +295,7 @@ class Media extends Component
                 'topics' => ['Recognition', 'PPATK', 'Public Appearance'],
                 'url' => 'https://www.ppatk.go.id/news/read/1314/trees',
                 'actionLabel' => 'View Event',
-                'thumbnail' => 'https://static.gatra.com/foldershared/images/2023/iwan/11-Nov/IMG_20231118_123815.jpg',
+                'thumbnail' => 'https://www.ppatk.go.id//backend/assets/images/berita_utama/1700468616_1314.JPG',
                 'sourceNote' => 'Berita resmi PPATK menyebut penghargaan diterima oleh M. Natsir Kongah pada 17 November 2023.',
             ],
             [
@@ -343,7 +343,7 @@ class Media extends Component
                 'topics' => ['Keterbukaan Informasi', 'Public Service', 'Knowledge Sharing'],
                 'url' => 'https://ppid.ppatk.go.id/?p=6548',
                 'actionLabel' => 'View Event',
-                'thumbnail' => null,
+                'thumbnail' => 'https://ppid.ppatk.go.id/wp-content/uploads/2022/09/WhatsApp-Image-2022-09-14-at-09.39.12-e1663123759938.jpeg',
                 'sourceNote' => 'Portal PPID PPATK mencatat M. Natsir Kongah melakukan sharing session bersama tim PIP KPK.',
             ],
             [
@@ -359,7 +359,7 @@ class Media extends Component
                 'topics' => ['Media Relations', 'APUPPT', 'Public Education'],
                 'url' => 'https://www.ppatk.go.id/news/read/1032/rangkul-pers-pimpinan-ppatk-sambang-the-jakarta-post.html',
                 'actionLabel' => 'View Event',
-                'thumbnail' => null,
+                'thumbnail' => 'https://www.ppatk.go.id//backend/assets/images/berita_utama/1582256211_1032.png',
                 'sourceNote' => 'Berita resmi PPATK menyebut M. Natsir Kongah sebagai Ketua Kelompok Humas PPATK yang mengikuti kunjungan pada 18 Februari 2020.',
             ],
             [
@@ -375,7 +375,7 @@ class Media extends Component
                 'topics' => ['Anti-Corruption', 'Money Laundering', 'Seminar'],
                 'url' => 'https://sumbar.antaranews.com/berita/314376/peringati-hari-anti-korupsi-sedunia-semen-padang-gelar-seminar',
                 'actionLabel' => 'Read Coverage',
-                'thumbnail' => null,
+                'thumbnail' => 'https://img.antaranews.com/cache/1200x800/2019/12/20/WhatsApp-Image-2019-12-20-at-06.04.35.jpeg.webp',
                 'sourceNote' => 'ANTARA Sumbar secara eksplisit menyebut M. Natsir Kongah menyampaikan materi dalam seminar.',
             ],
             [
@@ -391,7 +391,7 @@ class Media extends Component
                 'topics' => ['Public Education', 'Anti-Money Laundering', 'Creative Outreach'],
                 'url' => 'https://www.ppatk.go.id/siaran_pers/read/998/tingkatkan-kesadaran-anti-pencucian-uang-pada-milenial-dengan-kreatifitas-.html',
                 'actionLabel' => 'View Event',
-                'thumbnail' => null,
+                'thumbnail' => 'https://www.ppatk.go.id//backend/assets/images/berita_utama/1572313967_998.JPG',
                 'sourceNote' => 'Siaran pers PPATK mencatat laporan kegiatan disampaikan oleh M. Natsir Kongah sebagai Ketua Kelompok Humas.',
             ],
             [
