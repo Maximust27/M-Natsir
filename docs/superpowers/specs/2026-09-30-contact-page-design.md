@@ -225,7 +225,7 @@ Include a visually hidden field that normal visitors never fill. A non-empty val
 
 Rate-limit submissions by request IP, with a conservative default such as:
 
-- 3 successful attempts per 10 minutes.
+- 3 submission attempts per 10 minutes.
 
 When the limit is reached, show a generic Indonesian message asking the visitor to try again later.
 
