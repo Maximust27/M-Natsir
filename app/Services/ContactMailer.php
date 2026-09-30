@@ -10,9 +10,7 @@ class ContactMailer
 {
     public function configured(): bool
     {
-        return filled(config('contact.email.to'))
-            && filled(config('contact.email.from'))
-            && filled(config('contact.resend.key'));
+        return filled(config('contact.web3forms.access_key'));
     }
 
     /**
@@ -31,37 +29,24 @@ class ContactMailer
             return false;
         }
 
-        $fromName = trim((string) config('contact.email.from_name', 'M. Natsir Kongah'));
-        $fromEmail = trim((string) config('contact.email.from'));
-        $to = trim((string) config('contact.email.to'));
-
-        $text = implode("\n", array_filter([
-            'Website Contact — M. Natsir Kongah',
-            '',
-            'Nama: '.$data['name'],
-            'Email: '.$data['email'],
-            'Institusi / Media: '.$data['institution'],
-            'Tujuan Kontak: '.$data['purpose_label'],
-            filled($data['message'] ?? null) ? 'Pesan / Tenggat: '.trim((string) $data['message']) : null,
-            '',
-            'Dikirim: '.now()->toIso8601String(),
-        ], static fn ($line): bool => $line !== null));
-
         try {
-            $response = Http::withToken((string) config('contact.resend.key'))
-                ->acceptJson()
+            $response = Http::acceptJson()
                 ->asJson()
                 ->timeout(10)
-                ->post((string) config('contact.resend.endpoint'), [
-                    'from' => $fromName.' <'.$fromEmail.'>',
-                    'to' => [$to],
-                    'reply_to' => $data['email'],
+                ->post((string) config('contact.web3forms.endpoint'), [
+                    'access_key' => (string) config('contact.web3forms.access_key'),
                     'subject' => '[Website Contact] '.$data['purpose_label'].' — '.$data['name'],
-                    'text' => $text,
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'institution' => $data['institution'],
+                    'purpose' => $data['purpose_label'],
+                    'message' => filled($data['message'] ?? null)
+                        ? trim((string) $data['message'])
+                        : 'Tidak ada pesan tambahan atau tenggat waktu.',
                 ]);
 
-            if (! $response->successful()) {
-                Log::warning('Contact email provider rejected a request.', [
+            if (! $response->successful() || $response->json('success') !== true) {
+                Log::warning('Contact form provider rejected a request.', [
                     'status' => $response->status(),
                 ]);
 
@@ -70,7 +55,7 @@ class ContactMailer
 
             return true;
         } catch (Throwable $exception) {
-            Log::warning('Contact email provider request failed.', [
+            Log::warning('Contact form provider request failed.', [
                 'exception' => $exception::class,
             ]);
 
