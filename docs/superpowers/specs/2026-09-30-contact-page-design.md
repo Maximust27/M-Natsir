@@ -15,7 +15,7 @@ The contact experience should:
 
 - look consistent with the approved Figma layout and the existing Home, About, Articles, Library, and Media pages;
 - provide one clear professional contact form for journalists, academics, consultants, and related inquiries;
-- use a reputable transactional-email provider through the Laravel backend;
+- use Web3Forms through the Laravel backend;
 - keep secrets and personal contact details out of Blade templates and source control;
 - allow WhatsApp and CV links to be added later by configuration only;
 - remain visually complete when those integrations are not yet configured;
@@ -30,7 +30,7 @@ The contact experience should:
 - class-based Livewire page `App\Livewire\Contact`;
 - contact form based on the approved Figma layout;
 - Laravel-side validation;
-- email delivery through the Resend HTTP API;
+- form-to-email delivery through the Web3Forms HTTP API;
 - disabled/unavailable state while email configuration is incomplete;
 - basic honeypot protection and rate limiting;
 - success and failure feedback;
@@ -143,7 +143,7 @@ Validation errors render inline next to the relevant field and preserve submitte
 
 ## Email Delivery Architecture
 
-Use Resend through Laravel's built-in HTTP client rather than placing third-party JavaScript in the browser.
+Use Web3Forms through Laravel's built-in HTTP client rather than placing the access key or third-party JavaScript in the browser.
 
 Create a small isolated service, for example:
 
@@ -152,10 +152,10 @@ Create a small isolated service, for example:
 Responsibilities:
 
 - determine whether mail delivery is configured;
-- build the Resend request payload;
-- call the Resend API using the configured secret;
+- build the Web3Forms request payload;
+- call the Web3Forms API using the configured access key;
 - return a clear success/failure result to the Livewire component;
-- never expose the API key to client-side markup.
+- never expose the Web3Forms access key to client-side markup.
 
 This keeps provider-specific code out of the Livewire component and makes a future provider swap localized.
 
@@ -166,21 +166,14 @@ Add a dedicated config file such as `config/contact.php`.
 Environment values:
 
 ```env
-CONTACT_EMAIL_TO=
-CONTACT_EMAIL_FROM=
-CONTACT_EMAIL_FROM_NAME="M. Natsir Kongah"
-RESEND_API_KEY=
+WEB3FORMS_ACCESS_KEY=
 CONTACT_WHATSAPP_URL=
 CONTACT_CV_URL=
 ```
 
 No real email address, API key, WhatsApp number, or private URL is committed to Git.
 
-Mail is considered enabled only when all required mail values are present:
-
-- `CONTACT_EMAIL_TO`
-- `CONTACT_EMAIL_FROM`
-- `RESEND_API_KEY`
+Mail is considered enabled when `WEB3FORMS_ACCESS_KEY` is present. The destination inbox is associated with that access key in Web3Forms, so no destination email address needs to be committed or configured in this project.
 
 ### Email Payload
 
@@ -193,7 +186,7 @@ The outgoing message should contain:
 - optional message/deadline;
 - timestamp.
 
-The site-controlled verified sender goes in Resend's `from` field. The visitor email should be used as `reply_to`, not as the sender, to avoid deliverability and spoofing issues.
+The visitor's name, email, institution, purpose, and optional message are submitted as form fields. Web3Forms uses the access key to route the submission to the email address associated with that key.
 
 Suggested subject format:
 
@@ -208,7 +201,7 @@ When mail configuration is incomplete:
 - all form fields may still render;
 - the submit button remains visible but disabled;
 - supporting text states: `Layanan pengiriman sedang disiapkan.`;
-- no HTTP request to Resend is attempted;
+- no HTTP request to Web3Forms is attempted;
 - the page does not throw configuration exceptions.
 
 Once the environment variables are added and Laravel config is refreshed, the same button becomes active automatically.
@@ -235,7 +228,7 @@ Do not disclose internal rate-limit keys or provider details.
 
 ### Success
 
-After Resend confirms delivery:
+After Web3Forms confirms delivery:
 
 - show a clear success notice;
 - reset the form;
@@ -248,7 +241,7 @@ Suggested copy:
 
 ### Provider Failure
 
-If Resend returns an error or the request fails:
+If Web3Forms returns an error or the request fails:
 
 - do not clear user input;
 - display a generic retry message;
@@ -390,7 +383,7 @@ Do not introduce a new UI component system unless repeated markup clearly justif
 - no API key is written into Blade, JavaScript, repository history, or browser-visible state;
 - form values are treated as untrusted input;
 - user-supplied content is escaped in rendered feedback;
-- Resend request failures are logged without logging secrets;
+- Web3Forms request failures are logged without logging secrets;
 - do not persist contact form submissions in the first version;
 - do not expose visitor email addresses in URLs.
 
@@ -411,13 +404,13 @@ Create `tests/Feature/Livewire/ContactTest.php` covering at least:
 - rate limiting blocks excessive submissions;
 - successful provider response shows success feedback and resets fields;
 - provider failure shows retry feedback and preserves input;
-- visitor email is sent as `reply_to`;
+- visitor email is included in the Web3Forms payload;
 - API key is never rendered into the page;
 - WhatsApp configured/unconfigured states render correctly;
 - CV configured/unconfigured states render correctly;
 - Home contact CTA points to `/contact`.
 
-Use Laravel HTTP fakes for Resend requests. Tests must not perform real network calls.
+Use Laravel HTTP fakes for Web3Forms requests. Tests must not perform real network calls.
 
 ## Verification
 
