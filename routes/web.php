@@ -19,10 +19,22 @@ Route::get('/contact/cv', function () {
 
     abort_unless(is_file($path), 404);
 
-    return response()->download(
-        $path,
+    return response()->streamDownload(
+        function () use ($path): void {
+            $stream = fopen($path, 'rb');
+
+            if ($stream === false) {
+                return;
+            }
+
+            fpassthru($stream);
+            fclose($stream);
+        },
         'M-Natsir-Kongah-CV.pdf',
-        ['Content-Type' => 'application/pdf'],
+        [
+            'Content-Type' => 'application/pdf',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate',
+        ],
     );
 })->name('contact.cv.download');
 
