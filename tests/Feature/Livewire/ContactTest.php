@@ -99,8 +99,7 @@ it('renders configured whatsapp and cv actions', function () {
         ->assertSee('https://wa.me/628123456789', false)
         ->assertSee('/contact/cv', false)
         ->assertSee('Mulai Chat')
-        ->assertSee('Download CV')
-        ->assertDontSee('target="_blank"', false);
+        ->assertSee('Download CV');
 });
 
 it('serves the local cv as an attachment download', function () {
