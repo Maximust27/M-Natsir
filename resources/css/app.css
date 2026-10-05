@@ -72,6 +72,16 @@
         width: min(calc(100% - 2rem), 102.5rem);
         margin-inline: auto;
     }
+
+    [data-ui-button] > [aria-hidden='true'] {
+        display: inline-block;
+        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    [data-ui-button]:hover > [aria-hidden='true'],
+    [data-ui-button]:focus-visible > [aria-hidden='true'] {
+        transform: translateX(0.18rem);
+    }
 }
 
 @media (min-width: 64rem) {
@@ -80,9 +90,71 @@
     }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+    [data-motion-reveal],
+    [data-motion-card] {
+        opacity: 0;
+        transform: translateY(18px);
+        transition:
+            opacity 620ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay, 0ms),
+            transform 620ms cubic-bezier(0.22, 1, 0.36, 1) var(--motion-delay, 0ms);
+        will-change: opacity, transform;
+    }
+
+    [data-motion-reveal][data-motion-state='visible'],
+    [data-motion-card][data-motion-state='visible'] {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    [data-home-hero-image] {
+        transform: scale(1.035);
+        transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+    }
+
+    [data-home-hero-item] {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+            opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+            transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    [data-home-hero-item]:nth-of-type(2) {
+        transition-delay: 90ms;
+    }
+
+    [data-home-hero-item]:nth-of-type(3) {
+        transition-delay: 160ms;
+    }
+
+    [data-home-hero-item]:nth-of-type(4) {
+        transition-delay: 230ms;
+    }
+
+    [data-home-hero][data-motion-state='visible'] [data-home-hero-image] {
+        transform: scale(1);
+    }
+
+    [data-home-hero][data-motion-state='visible'] [data-home-hero-item] {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
 
