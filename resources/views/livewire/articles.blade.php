@@ -1,4 +1,4 @@
-<div>
+<div data-motion-static>
     <section class="site-container border-b border-line py-14 sm:py-18 lg:py-22" aria-labelledby="articles-title">
         <div class="max-w-5xl">
             <p class="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-accent">
