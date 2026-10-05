@@ -21,11 +21,11 @@
                 Knowledge Pillars
             </h2>
             <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
-                <a href="{{ route('home') }}#knowledge-pillars" class="min-h-8 transition hover:text-ink">Anti-Money Laundering</a>
-                <a href="{{ route('home') }}#knowledge-pillars" class="min-h-8 transition hover:text-ink">Professional Money Laundering</a>
-                <a href="{{ route('home') }}#featured-writings" class="min-h-8 transition hover:text-ink">Financial Intelligence</a>
-                <a href="{{ route('home') }}#featured-writings" class="min-h-8 transition hover:text-ink">White-Collar Crime</a>
-                <a href="{{ route('home') }}#knowledge-pillars" class="min-h-8 transition hover:text-ink">Future Crime (AI &amp; Crypto)</a>
+                <a href="{{ route('articles', ['category' => 'aml']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Anti-Money Laundering</a>
+                <a href="{{ route('articles', ['category' => 'pml']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Professional Money Laundering</a>
+                <a href="{{ route('articles', ['category' => 'financial-intelligence']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Financial Intelligence</a>
+                <a href="{{ route('articles', ['category' => 'white-collar']) }}" wire:navigate class="min-h-8 transition hover:text-ink">White-Collar Crime</a>
+                <a href="{{ route('articles', ['category' => 'future-crime']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Future Crime (AI &amp; Crypto)</a>
             </div>
         </div>
 
