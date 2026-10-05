@@ -8,11 +8,11 @@
         <title>{{ $title ?? 'M. Natsir Kongah | Financial Intelligence Hub' }}</title>
         <meta name="theme-color" content="#0e1c2f">
 
-        <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
-        <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
-        <link rel="icon" href="{{ asset('favicon-32x32.png') }}" type="image/png" sizes="32x32">
-        <link rel="icon" href="{{ asset('favicon-16x16.png') }}" type="image/png" sizes="16x16">
-        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}" sizes="180x180">
+        <link rel="icon" href="{{ asset('favicon.ico') }}?v=mnk-1" sizes="any">
+        <link rel="icon" href="{{ asset('favicon.svg') }}?v=mnk-1" type="image/svg+xml">
+        <link rel="icon" href="{{ asset('favicon-32x32.png') }}?v=mnk-1" type="image/png" sizes="32x32">
+        <link rel="icon" href="{{ asset('favicon-16x16.png') }}?v=mnk-1" type="image/png" sizes="16x16">
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}?v=mnk-1" sizes="180x180">
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
