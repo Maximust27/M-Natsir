@@ -6,6 +6,7 @@ on:
       - feat/articles-livewire
       - feat/library-livewire
       - feat/media-livewire
+      - feat/contact-livewire
   pull_request:
     branches:
       - main

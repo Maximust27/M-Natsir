@@ -2,6 +2,7 @@
 
 use App\Livewire\About;
 use App\Livewire\Articles;
+use App\Livewire\Contact;
 use App\Livewire\Home;
 use App\Livewire\Library;
 use App\Livewire\Media;
@@ -12,3 +13,29 @@ Route::livewire('/tentang', About::class)->name('about');
 Route::livewire('/articles', Articles::class)->name('articles');
 Route::livewire('/library', Library::class)->name('library');
 Route::livewire('/media', Media::class)->name('media');
+
+Route::get('/contact/cv', function () {
+    $path = public_path('files/m-natsir-kongah-cv.pdf');
+
+    abort_unless(is_file($path), 404);
+
+    return response()->streamDownload(
+        function () use ($path): void {
+            $stream = fopen($path, 'rb');
+
+            if ($stream === false) {
+                return;
+            }
+
+            fpassthru($stream);
+            fclose($stream);
+        },
+        'M-Natsir-Kongah-CV.pdf',
+        [
+            'Content-Type' => 'application/pdf',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate',
+        ],
+    );
+})->name('contact.cv.download');
+
+Route::livewire('/contact', Contact::class)->name('contact');

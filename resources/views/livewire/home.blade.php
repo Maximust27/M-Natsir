@@ -154,7 +154,7 @@
                 />
 
                 <div class="mt-8">
-                    <x-ui.button href="#contact" variant="outline" size="lg">
+                    <x-ui.button :href="route('contact')" variant="outline" size="lg" wire:navigate>
                         Ajukan Pertanyaan / Undangan Media
                     </x-ui.button>
                 </div>
