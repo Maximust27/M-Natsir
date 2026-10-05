@@ -52,7 +52,7 @@
                 size="md"
             >
                 {{ $article['accessLabel'] ?? 'Baca Publikasi Asli' }}
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">→</span>
             </x-ui.button>
 
             <span class="text-xs leading-6 text-slate-500">

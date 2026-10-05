@@ -44,7 +44,7 @@
                             class="inline-flex min-h-10 items-center gap-2 rounded-sm text-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                         >
                             {{ $profile['label'] }}
-                            <span aria-hidden="true">↗</span>
+                            <span aria-hidden="true">→</span>
                         </a>
                     @endforeach
                 </div>
