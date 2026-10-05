@@ -133,11 +133,11 @@
         transition-delay: 230ms;
     }
 
-    [data-home-hero][data-motion-state='visible'] .motion-ready [data-home-hero-image] {
+    .motion-ready [data-home-hero][data-motion-state='visible'] [data-home-hero-image] {
         transform: scale(1);
     }
 
-    [data-home-hero][data-motion-state='visible'] .motion-ready [data-home-hero-item] {
+    .motion-ready [data-home-hero][data-motion-state='visible'] [data-home-hero-item] {
         opacity: 1;
         transform: translateY(0);
     }
