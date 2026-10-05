@@ -1,4 +1,4 @@
-<div>
+<div data-motion-static>
     <section class="border-b border-line bg-white">
         <div class="site-container py-14 sm:py-16 lg:py-20">
             <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_30rem] lg:items-end">
