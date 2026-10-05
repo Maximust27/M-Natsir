@@ -40,10 +40,6 @@
                 <a href="{{ route('media') }}" wire:navigate class="min-h-8 transition hover:text-ink">Media &amp; Appearances</a>
                 <a href="{{ route('contact') }}" wire:navigate class="min-h-8 transition hover:text-ink">Contact</a>
             </div>
-            <div class="mt-7 grid gap-2 text-sm leading-6 text-slate-600">
-                <a href="#" class="min-h-8 transition hover:text-ink">Privacy Policy</a>
-                <a href="#" class="min-h-8 transition hover:text-ink">Terms of Service</a>
-            </div>
         </div>
     </div>
 </footer>
