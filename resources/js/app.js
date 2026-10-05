@@ -75,6 +75,7 @@ function playHomeHero() {
 }
 
 function initializeMotion() {
+    observeMotionRoot();
     prepareRevealElements();
     playHomeHero();
 }
@@ -90,8 +91,21 @@ const motionMutationObserver = new MutationObserver((mutations) => {
     }
 });
 
-const motionRoot = document.querySelector('main');
+let motionRoot;
 
-if (motionRoot) {
-    motionMutationObserver.observe(motionRoot, { childList: true, subtree: true });
+function observeMotionRoot() {
+    const nextRoot = document.querySelector('main');
+
+    if (nextRoot === motionRoot) {
+        return;
+    }
+
+    motionMutationObserver.disconnect();
+    motionRoot = nextRoot;
+
+    if (motionRoot) {
+        motionMutationObserver.observe(motionRoot, { childList: true, subtree: true });
+    }
 }
+
+observeMotionRoot();
