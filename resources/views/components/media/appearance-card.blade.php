@@ -77,7 +77,7 @@
                 size="sm"
             >
                 {{ $appearance['actionLabel'] }}
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">→</span>
             </x-ui.button>
         </div>
     </div>
