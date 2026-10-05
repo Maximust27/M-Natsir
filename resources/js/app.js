@@ -1,5 +1,3 @@
-document.documentElement.classList.add('motion-ready');
-
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const revealOptions = {
@@ -9,12 +7,31 @@ const revealOptions = {
 };
 
 let observer;
+let motionRoot;
 
 function revealElement(element) {
     element.dataset.motionState = 'visible';
 }
 
+function ensureMotionReady() {
+    document.documentElement.classList.add('motion-ready');
+}
+
+function observeAfterPaint(elements) {
+    if (elements.length === 0 || reduceMotion.matches) {
+        return;
+    }
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            elements.forEach((element) => observer?.observe(element));
+        });
+    });
+}
+
 function prepareRevealElements() {
+    ensureMotionReady();
+
     if (reduceMotion.matches) {
         document.querySelectorAll('[data-motion-reveal], [data-motion-card]').forEach(revealElement);
         return;
@@ -31,6 +48,8 @@ function prepareRevealElements() {
         });
     }, revealOptions);
 
+    const pending = [];
+
     const sections = Array.from(document.querySelectorAll('main section'))
         .filter((section) => ! section.closest('[data-home-hero]'));
 
@@ -41,7 +60,7 @@ function prepareRevealElements() {
 
         section.dataset.motionPrepared = 'true';
         section.dataset.motionReveal = '';
-        observer.observe(section);
+        pending.push(section);
     });
 
     document.querySelectorAll('[data-motion-card]').forEach((card, index) => {
@@ -51,8 +70,10 @@ function prepareRevealElements() {
 
         card.dataset.motionPrepared = 'true';
         card.style.setProperty('--motion-delay', `${Math.min(index % 4, 3) * 55}ms`);
-        observer.observe(card);
+        pending.push(card);
     });
+
+    observeAfterPaint(pending);
 }
 
 function playHomeHero() {
@@ -70,28 +91,17 @@ function playHomeHero() {
     }
 
     requestAnimationFrame(() => {
-        hero.dataset.motionState = 'visible';
+        requestAnimationFrame(() => {
+            hero.dataset.motionState = 'visible';
+        });
     });
 }
-
-function initializeMotion() {
-    observeMotionRoot();
-    prepareRevealElements();
-    playHomeHero();
-}
-
-document.addEventListener('DOMContentLoaded', initializeMotion);
-document.addEventListener('livewire:navigated', initializeMotion);
-
-reduceMotion.addEventListener?.('change', initializeMotion);
 
 const motionMutationObserver = new MutationObserver((mutations) => {
     if (mutations.some((mutation) => mutation.addedNodes.length > 0)) {
         initializeMotion();
     }
 });
-
-let motionRoot;
 
 function observeMotionRoot() {
     const nextRoot = document.querySelector('main');
@@ -108,4 +118,16 @@ function observeMotionRoot() {
     }
 }
 
-observeMotionRoot();
+function initializeMotion() {
+    ensureMotionReady();
+    observeMotionRoot();
+    prepareRevealElements();
+    playHomeHero();
+}
+
+document.addEventListener('DOMContentLoaded', initializeMotion);
+document.addEventListener('livewire:navigated', initializeMotion);
+
+reduceMotion.addEventListener?.('change', initializeMotion);
+
+initializeMotion();
