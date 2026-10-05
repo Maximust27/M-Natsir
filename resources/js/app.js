@@ -51,7 +51,7 @@ function prepareRevealElements() {
     const pending = [];
 
     const sections = Array.from(document.querySelectorAll('main section'))
-        .filter((section) => ! section.closest('[data-home-hero]'));
+        .filter((section) => ! section.closest('[data-home-hero], [data-motion-static]'));
 
     sections.forEach((section) => {
         if (section.dataset.motionPrepared === 'true') {
@@ -64,6 +64,11 @@ function prepareRevealElements() {
     });
 
     document.querySelectorAll('[data-motion-card]').forEach((card, index) => {
+        if (card.closest('[data-motion-static]')) {
+            card.dataset.motionState = 'visible';
+            return;
+        }
+
         if (card.dataset.motionPrepared === 'true') {
             return;
         }
