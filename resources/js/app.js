@@ -1,3 +1,5 @@
+document.documentElement.classList.add('motion-ready');
+
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 const revealOptions = {
@@ -83,3 +85,15 @@ document.addEventListener('DOMContentLoaded', initializeMotion);
 document.addEventListener('livewire:navigated', initializeMotion);
 
 reduceMotion.addEventListener?.('change', initializeMotion);
+
+const motionMutationObserver = new MutationObserver((mutations) => {
+    if (mutations.some((mutation) => mutation.addedNodes.length > 0)) {
+        initializeMotion();
+    }
+});
+
+const motionRoot = document.querySelector('main');
+
+if (motionRoot) {
+    motionMutationObserver.observe(motionRoot, { childList: true, subtree: true });
+}
