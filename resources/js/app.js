@@ -20,9 +20,7 @@ function prepareRevealElements() {
         return;
     }
 
-    observer?.disconnect();
-
-    observer = new IntersectionObserver((entries) => {
+    observer ??= new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (! entry.isIntersecting) {
                 return;
