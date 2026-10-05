@@ -91,8 +91,8 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    [data-motion-reveal],
-    [data-motion-card] {
+    .motion-ready [data-motion-reveal],
+    .motion-ready [data-motion-card] {
         opacity: 0;
         transform: translateY(18px);
         transition:
@@ -101,19 +101,19 @@
         will-change: opacity, transform;
     }
 
-    [data-motion-reveal][data-motion-state='visible'],
-    [data-motion-card][data-motion-state='visible'] {
+    .motion-ready [data-motion-reveal][data-motion-state='visible'],
+    .motion-ready [data-motion-card][data-motion-state='visible'] {
         opacity: 1;
         transform: translateY(0);
     }
 
-    [data-home-hero-image] {
+    .motion-ready [data-home-hero-image] {
         transform: scale(1.035);
         transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
         will-change: transform;
     }
 
-    [data-home-hero-item] {
+    .motion-ready [data-home-hero-item] {
         opacity: 0;
         transform: translateY(20px);
         transition:
@@ -121,23 +121,23 @@
             transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    [data-home-hero-item]:nth-of-type(2) {
+    .motion-ready [data-home-hero-item]:nth-of-type(2) {
         transition-delay: 90ms;
     }
 
-    [data-home-hero-item]:nth-of-type(3) {
+    .motion-ready [data-home-hero-item]:nth-of-type(3) {
         transition-delay: 160ms;
     }
 
-    [data-home-hero-item]:nth-of-type(4) {
+    .motion-ready [data-home-hero-item]:nth-of-type(4) {
         transition-delay: 230ms;
     }
 
-    [data-home-hero][data-motion-state='visible'] [data-home-hero-image] {
+    [data-home-hero][data-motion-state='visible'] .motion-ready [data-home-hero-image] {
         transform: scale(1);
     }
 
-    [data-home-hero][data-motion-state='visible'] [data-home-hero-item] {
+    [data-home-hero][data-motion-state='visible'] .motion-ready [data-home-hero-item] {
         opacity: 1;
         transform: translateY(0);
     }
