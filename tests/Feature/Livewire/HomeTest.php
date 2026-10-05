@@ -13,7 +13,8 @@ it('renders the home page with verified featured writings', function () {
         ->assertSee('Batas Negara atas Harta')
         ->assertSee('Campaign funding: Lesson from Watergate')
         ->assertDontSee('Menelusuri Aliran Dana Gelap')
-        ->assertDontSee('★ Prof. Money LaunderingAML RegsCrypto/AIPenyidikan')
+        ->assertDontSee('Crypto/AI')
+        ->assertDontSee('Penyidikan')
         ->assertSeeLivewire(Home::class);
 });
 
