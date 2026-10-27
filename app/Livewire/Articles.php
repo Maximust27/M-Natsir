@@ -10,7 +10,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 
 #[Layout('layouts::app')]
-#[Title('Artikel & Analisis | M. Natsir Kongah')]
+#[Title('Artikel Anti Pencucian Uang | M. Natsir Kongah')]
 class Articles extends Component
 {
     #[Url(as: 'q', except: '')]

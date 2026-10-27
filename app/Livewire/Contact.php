@@ -8,7 +8,7 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 
 #[Layout('layouts::app')]
-#[Title('Contact | M. Natsir Kongah')]
+#[Title('Kontak M. Natsir Kongah | Wawancara & Diskusi')]
 class Contact extends Component
 {
     public function render(): View
