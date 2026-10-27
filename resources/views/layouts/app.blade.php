@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="id">
     <head>
+        @php
+            $seoSettings = config('seo');
+            $seoPage = $seoSettings['pages'][request()->route()?->getName() ?? ''] ?? [];
+            $seoTitle = $title ?? $seoSettings['default_title'];
+            $seoDescription = $seoPage['description'] ?? $seoSettings['default_description'];
+            $seoImage = asset($seoPage['image'] ?? $seoSettings['default_image']);
+            $seoImageAlt = $seoPage['image_alt'] ?? $seoSettings['default_image_alt'];
+            $seoUrl = url()->current();
+        @endphp
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Financial Intelligence Hub M. Natsir Kongah — analisis, riset, dan pembelajaran tentang anti pencucian uang serta kejahatan keuangan terorganisir.">
+        <title>{{ $seoTitle }}</title>
+        <meta name="description" content="{{ $seoDescription }}">
 
-        <title>{{ $title ?? 'M. Natsir Kongah | Financial Intelligence Hub' }}</title>
+        <meta property="og:type" content="website">
+        <meta property="og:locale" content="id_ID">
+        <meta property="og:site_name" content="{{ $seoSettings['site_name'] }}">
+        <meta property="og:title" content="{{ $seoTitle }}">
+        <meta property="og:description" content="{{ $seoDescription }}">
+        <meta property="og:url" content="{{ $seoUrl }}">
+        <meta property="og:image" content="{{ $seoImage }}">
+        <meta property="og:image:alt" content="{{ $seoImageAlt }}">
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $seoTitle }}">
+        <meta name="twitter:description" content="{{ $seoDescription }}">
+        <meta name="twitter:image" content="{{ $seoImage }}">
+        <meta name="twitter:image:alt" content="{{ $seoImageAlt }}">
+
         <meta name="theme-color" content="#0e1c2f">
 
         <link rel="icon" href="{{ asset('favicon.ico') }}?v=mnk-1" sizes="any">
