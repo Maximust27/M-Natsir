@@ -81,27 +81,6 @@ function prepareRevealElements() {
     observeAfterPaint(pending);
 }
 
-function playHomeHero() {
-    const hero = document.querySelector('[data-home-hero]');
-
-    if (! hero || hero.dataset.motionPlayed === 'true') {
-        return;
-    }
-
-    hero.dataset.motionPlayed = 'true';
-
-    if (reduceMotion.matches) {
-        hero.dataset.motionState = 'visible';
-        return;
-    }
-
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            hero.dataset.motionState = 'visible';
-        });
-    });
-}
-
 const motionMutationObserver = new MutationObserver((mutations) => {
     if (mutations.some((mutation) => mutation.addedNodes.length > 0)) {
         initializeMotion();
@@ -127,7 +106,6 @@ function initializeMotion() {
     ensureMotionReady();
     observeMotionRoot();
     prepareRevealElements();
-    playHomeHero();
 }
 
 document.addEventListener('DOMContentLoaded', initializeMotion);

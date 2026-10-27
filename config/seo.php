@@ -5,7 +5,7 @@ return [
     // Only identity claims already visible on the public About page belong here.
     'person' => [
         'description' => 'Pembelajar Anti Pencucian Uang & Pengamat Kejahatan Keuangan',
-        'image' => 'images/about-hero.jpeg',
+        'image' => 'images/about-hero.png',
         'same_as' => [
             'https://id.linkedin.com/in/m-natsir-kongah-221615130',
             'https://kumparan.com/natsir-kongah',
@@ -34,7 +34,7 @@ return [
         ],
         'about' => [
             'description' => 'Kenali profil M. Natsir Kongah, pengalaman profesional, kontribusi edukasi publik, dan fokus kajian dalam intelijen keuangan serta anti pencucian uang.',
-            'image' => 'images/about-hero.jpeg',
+            'image' => 'images/about-hero.png',
             'image_alt' => 'Potret M. Natsir Kongah pada halaman profil',
         ],
         'articles' => [
