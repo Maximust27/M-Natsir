@@ -47,7 +47,7 @@ it('uses ProfilePage only for Tentang with a fully described Person', function (
         ->and($person['@id'])->toBe(route('about').'#person')
         ->and($person['name'])->toBe('M. Natsir Kongah')
         ->and($person['description'])->toBe(config('seo.person.description'))
-        ->and($person['image'])->toBe(asset('images/about-hero.jpeg'))
+        ->and($person['image'])->toBe(asset('images/about-hero.png'))
         ->and($person['sameAs'])->toBe(config('seo.person.same_as'))
         ->and($person['knowsAbout'])->toBe(config('seo.person.knows_about'));
 

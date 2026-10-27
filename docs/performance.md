@@ -1,11 +1,11 @@
 # Tahap 5 — Performa dan Core Web Vitals
 
-Website M-Natsir saat ini menggunakan dua JPEG hero besar di `public/images` (sekitar 1,8 MB masing-masing). Perubahan ini menyiapkan **WebP responsif secara otomatis** saat build dan mempertahankan JPEG asli sebagai fallback.
+Website M-Natsir saat ini menggunakan dua gambar hero besar (Home: JPEG, Tentang: PNG) di `public/images` (sekitar 1,8 MB masing-masing). Perubahan ini menyiapkan **WebP responsif secara otomatis** saat build dan mempertahankan file sumber (JPEG/PNG) sebagai fallback.
 
 ## Mekanisme gambar
 
-- `scripts/optimize-hero-images.php` membuat WebP dengan PHP GD pada kualitas 76, tanpa mengubah JPEG asli.
-- Home: kandidat 480, 960, dan 1440 piksel (hanya yang lebih kecil dari lebar JPEG asli) dan satu varian di resolusi asli.
+- `scripts/optimize-hero-images.php` membuat WebP dengan PHP GD pada kualitas 76, tanpa mengubah konten gambar asli.
+- Home: kandidat 480, 960, dan 1440 piksel (hanya yang lebih kecil dari lebar gambar asli) dan satu varian di resolusi asli.
 - Tentang: kandidat 320 dan 640 piksel serta satu varian di resolusi asli.
 - `npm run dev` dan `npm run build` otomatis menjalankan script langsung di dalam perintah `build` / `dev` (bukan lifecycle hook, karena `.npmrc` proyek memakai `ignore-scripts=true`).
 - File `home-hero-*.webp` dan `about-hero-*.webp` adalah hasil build dan di-ignore oleh Git, **sehingga deployment perlu menjalankan build sebelum menayangkan site**.
@@ -13,7 +13,7 @@ Website M-Natsir saat ini menggunakan dua JPEG hero besar di `public/images` (se
 - Gambar LCP pada homepage dan halaman Tentang menggunakan `loading="eager"`, `fetchpriority="high"`, dan `decoding="async"`. Jangan menambah `loading="lazy"` pada gambar utama di atas fold.
 - Frame gambar Tentang memakai `aspect-[3/4]` agar ukuran stabil sebelum gambar dimuat.
 
-Jika GD dengan JPEG/WebP tidak terpasang, script memberikan pesan peringatan dan **build tetap jalan memakai JPEG lama**. Pada Laragon, aktifkan ekstensi `gd` pada PHP aktif untuk mendapatkan WebP. Untuk memverifikasi, jalankan:
+Jika GD dengan JPEG/WebP tidak terpasang, script memberikan pesan peringatan dan **build tetap jalan memakai gambar asal**. Pada Laragon, aktifkan ekstensi `gd` pada PHP aktif untuk mendapatkan WebP. Untuk memverifikasi, jalankan:
 
 ```bash
 php -r "var_dump(function_exists('imagewebp'));"

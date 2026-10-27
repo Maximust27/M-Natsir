@@ -3,16 +3,17 @@
 declare(strict_types=1);
 
 /**
- * Create responsive WebP copies of the two existing hero JPEGs.
+ * Create responsive WebP copies of the two existing hero images.
  *
  * Runs automatically before npm run dev/build. Generated files stay out of Git.
- * The Blade templates retain a JPEG fallback when GD/WebP is not available.
+ * The Blade templates retain their original image fallback when GD/WebP is unavailable.
  */
 $directory = dirname(__DIR__).'/public/images';
 
 $images = [
-    'home-hero' => [480, 960, 1440],
-    'about-hero' => [320, 640],
+    'home-hero' => ['source' => 'home-hero.jpeg', 'widths' => [480, 960, 1440]],
+    // The About source is PNG, despite previously carrying a .jpeg extension.
+    'about-hero' => ['source' => 'about-hero.png', 'widths' => [320, 640]],
 ];
 
 if (! function_exists('imagecreatefromjpeg')
@@ -24,8 +25,9 @@ if (! function_exists('imagecreatefromjpeg')
 
 $failed = false;
 
-foreach ($images as $name => $widths) {
-    $sourcePath = $directory.'/'.$name.'.jpeg';
+foreach ($images as $name => $image) {
+    $widths = $image['widths'];
+    $sourcePath = $directory.'/'.$image['source'];
 
     if (! is_file($sourcePath)) {
         fwrite(STDERR, "[hero-images] Missing source: {$sourcePath}\n");
@@ -36,8 +38,21 @@ foreach ($images as $name => $widths) {
 
     $dimensions = @getimagesize($sourcePath);
 
-    if (! is_array($dimensions) || ($dimensions[2] ?? null) !== IMAGETYPE_JPEG) {
-        fwrite(STDERR, "[hero-images] Expected a readable JPEG: {$sourcePath}\n");
+    if (! is_array($dimensions)) {
+        fwrite(STDERR, "[hero-images] Could not read dimensions: {$sourcePath}\n");
+        $failed = true;
+
+        continue;
+    }
+
+    $decoder = match ($dimensions[2] ?? null) {
+        IMAGETYPE_JPEG => 'imagecreatefromjpeg',
+        IMAGETYPE_PNG => 'imagecreatefrompng',
+        default => null,
+    };
+
+    if ($decoder === null || ! function_exists($decoder)) {
+        fwrite(STDERR, "[hero-images] Unsupported image format: {$sourcePath}\n");
         $failed = true;
 
         continue;
@@ -52,7 +67,7 @@ foreach ($images as $name => $widths) {
     ));
     $variants[] = $originalWidth;
 
-    $source = @imagecreatefromjpeg($sourcePath);
+    $source = @$decoder($sourcePath);
 
     if ($source === false) {
         fwrite(STDERR, "[hero-images] Could not decode {$sourcePath}\n");

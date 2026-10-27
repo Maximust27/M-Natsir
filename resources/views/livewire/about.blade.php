@@ -13,7 +13,7 @@
                             >
                         @endif
                         <img
-                            src="{{ asset('images/about-hero.jpeg') }}"
+                            src="{{ asset('images/about-hero.png') }}"
                             alt="Potret M. Natsir Kongah"
                             width="1200"
                             height="675"

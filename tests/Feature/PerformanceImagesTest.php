@@ -2,6 +2,14 @@
 
 use App\Support\Media\HeroImages;
 
+it('uses the correct source image formats and file extensions', function () {
+    $home = getimagesize(public_path('images/home-hero.jpeg'));
+    $about = getimagesize(public_path('images/about-hero.png'));
+
+    expect($home[2])->toBe(IMAGETYPE_JPEG)
+        ->and($about[2])->toBe(IMAGETYPE_PNG);
+});
+
 it('keeps the LCP hero image eager and high priority on Home and Tentang', function () {
     $home = $this->get(route('home'))->assertOk()->getContent();
     $about = $this->get(route('about'))->assertOk()->getContent();
@@ -14,7 +22,7 @@ it('keeps the LCP hero image eager and high priority on Home and Tentang', funct
     }
 
     expect($home)->toContain('src="'.asset('images/home-hero.jpeg').'"')
-        ->and($about)->toContain('src="'.asset('images/about-hero.jpeg').'"')
+        ->and($about)->toContain('src="'.asset('images/about-hero.png').'"')
         ->and($about)->toContain('aspect-[3/4]');
 });
 

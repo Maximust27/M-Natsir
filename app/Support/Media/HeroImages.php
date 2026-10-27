@@ -4,24 +4,25 @@ namespace App\Support\Media;
 
 final class HeroImages
 {
-    private const WIDTHS = [
-        'home-hero' => [480, 960, 1440],
-        'about-hero' => [320, 640],
+    private const IMAGES = [
+        'home-hero' => ['file' => 'home-hero.jpeg', 'widths' => [480, 960, 1440]],
+        'about-hero' => ['file' => 'about-hero.png', 'widths' => [320, 640]],
     ];
 
     /**
      * Return only WebP files that actually exist after the image build.
-     * Missing variants gracefully fall back to the existing JPEG <img>.
+     * Missing variants gracefully fall back to the original <img> asset.
      */
     public static function webpSrcset(string $image): string
     {
-        $widths = self::WIDTHS[$image] ?? null;
+        $details = self::IMAGES[$image] ?? null;
 
-        if ($widths === null) {
+        if ($details === null) {
             return '';
         }
 
-        $original = public_path('images/'.$image.'.jpeg');
+        $widths = $details['widths'];
+        $original = public_path('images/'.$details['file']);
 
         if (! is_file($original)) {
             return '';
