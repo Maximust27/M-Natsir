@@ -7,7 +7,7 @@ Website M-Natsir saat ini menggunakan dua JPEG hero besar di `public/images` (se
 - `scripts/optimize-hero-images.php` membuat WebP dengan PHP GD pada kualitas 76, tanpa mengubah JPEG asli.
 - Home: kandidat 480, 960, dan 1440 piksel (hanya yang lebih kecil dari lebar JPEG asli) dan satu varian di resolusi asli.
 - Tentang: kandidat 320 dan 640 piksel serta satu varian di resolusi asli.
-- `npm run dev` dan `npm run build` otomatis menjalankan script melalui `predev` dan `prebuild`.
+- `npm run dev` dan `npm run build` otomatis menjalankan script langsung di dalam perintah `build` / `dev` (bukan lifecycle hook, karena `.npmrc` proyek memakai `ignore-scripts=true`).
 - File `home-hero-*.webp` dan `about-hero-*.webp` adalah hasil build dan di-ignore oleh Git, **sehingga deployment perlu menjalankan build sebelum menayangkan site**.
 - Blade menggunakan `<picture><source type="image/webp" srcset="..." sizes="..."><img src="...jpeg"></picture>`. Source WebP hanya muncul bila file tersebut benar-benar ada.
 - Gambar LCP pada homepage dan halaman Tentang menggunakan `loading="eager"`, `fetchpriority="high"`, dan `decoding="async"`. Jangan menambah `loading="lazy"` pada gambar utama di atas fold.
