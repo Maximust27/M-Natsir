@@ -22,8 +22,12 @@ it('keeps the LCP hero image eager and high priority on Home and Tentang', funct
     }
 
     expect($home)->toContain('src="'.asset('images/home-hero.jpeg').'"')
+        ->toContain('width="2730"')
+        ->toContain('height="1536"')
         ->and($about)->toContain('src="'.asset('images/about-hero.png').'"')
-        ->and($about)->toContain('aspect-[3/4]');
+        ->toContain('width="1087"')
+        ->toContain('height="1447"')
+        ->toContain('aspect-[3/4]');
 });
 
 it('only exposes WebP srcsets when optimized image files exist', function (string $name, string $routeName) {

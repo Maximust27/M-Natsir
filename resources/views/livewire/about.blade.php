@@ -15,8 +15,8 @@
                         <img
                             src="{{ asset('images/about-hero.png') }}"
                             alt="Potret M. Natsir Kongah"
-                            width="1200"
-                            height="675"
+                            width="1087"
+                            height="1447"
                             loading="eager"
                             decoding="async"
                             fetchpriority="high"

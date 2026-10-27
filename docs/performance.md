@@ -11,7 +11,7 @@ Website M-Natsir saat ini menggunakan dua gambar hero besar (Home: JPEG, Tentang
 - File `home-hero-*.webp` dan `about-hero-*.webp` adalah hasil build dan di-ignore oleh Git, **sehingga deployment perlu menjalankan build sebelum menayangkan site**.
 - Blade menggunakan `<picture><source type="image/webp" srcset="..." sizes="..."><img src="...jpeg"></picture>`. Source WebP hanya muncul bila file tersebut benar-benar ada.
 - Gambar LCP pada homepage dan halaman Tentang menggunakan `loading="eager"`, `fetchpriority="high"`, dan `decoding="async"`. Jangan menambah `loading="lazy"` pada gambar utama di atas fold.
-- Frame gambar Tentang memakai `aspect-[3/4]` agar ukuran stabil sebelum gambar dimuat.
+- Frame gambar Tentang memakai `aspect-[3/4]` agar ukuran stabil sebelum gambar dimuat. Atribut dimensi HTML sekarang mengikuti ukuran sumber sebenarnya (Home 2730×1536, Tentang 1087×1447).
 
 Jika GD dengan JPEG/WebP tidak terpasang, script memberikan pesan peringatan dan **build tetap jalan memakai gambar asal**. Pada Laragon, aktifkan ekstensi `gd` pada PHP aktif untuk mendapatkan WebP. Untuk memverifikasi, jalankan:
 

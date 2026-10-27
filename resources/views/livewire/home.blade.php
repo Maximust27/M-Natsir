@@ -13,8 +13,8 @@
                 <img
                     src="{{ asset('images/home-hero.jpeg') }}"
                     alt="Potret M. Natsir Kongah berdiri di ruang kerja"
-                    width="1200"
-                    height="675"
+                    width="2730"
+                    height="1536"
                     loading="eager"
                     decoding="async"
                     fetchpriority="high"
