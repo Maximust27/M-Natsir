@@ -3,7 +3,9 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "prebuild": "php scripts/optimize-hero-images.php",
         "build": "vite build",
+        "predev": "php scripts/optimize-hero-images.php",
         "dev": "vite"
     },
     "devDependencies": {

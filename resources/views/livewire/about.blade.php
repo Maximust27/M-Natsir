@@ -3,13 +3,26 @@
         <div class="mx-auto grid w-full max-w-5xl items-center gap-12 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-20">
             <figure class="mx-auto w-full max-w-80 lg:mx-0">
                 <div class="overflow-hidden border border-line bg-slate-100">
-                    <img
-                        src="{{ asset('images/about-hero.jpeg') }}"
-                        alt="Potret M. Natsir Kongah"
-                        width="1200"
-                        height="675"
-                        class="aspect-[3/4] h-auto w-full object-cover object-[82%_center]"
-                    >
+                    @php($aboutWebpSrcset = \App\Support\Media\HeroImages::webpSrcset('about-hero'))
+                    <picture class="relative block aspect-[3/4] w-full">
+                        @if ($aboutWebpSrcset !== '')
+                            <source
+                                type="image/webp"
+                                srcset="{{ $aboutWebpSrcset }}"
+                                sizes="(min-width: 1024px) 240px, (min-width: 640px) 320px, min(80vw, 320px)"
+                            >
+                        @endif
+                        <img
+                            src="{{ asset('images/about-hero.jpeg') }}"
+                            alt="Potret M. Natsir Kongah"
+                            width="1200"
+                            height="675"
+                            loading="eager"
+                            decoding="async"
+                            fetchpriority="high"
+                            class="absolute inset-0 h-full w-full object-cover object-[82%_center]"
+                        >
+                    </picture>
                 </div>
             </figure>
 

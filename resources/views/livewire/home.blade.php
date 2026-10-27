@@ -5,15 +5,23 @@
         data-home-hero
     >
         <div class="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-slate-100">
-            <img
-                src="{{ asset('images/home-hero.jpeg') }}"
-                alt="Potret M. Natsir Kongah berdiri di ruang kerja"
-                width="1200"
-                height="675"
-                fetchpriority="high"
-                class="absolute inset-0 h-full w-full object-cover object-[72%_center] sm:object-[70%_center]"
-                data-home-hero-image
-            >
+            @php($homeWebpSrcset = \App\Support\Media\HeroImages::webpSrcset('home-hero'))
+            <picture>
+                @if ($homeWebpSrcset !== '')
+                    <source type="image/webp" srcset="{{ $homeWebpSrcset }}" sizes="100vw">
+                @endif
+                <img
+                    src="{{ asset('images/home-hero.jpeg') }}"
+                    alt="Potret M. Natsir Kongah berdiri di ruang kerja"
+                    width="1200"
+                    height="675"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                    class="absolute inset-0 h-full w-full object-cover object-[72%_center] sm:object-[70%_center]"
+                    data-home-hero-image
+                >
+            </picture>
             <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/15 sm:from-white/88 sm:via-white/55 sm:to-transparent lg:from-white/72 lg:via-white/30"></div>
 
             <div class="site-container relative z-10 flex min-h-[calc(100svh-5rem)] items-center">

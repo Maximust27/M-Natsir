@@ -15,6 +15,9 @@
 /auth.json
 /node_modules
 /public/build
+# Generated during npm run build/dev; JPEG originals remain tracked.
+/public/images/home-hero-*.webp
+/public/images/about-hero-*.webp
 /public/fonts-manifest.dev.json
 /public/hot
 /public/storage
