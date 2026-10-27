@@ -1,0 +1,116 @@
+name: Lighthouse & SEO Audit
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      APP_ENV: production
+      APP_DEBUG: 'false'
+      APP_URL: http://127.0.0.1:8000
+      SEO_ALLOW_INDEXING: 'true'
+      SESSION_DRIVER: file
+      CACHE_STORE: file
+      QUEUE_CONNECTION: sync
+      DB_CONNECTION: sqlite
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, gd, dom, pdo_sqlite
+          coverage: none
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install backend dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Prepare Laravel app
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          php artisan config:clear
+
+      - name: Build production assets and responsive WebP
+        run: npm run build
+
+      - name: Start production-like Laravel server
+        run: |
+          php artisan view:cache
+          php artisan serve --host=127.0.0.1 --port=8000 > storage/logs/lighthouse-server.log 2>&1 &
+          echo $! > /tmp/m-natsir-audit-server.pid
+
+          for attempt in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:8000/robots.txt > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat storage/logs/lighthouse-server.log
+          exit 1
+
+      - name: Audit all sitemap URLs, canonical, schema, and local links
+        run: node scripts/audit-seo.mjs http://127.0.0.1:8000
+
+      - name: Publish HTTP SEO check summary
+        if: always()
+        run: |
+          if [ -f reports/seo-audit.md ]; then
+            cat reports/seo-audit.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Setup Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: stable
+
+      - name: Install Lighthouse CI
+        run: npm install --global @lhci/cli@0.15.x
+
+      - name: Measure Lighthouse mobile and assert SEO fundamentals
+        env:
+          LHCI_COLLECT__CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+        run: lhci autorun --config=.lighthouserc.cjs
+
+      - name: Summarize Lighthouse metrics
+        if: always()
+        run: |
+          if [ -f reports/lighthouse/manifest.json ]; then
+            node scripts/summarize-lighthouse.mjs
+          fi
+
+      - name: Upload Lighthouse and SEO audit reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-seo-audit-${{ github.run_number }}
+          path: |
+            reports/
+            storage/logs/lighthouse-server.log
+          if-no-files-found: warn
+          retention-days: 14
