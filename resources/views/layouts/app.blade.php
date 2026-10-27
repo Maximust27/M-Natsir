@@ -8,13 +8,17 @@
             $seoDescription = $seoPage['description'] ?? $seoSettings['default_description'];
             $seoImage = asset($seoPage['image'] ?? $seoSettings['default_image']);
             $seoImageAlt = $seoPage['image_alt'] ?? $seoSettings['default_image_alt'];
-            $seoUrl = url()->current();
+            $seoCanonical = \App\Support\Seo\PageMetadata::canonical(request());
+            $seoRobots = \App\Support\Seo\PageMetadata::robots(request());
+            $seoUrl = $seoCanonical;
         @endphp
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ $seoTitle }}</title>
         <meta name="description" content="{{ $seoDescription }}">
+        <meta name="robots" content="{{ $seoRobots }}">
+        <link rel="canonical" href="{{ $seoCanonical }}">
 
         <meta property="og:type" content="website">
         <meta property="og:locale" content="id_ID">
