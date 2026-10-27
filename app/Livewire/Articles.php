@@ -22,7 +22,28 @@ class Articles extends Component
     #[Url(as: 'page', except: 1)]
     public int $page = 1;
 
-    private int $perPage = 5;
+    public const PER_PAGE = 5;
+
+    private int $perPage = self::PER_PAGE;
+
+    public function paginationUrl(int $page): string
+    {
+        $parameters = [];
+
+        if (trim($this->search) !== '') {
+            $parameters['q'] = trim($this->search);
+        }
+
+        if ($this->activeCategory !== 'all' && array_key_exists($this->activeCategory, $this->categories())) {
+            $parameters['category'] = $this->activeCategory;
+        }
+
+        if ($page > 1) {
+            $parameters['page'] = $page;
+        }
+
+        return route('articles', $parameters);
+    }
 
     public function updatedSearch(): void
     {

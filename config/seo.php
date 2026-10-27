@@ -2,6 +2,9 @@
 
 return [
     'site_name' => 'M. Natsir Kongah',
+    // Keep local, staging, and preview deployments out of search results.
+    'allow_indexing' => (bool) env('SEO_ALLOW_INDEXING', false),
+    'sitemap_routes' => ['home', 'about', 'articles', 'library', 'media', 'contact'],
     'default_title' => 'M. Natsir Kongah | Financial Intelligence Hub',
     'default_description' => 'Jelajahi profil, publikasi, dan referensi M. Natsir Kongah mengenai intelijen keuangan, anti pencucian uang, serta kejahatan finansial.',
     'default_image' => 'images/home-hero.jpeg',

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SeoController;
 use App\Livewire\About;
 use App\Livewire\Articles;
 use App\Livewire\Contact;
@@ -7,6 +8,9 @@ use App\Livewire\Home;
 use App\Livewire\Library;
 use App\Livewire\Media;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
 
 Route::livewire('/', Home::class)->name('home');
 Route::livewire('/tentang', About::class)->name('about');

@@ -134,38 +134,56 @@
 
         @if ($totalPages > 1)
             <nav class="mt-10 flex items-center justify-center gap-2 sm:mt-12" aria-label="Navigasi halaman artikel">
-                <button
-                    type="button"
-                    wire:click="previousPage"
-                    @disabled($page === 1)
-                    class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
-                    aria-label="Halaman sebelumnya"
-                >
-                    <span aria-hidden="true">←</span>
-                </button>
+                @if ($page > 1)
+                    <a
+                        href="{{ $this->paginationUrl($page - 1) }}"
+                        wire:navigate
+                        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink transition hover:border-slate-400 hover:bg-slate-50"
+                        aria-label="Halaman sebelumnya"
+                    >
+                        <span aria-hidden="true">←</span>
+                    </a>
+                @else
+                    <span
+                        aria-disabled="true"
+                        class="inline-flex min-h-11 min-w-11 cursor-not-allowed items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink opacity-40"
+                        aria-label="Halaman sebelumnya"
+                    >
+                        <span aria-hidden="true">←</span>
+                    </span>
+                @endif
 
                 @for ($pageNumber = 1; $pageNumber <= $totalPages; $pageNumber++)
-                    <button
-                        type="button"
+                    <a
+                        href="{{ $this->paginationUrl($pageNumber) }}"
+                        wire:navigate
                         wire:key="article-page-{{ $pageNumber }}"
-                        wire:click="goToPage({{ $pageNumber }})"
                         class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border px-3 text-sm font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink {{ $page === $pageNumber ? 'border-ink bg-ink text-white' : 'border-line bg-white text-ink hover:border-slate-400 hover:bg-slate-50' }}"
                         aria-label="Halaman {{ $pageNumber }}"
                         aria-current="{{ $page === $pageNumber ? 'page' : 'false' }}"
                     >
                         {{ $pageNumber }}
-                    </button>
+                    </a>
                 @endfor
 
-                <button
-                    type="button"
-                    wire:click="nextPage"
-                    @disabled($page === $totalPages)
-                    class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink transition hover:border-slate-400 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
-                    aria-label="Halaman berikutnya"
-                >
-                    <span aria-hidden="true">→</span>
-                </button>
+                @if ($page < $totalPages)
+                    <a
+                        href="{{ $this->paginationUrl($page + 1) }}"
+                        wire:navigate
+                        class="inline-flex min-h-11 min-w-11 items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink transition hover:border-slate-400 hover:bg-slate-50"
+                        aria-label="Halaman berikutnya"
+                    >
+                        <span aria-hidden="true">→</span>
+                    </a>
+                @else
+                    <span
+                        aria-disabled="true"
+                        class="inline-flex min-h-11 min-w-11 cursor-not-allowed items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink opacity-40"
+                        aria-label="Halaman berikutnya"
+                    >
+                        <span aria-hidden="true">→</span>
+                    </span>
+                @endif
             </nav>
         @endif
     </section>
