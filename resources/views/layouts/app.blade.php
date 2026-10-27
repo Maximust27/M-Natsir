@@ -3,7 +3,12 @@
     <head>
         @php
             $seoSettings = config('seo');
-            $seoPage = $seoSettings['pages'][request()->route()?->getName() ?? ''] ?? [];
+            $seoRoute = request()->route()?->getName() ?? '';
+            $seoPage = $seoSettings['pages'][$seoRoute] ?? [];
+
+            if ($seoRoute === 'topics.show') {
+                $seoPage = \App\Support\Content\TopicCatalog::find((string) request()->route('slug')) ?? [];
+            }
             $seoTitle = $title ?? $seoSettings['default_title'];
             $seoDescription = $seoPage['description'] ?? $seoSettings['default_description'];
             $seoImage = asset($seoPage['image'] ?? $seoSettings['default_image']);

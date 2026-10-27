@@ -5,9 +5,20 @@
 <x-ui.card class="group p-0">
     <div class="p-6 sm:p-8 lg:p-9">
         <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <x-ui.badge :class="$article['badgeClasses']">
-                {{ $article['categoryLabel'] }}
-            </x-ui.badge>
+            @php($topic = \App\Support\Content\TopicCatalog::forCategory($article['category']))
+
+            @if ($topic)
+                <a
+                    href="{{ route('topics.show', ['slug' => $topic['slug']]) }}"
+                    wire:navigate
+                    class="inline-flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                    aria-label="Peta topik {{ $topic['heading'] }}"
+                >
+                    <x-ui.badge :class="$article['badgeClasses']">{{ $article['categoryLabel'] }}</x-ui.badge>
+                </a>
+            @else
+                <x-ui.badge :class="$article['badgeClasses']">{{ $article['categoryLabel'] }}</x-ui.badge>
+            @endif
 
             <span class="font-mono text-[11px] font-medium uppercase tracking-[0.045em] text-slate-500">
                 {{ $article['source'] }}
