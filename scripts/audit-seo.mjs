@@ -144,7 +144,8 @@ async function audit() {
             const page = nodes.find((node) => ['WebPage', 'ProfilePage'].includes(node['@type']));
             assert.ok(page, 'missing WebPage/ProfilePage schema');
             assert.equal(localPath(page.url), path, 'schema URL mismatch');
-            assert.equal(page.name, title);
+            // JSON-LD uses literal text; Blade escapes ampersands in <title>.
+            assert.equal(page.name, title.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#039;', "'"));
             if (path === '/') {
                 assert.ok(nodes.some((node) => node['@type'] === 'WebSite'));
                 assert.ok(nodes.some((node) => node['@type'] === 'Person'));
@@ -209,11 +210,13 @@ async function audit() {
             signal: AbortSignal.timeout(15000),
         });
         assert.equal(response.status, 404);
+        await response.text(); // Drain response so Undici can reuse the socket safely.
     });
 
     for (const link of links) {
         await check('internal link ' + link, async () => {
-            await request(link);
+            const response = await request(link);
+            await response.arrayBuffer(); // Always consume HTTP bodies before the next request.
             checkedLinks++;
         });
     }
