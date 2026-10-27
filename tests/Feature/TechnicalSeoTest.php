@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Articles;
+use App\Support\Content\TopicCatalog;
 use App\Support\Seo\PageMetadata;
 use Livewire\Livewire;
 
@@ -66,7 +67,7 @@ it('publishes a valid XML sitemap of canonical public pages and article paginati
         ->assertDontSee('?q=');
 
     expect(substr_count($response->getContent(), '<loc>'))
-        ->toBe(count(config('seo.sitemap_routes')) + PageMetadata::articlePageCount() - 1);
+        ->toBe(count(config('seo.sitemap_routes')) + count(TopicCatalog::all()) + PageMetadata::articlePageCount() - 1);
 });
 
 it('blocks robots by default and exposes the sitemap only when indexing is enabled', function () {

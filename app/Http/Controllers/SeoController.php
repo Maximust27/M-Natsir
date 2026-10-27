@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Content\TopicCatalog;
 use App\Support\Seo\PageMetadata;
 use Illuminate\Http\Response;
 
@@ -13,6 +14,10 @@ final class SeoController extends Controller
             static fn (string $routeName): string => route($routeName),
             config('seo.sitemap_routes', []),
         );
+
+        foreach (TopicCatalog::all() as $topic) {
+            $urls[] = route('topics.show', ['slug' => $topic['slug']]);
+        }
 
         for ($page = 2; $page <= PageMetadata::articlePageCount(); $page++) {
             $urls[] = route('articles', ['page' => $page]);

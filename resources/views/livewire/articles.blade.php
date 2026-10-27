@@ -15,6 +15,22 @@
             <p class="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
                 Tulisan, ringkasan opini media, dan catatan kritis seputar kejahatan keuangan.
             </p>
+
+            <nav class="mt-8" aria-label="Peta bacaan menurut topik">
+                <span class="block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">Mulai dari topik utama</span>
+                <div class="mt-3 flex flex-wrap gap-3">
+                    @foreach (\App\Support\Content\TopicCatalog::all() as $topic)
+                        <a
+                            href="{{ route('topics.show', ['slug' => $topic['slug']]) }}"
+                            wire:navigate
+                            class="inline-flex min-h-10 items-center rounded-sm border border-line bg-white px-4 text-sm font-semibold text-ink transition hover:border-slate-400 hover:bg-slate-50"
+                        >
+                            {{ $topic['heading'] }} →
+                        </a>
+                    @endforeach
+                </div>
+            </nav>
+
         </div>
 
         <div class="mt-10 grid gap-5 xl:grid-cols-[minmax(19rem,26rem)_minmax(0,1fr)] xl:items-end">

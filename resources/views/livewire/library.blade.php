@@ -14,6 +14,14 @@
                     <p class="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
                         Karya M. Natsir Kongah, kontribusi institusional, dan sumber rujukan untuk riset kejahatan keuangan.
                     </p>
+
+                    <p class="mt-5 max-w-3xl text-sm leading-7 text-slate-600">
+                        Untuk memahami konteksnya, mulai dari
+                        <a href="{{ route('topics.show', ['slug' => 'anti-pencucian-uang']) }}" wire:navigate class="font-semibold text-ink underline underline-offset-4 hover:text-accent">Anti Pencucian Uang</a>,
+                        <a href="{{ route('topics.show', ['slug' => 'pencucian-uang-profesional']) }}" wire:navigate class="font-semibold text-ink underline underline-offset-4 hover:text-accent">Pencucian Uang Profesional</a>,
+                        atau
+                        <a href="{{ route('topics.show', ['slug' => 'intelijen-keuangan']) }}" wire:navigate class="font-semibold text-ink underline underline-offset-4 hover:text-accent">Intelijen Keuangan</a>.
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-2 divide-x divide-y divide-line border border-line bg-paper sm:grid-cols-4 sm:divide-y-0">

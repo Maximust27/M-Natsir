@@ -7,6 +7,7 @@ use App\Livewire\Contact;
 use App\Livewire\Home;
 use App\Livewire\Library;
 use App\Livewire\Media;
+use App\Livewire\Topic;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
@@ -15,6 +16,7 @@ Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
 Route::livewire('/', Home::class)->name('home');
 Route::livewire('/tentang', About::class)->name('about');
 Route::livewire('/articles', Articles::class)->name('articles');
+Route::livewire('/topik/{slug}', Topic::class)->name('topics.show');
 Route::livewire('/library', Library::class)->name('library');
 Route::livewire('/media', Media::class)->name('media');
 

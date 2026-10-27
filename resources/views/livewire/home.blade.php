@@ -56,6 +56,30 @@
         </div>
     </section>
 
+
+    <section class="site-container border-b border-line py-14 lg:py-18" aria-labelledby="knowledge-pillars-heading">
+        <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">Peta Kajian</p>
+        <h2 id="knowledge-pillars-heading" class="mt-3 font-serif text-3xl font-medium tracking-[-0.03em] text-ink">
+            Mulai dari topik utama
+        </h2>
+        <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+            Pilih bidang kajian untuk membaca konteks, pertanyaan kunci, dan rujukan publikasi asli yang saling terkait.
+        </p>
+        <nav class="mt-8 grid gap-4 md:grid-cols-3" aria-label="Topik kajian utama">
+            @foreach (\App\Support\Content\TopicCatalog::all() as $topic)
+                <a
+                    href="{{ route('topics.show', ['slug' => $topic['slug']]) }}"
+                    wire:navigate
+                    class="group block border border-line bg-white p-6 transition hover:border-slate-400 hover:shadow-sm"
+                >
+                    <h3 class="font-serif text-xl font-medium text-ink group-hover:text-accent">{{ $topic['heading'] }}</h3>
+                    <p class="mt-3 text-sm leading-7 text-slate-600">{{ $topic['teaser'] }}</p>
+                    <span class="mt-4 inline-block text-xs font-semibold text-ink">Jelajahi topik →</span>
+                </a>
+            @endforeach
+        </nav>
+    </section>
+
     <section id="featured-writings" class="site-container border-b border-line py-16 lg:py-24" aria-labelledby="featured-heading">
         <x-ui.section-heading
             heading-id="featured-heading"
