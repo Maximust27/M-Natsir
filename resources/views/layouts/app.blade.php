@@ -11,6 +11,7 @@
             $seoCanonical = \App\Support\Seo\PageMetadata::canonical(request());
             $seoRobots = \App\Support\Seo\PageMetadata::robots(request());
             $seoUrl = $seoCanonical;
+            $seoStructuredData = \App\Support\Seo\StructuredData::forPage(request(), $seoTitle, $seoDescription);
         @endphp
 
         <meta charset="utf-8">
@@ -34,6 +35,8 @@
         <meta name="twitter:description" content="{{ $seoDescription }}">
         <meta name="twitter:image" content="{{ $seoImage }}">
         <meta name="twitter:image:alt" content="{{ $seoImageAlt }}">
+
+        <script type="application/ld+json">{!! json_encode($seoStructuredData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR) !!}</script>
 
         <meta name="theme-color" content="#0e1c2f">
 

@@ -2,6 +2,22 @@
 
 return [
     'site_name' => 'M. Natsir Kongah',
+    // Only identity claims already visible on the public About page belong here.
+    'person' => [
+        'description' => 'Pembelajar Anti Pencucian Uang & Pengamat Kejahatan Keuangan',
+        'image' => 'images/about-hero.jpeg',
+        'same_as' => [
+            'https://id.linkedin.com/in/m-natsir-kongah-221615130',
+            'https://kumparan.com/natsir-kongah',
+        ],
+        'knows_about' => [
+            'Financial Intelligence',
+            'Anti Pencucian Uang',
+            'Professional Money Laundering',
+            'Asset Recovery',
+            'Digital Financial Crime',
+        ],
+    ],
     // Keep local, staging, and preview deployments out of search results.
     'allow_indexing' => (bool) env('SEO_ALLOW_INDEXING', false),
     'sitemap_routes' => ['home', 'about', 'articles', 'library', 'media', 'contact'],
