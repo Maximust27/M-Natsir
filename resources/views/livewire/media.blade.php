@@ -30,7 +30,7 @@
                         <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Public Event</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-lg font-semibold leading-7 text-ink">{{ $yearSpan }}</span>
+                        <span class="type-stat block text-ink">{{ $yearSpan }}</span>
                         <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Timeline</span>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                             wire:model.live.debounce.350ms="search"
                             placeholder="Judul, outlet, peran, atau topik…"
                             autocomplete="off"
-                            class="min-h-13 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                            class="min-h-13 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 type-form-control text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                         >
                     </div>
                 </div>

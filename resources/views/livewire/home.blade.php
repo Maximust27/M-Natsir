@@ -186,7 +186,7 @@
             <article class="border border-line border-l-2 border-l-amber-600 bg-stone-50 p-8 sm:p-10 lg:min-h-[22rem]">
                 <span class="font-serif text-5xl leading-none text-amber-700/40" aria-hidden="true">“</span>
 
-                <blockquote class="mt-3 max-w-[58ch] font-serif text-lg italic leading-8 text-ink sm:text-xl sm:leading-9">
+                <blockquote class="type-quote mt-3 max-w-[58ch] text-ink">
                     “Two decades in financial intelligence have taught me that the complexity of the crime is always mirrored by the sophistication of its concealment. True oversight requires not just vigilance, but architectural understanding.”
                 </blockquote>
 

@@ -27,7 +27,7 @@
                     Pembelajar Anti Pencucian Uang &amp; Pengamat Kejahatan Keuangan
                 </p>
 
-                <div class="mt-5 inline-flex items-center gap-2 text-sm text-slate-500">
+                <div class="type-support mt-5 inline-flex items-center gap-2 text-slate-500">
                     <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
                         <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
                         <circle cx="12" cy="10" r="2.5"/>
@@ -82,7 +82,7 @@
                     Perjalanan Intelektual &amp; Advokasi Publik
                 </h2>
 
-                <div class="mt-7 max-w-[78ch] space-y-6 text-base leading-8 text-ink">
+                <div class="type-body mt-7 max-w-[78ch] space-y-6 text-ink">
                     <p>
                         Rekam publik M. Natsir Kongah menunjukkan keterlibatan lebih dari dua dekade pada isu anti pencucian uang, intelijen keuangan, komunikasi publik, dan pendidikan. Profil profesionalnya mencatat aktivitas di Indonesian Financial Intelligence Unit sejak 2002, disusul peran kehumasan PPATK dan pengajaran anti pencucian uang sejak 2003.
                     </p>

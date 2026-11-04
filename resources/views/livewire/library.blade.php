@@ -95,7 +95,7 @@
                             wire:model.live.debounce.350ms="search"
                             placeholder="Judul, topik, penulis, sumber…"
                             autocomplete="off"
-                            class="min-h-12 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                            class="min-h-12 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 type-form-control text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                         >
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                     <select
                         id="resource-type"
                         wire:model.live="resourceType"
-                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-sm font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 type-form-control font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                     >
                         @foreach ($resourceTypes as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -122,7 +122,7 @@
                     <select
                         id="resource-institution"
                         wire:model.live="institution"
-                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-sm font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 type-form-control font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                     >
                         @foreach ($institutions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -137,7 +137,7 @@
                     <select
                         id="resource-topic"
                         wire:model.live="topic"
-                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-sm font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 type-form-control font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                     >
                         @foreach ($topics as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>

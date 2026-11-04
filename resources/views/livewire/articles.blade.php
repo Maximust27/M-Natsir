@@ -58,7 +58,7 @@
                         wire:model.live.debounce.350ms="search"
                         placeholder="Cari judul, topik, atau media…"
                         autocomplete="off"
-                        class="min-h-13 w-full rounded-sm border border-line bg-white py-3 pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                        class="min-h-13 w-full rounded-sm border border-line bg-white py-3 pl-12 pr-4 type-form-control text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                     >
                 </div>
             </div>

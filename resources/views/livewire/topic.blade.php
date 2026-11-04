@@ -1,7 +1,7 @@
 <div data-motion-static>
     <section class="border-b border-line bg-white">
         <div class="site-container py-14 sm:py-18 lg:py-22">
-            <nav class="mb-9 flex flex-wrap items-center gap-2 text-xs text-slate-500" aria-label="Breadcrumb">
+            <nav class="type-meta mb-9 flex flex-wrap items-center gap-2 text-slate-500" aria-label="Breadcrumb">
                 <a href="{{ route('home') }}" wire:navigate class="font-semibold text-ink hover:underline">Beranda</a>
                 <span aria-hidden="true">/</span>
                 <a href="{{ route('articles') }}" wire:navigate class="font-semibold text-ink hover:underline">Artikel &amp; Analisis</a>
@@ -21,7 +21,7 @@
                 {{ $topic['teaser'] }}
             </p>
 
-            <div class="mt-8 max-w-4xl space-y-5 text-base leading-8 text-ink">
+            <div class="type-body mt-8 max-w-4xl space-y-5 text-ink">
                 @foreach ($topic['introduction'] as $paragraph)
                     <p>{{ $paragraph }}</p>
                 @endforeach
