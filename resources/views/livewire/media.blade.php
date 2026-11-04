@@ -3,35 +3,35 @@
         <div class="site-container py-14 sm:py-16 lg:py-20">
             <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_30rem] lg:items-end">
                 <div class="max-w-4xl">
-                    <p class="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-accent">
+                    <p class="type-eyebrow text-accent">
                         Public Record
                     </p>
 
-                    <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-ink sm:text-5xl lg:text-[3.35rem]">
+                    <h1 class="type-page-title mt-4 text-ink">
                         MEDIA &amp; APPEARANCES
                     </h1>
 
-                    <p class="mt-5 max-w-3xl text-base leading-8 text-ink sm:text-lg">
+                    <p class="type-lead mt-5 max-w-3xl text-ink">
                         Wawancara, forum publik, media visit, dan penampilan profesional M. Natsir Kongah yang dapat ditelusuri ke sumber terbuka.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-2 divide-x divide-y divide-line border border-line bg-paper sm:grid-cols-4 sm:divide-y-0">
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $totalAppearances }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Appearance</span>
+                        <span class="type-stat block text-ink">{{ $totalAppearances }}</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Appearance</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $interviewCount }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Interview</span>
+                        <span class="type-stat block text-ink">{{ $interviewCount }}</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Interview</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $publicEventCount }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Public Event</span>
+                        <span class="type-stat block text-ink">{{ $publicEventCount }}</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Public Event</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-lg font-semibold leading-7 text-ink">{{ $yearSpan }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Timeline</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Timeline</span>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             <x-ui.card class="overflow-hidden p-0">
                 <div class="grid lg:grid-cols-[16rem_minmax(0,1fr)]">
                     <div class="border-b border-line bg-paper p-6 sm:p-7 lg:border-b-0 lg:border-r">
-                        <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">
+                        <p class="type-eyebrow text-accent">
                             Featured Appearance
                         </p>
 
@@ -53,16 +53,16 @@
                             </x-ui.badge>
                         </div>
 
-                        <p class="mt-5 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-slate-500">
+                        <p class="type-meta mt-5 font-mono font-semibold uppercase tracking-[0.05em] text-slate-500">
                             {{ $featuredAppearance['date'] }}
                         </p>
-                        <p class="mt-2 text-sm font-semibold leading-6 text-ink">
+                        <p class="type-body mt-2 font-semibold text-ink">
                             {{ $featuredAppearance['outlet'] }}
                         </p>
                     </div>
 
                     <div class="p-6 sm:p-8 lg:p-9">
-                        <h2 id="featured-media-title" class="max-w-4xl font-serif text-3xl font-medium leading-[1.08] tracking-[-0.03em] text-ink sm:text-[2.15rem]">
+                        <h2 id="featured-media-title" class="type-section-title max-w-4xl text-ink">
                             <a
                                 href="{{ $featuredAppearance['url'] }}"
                                 target="_blank"
@@ -73,17 +73,17 @@
                             </a>
                         </h2>
 
-                        <p class="mt-4 text-sm font-semibold leading-6 text-ink">
+                        <p class="type-body mt-4 font-semibold text-ink">
                             {{ $featuredAppearance['role'] }}
                         </p>
 
-                        <p class="mt-5 max-w-[90ch] text-base leading-7 text-ink sm:text-base sm:leading-8">
+                        <p class="type-body mt-5 max-w-[90ch] text-ink">
                             {{ $featuredAppearance['summary'] }}
                         </p>
 
                         <div class="mt-6 flex flex-wrap gap-2">
                             @foreach ($featuredAppearance['topics'] as $topic)
-                                <span class="rounded-full border border-line bg-white px-2.5 py-1 text-xs font-medium text-ink">
+                                <span class="type-meta rounded-full border border-line bg-white px-2.5 py-1 font-medium text-ink">
                                     {{ $topic }}
                                 </span>
                             @endforeach
@@ -111,7 +111,7 @@
         <div class="border border-line bg-white p-5 sm:p-6">
             <div class="grid gap-5 xl:grid-cols-[minmax(19rem,26rem)_minmax(0,1fr)] xl:items-end">
                 <div>
-                    <label for="media-search" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="media-search" class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Cari appearance
                     </label>
 
@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="min-w-0">
-                    <span class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <span class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Format
                     </span>
 
@@ -153,7 +153,7 @@
                                 :inactive-classes="$category['classes']"
                             >
                                 <span>{{ $category['label'] }}</span>
-                                <span class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-xs leading-none {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}">
+                                <span class="type-meta ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}">
                                     {{ $category['count'] }}
                                 </span>
                             </x-ui.filter-chip>
@@ -167,10 +167,10 @@
     <section class="site-container pb-16 sm:pb-20 lg:pb-24" aria-label="Media archive">
         <div class="flex flex-col gap-3 border-b border-line pb-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <p class="text-sm font-semibold text-ink" aria-live="polite">
+                <p class="type-body font-semibold text-ink" aria-live="polite">
                     {{ $resultCount }} appearance ditemukan
                 </p>
-                <p class="mt-1 text-xs leading-6 text-slate-500">
+                <p class="type-support mt-1 text-slate-500">
                     Arsip hanya memuat penampilan dengan peran aktif yang dapat ditelusuri ke sumber publik.
                 </p>
             </div>
@@ -202,11 +202,11 @@
                         </svg>
                     </div>
 
-                    <h2 class="mt-4 font-serif text-2xl font-medium text-ink">
+                    <h2 class="type-card-title mt-4 text-ink">
                         Appearance belum ditemukan
                     </h2>
 
-                    <p class="mx-auto mt-2 max-w-xl text-sm leading-7 text-ink">
+                    <p class="type-body mx-auto mt-2 max-w-xl text-ink">
                         Coba kata kunci yang lebih umum atau tampilkan kembali seluruh format media.
                     </p>
 
@@ -221,15 +221,15 @@
 
         <aside class="mt-12 grid gap-5 border-t border-line pt-8 lg:grid-cols-[16rem_minmax(0,1fr)]" aria-labelledby="media-note-title">
             <div>
-                <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">
+                <p class="type-eyebrow text-accent">
                     Kriteria Arsip
                 </p>
-                <h2 id="media-note-title" class="mt-2 font-serif text-2xl font-medium tracking-[-0.02em] text-ink">
+                <h2 id="media-note-title" class="type-section-title mt-2 text-ink">
                     Appearance, bukan sekadar mention.
                 </h2>
             </div>
 
-            <p class="max-w-4xl text-base leading-7 text-ink">
+            <p class="type-body max-w-4xl text-ink">
                 Halaman ini hanya memuat wawancara, siaran, forum publik, media visit, dan recognition ketika M. Natsir Kongah memiliki peran aktif yang disebut jelas oleh sumber.
                 Halaman yang hanya mencantumkan nama sebagai narahubung media tidak dimasukkan. Tulisan opini tetap berada di
                 <a href="{{ route('articles') }}" wire:navigate class="font-semibold text-ink underline decoration-slate-300 underline-offset-4 transition hover:decoration-ink">Articles</a>,

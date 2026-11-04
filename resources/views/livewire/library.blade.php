@@ -3,19 +3,19 @@
         <div class="site-container py-14 sm:py-16 lg:py-20">
             <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_30rem] lg:items-end">
                 <div class="max-w-4xl">
-                    <p class="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-accent">
+                    <p class="type-eyebrow text-accent">
                         Research Desk
                     </p>
 
-                    <h1 class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-ink sm:text-5xl lg:text-[3.35rem]">
+                    <h1 class="type-page-title mt-4 text-ink">
                         LIBRARY &amp; REFERENSI
                     </h1>
 
-                    <p class="mt-5 max-w-3xl text-base leading-8 text-ink sm:text-lg">
+                    <p class="type-lead mt-5 max-w-3xl text-ink">
                         Karya M. Natsir Kongah, kontribusi institusional, dan sumber rujukan untuk riset kejahatan keuangan.
                     </p>
 
-                    <p class="mt-5 max-w-3xl text-sm leading-7 text-ink">
+                    <p class="type-body mt-5 max-w-3xl text-ink">
                         Untuk memahami konteksnya, mulai dari
                         <a href="{{ route('topics.show', ['slug' => 'anti-pencucian-uang']) }}" wire:navigate class="font-semibold text-ink underline underline-offset-4 hover:text-accent">Anti Pencucian Uang</a>,
                         <a href="{{ route('topics.show', ['slug' => 'pencucian-uang-profesional']) }}" wire:navigate class="font-semibold text-ink underline underline-offset-4 hover:text-accent">Pencucian Uang Profesional</a>,
@@ -26,20 +26,20 @@
 
                 <div class="grid grid-cols-2 divide-x divide-y divide-line border border-line bg-paper sm:grid-cols-4 sm:divide-y-0">
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $totalResources }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Total</span>
+                        <span class="type-stat block text-ink">{{ $totalResources }}</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Total</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $natsirWorksCount }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Karya Natsir</span>
+                        <span class="type-stat block text-ink">{{ $natsirWorksCount }}</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Karya Natsir</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $institutionalCount }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Institusional</span>
+                        <span class="type-stat block text-ink">{{ $institutionalCount }}</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Institusional</span>
                     </div>
                     <div class="px-4 py-4 text-center">
-                        <span class="block font-serif text-2xl font-semibold text-ink">{{ $referenceCount }}</span>
-                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Referensi</span>
+                        <span class="type-stat block text-ink">{{ $referenceCount }}</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Referensi</span>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
     <section class="site-container py-8 sm:py-10" aria-label="Filter library">
         <div class="border border-line bg-white p-5 sm:p-6">
             <div>
-                <span class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
+                <span class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                     Koleksi
                 </span>
 
@@ -62,7 +62,7 @@
                             :inactive-classes="$item['classes']"
                         >
                             <span>{{ $item['label'] }}</span>
-                            <span class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-xs leading-none {{ $collection === $key ? 'bg-white/15 text-white' : '' }}">
+                            <span class="type-meta ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 {{ $collection === $key ? 'bg-white/15 text-white' : '' }}">
                                 {{ $item['count'] }}
                             </span>
                         </x-ui.filter-chip>
@@ -72,7 +72,7 @@
 
             <div class="mt-6 grid gap-4 border-t border-line pt-6 lg:grid-cols-[minmax(16rem,1.6fr)_repeat(3,minmax(10rem,1fr))]">
                 <div>
-                    <label for="library-search" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="library-search" class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Cari referensi
                     </label>
 
@@ -101,7 +101,7 @@
                 </div>
 
                 <div>
-                    <label for="resource-type" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="resource-type" class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Jenis dokumen
                     </label>
                     <select
@@ -116,7 +116,7 @@
                 </div>
 
                 <div>
-                    <label for="resource-institution" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="resource-institution" class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Institusi / sumber
                     </label>
                     <select
@@ -131,7 +131,7 @@
                 </div>
 
                 <div>
-                    <label for="resource-topic" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="resource-topic" class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Topik
                     </label>
                     <select
@@ -151,10 +151,10 @@
     <section class="site-container pb-16 sm:pb-20 lg:pb-24" aria-label="Katalog referensi">
         <div class="flex flex-col gap-3 border-b border-line pb-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <p class="text-sm font-semibold text-ink" aria-live="polite">
+                <p class="type-body font-semibold text-ink" aria-live="polite">
                     {{ count($resources) }} referensi ditemukan
                 </p>
-                <p class="mt-1 text-xs leading-6 text-slate-500">
+                <p class="type-support mt-1 text-slate-500">
                     Atribusi dibedakan antara karya personal, kontribusi institusional, dan sumber referensi eksternal.
                 </p>
             </div>
@@ -186,11 +186,11 @@
                         </svg>
                     </div>
 
-                    <h2 class="mt-4 font-serif text-2xl font-medium text-ink">
+                    <h2 class="type-card-title mt-4 text-ink">
                         Referensi belum ditemukan
                     </h2>
 
-                    <p class="mx-auto mt-2 max-w-xl text-sm leading-7 text-ink">
+                    <p class="type-body mx-auto mt-2 max-w-xl text-ink">
                         Ubah kata kunci atau longgarkan salah satu filter untuk melihat sumber lain.
                     </p>
 
@@ -205,15 +205,15 @@
 
         <aside class="mt-12 grid gap-5 border-t border-line pt-8 lg:grid-cols-[16rem_minmax(0,1fr)]" aria-labelledby="library-note-title">
             <div>
-                <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">
+                <p class="type-eyebrow text-accent">
                     Cara membaca Library
                 </p>
-                <h2 id="library-note-title" class="mt-2 font-serif text-2xl font-medium tracking-[-0.02em] text-ink">
+                <h2 id="library-note-title" class="type-section-title mt-2 text-ink">
                     Arsip, kontribusi, referensi.
                 </h2>
             </div>
 
-            <p class="max-w-4xl text-base leading-7 text-ink">
+            <p class="type-body max-w-4xl text-ink">
                 <strong class="font-semibold text-ink">Karya M. Natsir Kongah</strong> memuat paper, makalah, dan tulisan arsip yang atribusinya dapat ditelusuri.
                 <strong class="font-semibold text-ink">Kontribusi Institusional</strong> mencatat peran editorial atau kontribusi pada publikasi lembaga tanpa menyebutnya sebagai karya tunggal.
                 <strong class="font-semibold text-ink">Reference Sources</strong> adalah bahan rujukan eksternal. Untuk kolom dan opini media, gunakan halaman
