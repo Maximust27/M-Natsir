@@ -23,7 +23,7 @@
                     M. NATSIR KONGAH
                 </h1>
 
-                <p class="mt-5 max-w-3xl text-lg font-semibold leading-8 text-slate-700 sm:text-xl">
+                <p class="mt-5 max-w-3xl text-lg font-semibold leading-8 text-ink sm:text-xl">
                     Pembelajar Anti Pencucian Uang &amp; Pengamat Kejahatan Keuangan
                 </p>
 
@@ -60,7 +60,7 @@
                     <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-ink">
                         Catatan afiliasi &amp; kredibilitas
                     </h2>
-                    <p class="mt-2 max-w-[95ch] text-sm leading-7 text-slate-600">
+                    <p class="mt-2 max-w-[95ch] text-sm leading-7 text-ink">
                         Halaman ini adalah profil personal berbasis sumber publik. Riwayat afiliasi dan aktivitas profesional diringkas secara konservatif dari profil LinkedIn, dokumen PPATK/PPID, rekam pengajaran, serta tulisan yang dipublikasikan di media. Analisis dan opini pada situs ini diposisikan sebagai pandangan personal, bukan pernyataan resmi institusi.
                     </p>
                 </div>
@@ -75,7 +75,7 @@
                     Perjalanan Intelektual &amp; Advokasi Publik
                 </h2>
 
-                <div class="mt-7 max-w-[78ch] space-y-6 text-base leading-8 text-slate-600">
+                <div class="mt-7 max-w-[78ch] space-y-6 text-base leading-8 text-ink">
                     <p>
                         Rekam publik M. Natsir Kongah menunjukkan keterlibatan lebih dari dua dekade pada isu anti pencucian uang, intelijen keuangan, komunikasi publik, dan pendidikan. Profil profesionalnya mencatat aktivitas di Indonesian Financial Intelligence Unit sejak 2002, disusul peran kehumasan PPATK dan pengajaran anti pencucian uang sejak 2003.
                     </p>
@@ -92,7 +92,7 @@
                         <p class="font-serif text-lg italic leading-8 text-ink">
                             Benang merah yang tampak dari tulisan-tulisannya: pencucian uang tidak cukup dibaca sebagai perpindahan dana antar-rekening, tetapi sebagai arsitektur yang melibatkan manusia, profesi, dokumen, badan usaha, teknologi, aset, dan yurisdiksi.
                         </p>
-                        <p class="mt-3 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-500">
+                        <p class="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.06em] text-slate-500">
                             Ringkasan tema tulisan publik — bukan kutipan langsung
                         </p>
                     </div>
@@ -112,15 +112,15 @@
                     <div class="mt-5 grid gap-4">
                         @foreach ($focusAreas as $focus)
                             <x-ui.card :interactive="false" class="p-5 sm:p-5">
-                                <span class="inline-flex rounded-full px-3 py-1.5 font-mono text-[11px] font-semibold leading-none tracking-[0.03em] {{ $focus['classes'] }}">
+                                <span class="inline-flex rounded-full px-3 py-1.5 font-mono text-xs font-semibold leading-none tracking-[0.03em] {{ $focus['classes'] }}">
                                     {{ $focus['label'] }}
                                 </span>
 
-                                <h3 class="mt-4 text-[15px] font-semibold leading-6 text-ink">
+                                <h3 class="mt-4 text-base font-semibold leading-6 text-ink">
                                     {{ $focus['title'] }}
                                 </h3>
 
-                                <p class="mt-2 text-sm leading-6 text-slate-600">
+                                <p class="mt-2 text-sm leading-6 text-ink">
                                     {{ $focus['description'] }}
                                 </p>
                             </x-ui.card>
@@ -139,7 +139,7 @@
                                 <h3 class="text-sm font-semibold leading-6 text-ink">
                                     {{ $contribution['title'] }}
                                 </h3>
-                                <p class="mt-1 text-sm leading-6 text-slate-600">
+                                <p class="mt-1 text-sm leading-6 text-ink">
                                     {{ $contribution['description'] }}
                                 </p>
                             </div>
@@ -157,7 +157,7 @@
                 <h2 id="sources-heading" class="mt-3 font-serif text-3xl font-medium tracking-[-0.025em] text-ink">
                     Rujukan profil publik
                 </h2>
-                <p class="mt-4 text-sm leading-7 text-slate-600">
+                <p class="mt-4 text-sm leading-7 text-ink">
                     Tautan berikut menjadi basis verifikasi utama untuk informasi yang ditampilkan pada halaman ini.
                 </p>
             </div>
@@ -170,7 +170,7 @@
                         rel="noopener noreferrer"
                         class="group border border-line bg-white p-5 transition hover:border-slate-400 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                     >
-                        <span class="font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-500">
+                        <span class="font-mono text-xs font-semibold uppercase tracking-[0.06em] text-slate-500">
                             {{ $source['source'] }}
                         </span>
                         <span class="mt-2 block text-sm font-semibold leading-6 text-ink group-hover:text-accent">

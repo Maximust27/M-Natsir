@@ -17,17 +17,17 @@
                 {{ $topic['heading'] }}
             </h1>
 
-            <p class="mt-6 max-w-3xl text-lg leading-8 text-slate-700">
+            <p class="mt-6 max-w-3xl text-lg leading-8 text-ink">
                 {{ $topic['teaser'] }}
             </p>
 
-            <div class="mt-8 max-w-4xl space-y-5 text-base leading-8 text-slate-600">
+            <div class="mt-8 max-w-4xl space-y-5 text-base leading-8 text-ink">
                 @foreach ($topic['introduction'] as $paragraph)
                     <p>{{ $paragraph }}</p>
                 @endforeach
             </div>
 
-            <p class="mt-7 max-w-4xl border-l-2 border-amber-500 bg-stone-50 px-5 py-4 text-sm leading-7 text-slate-600">
+            <p class="mt-7 max-w-4xl border-l-2 border-amber-500 bg-stone-50 px-5 py-4 text-sm leading-7 text-ink">
                 Halaman ini adalah pengantar dan peta bacaan yang disusun dari tema publikasi yang tercatat di situs.
                 Kutipan serta rincian tulisan tetap harus diperiksa melalui sumber aslinya; halaman ini bukan nasihat hukum.
                 <a href="{{ route('about') }}" wire:navigate class="font-semibold text-ink underline underline-offset-4">Lihat profil dan rujukan penulis</a>.
@@ -46,7 +46,7 @@
                 <article class="border border-line bg-white p-6 sm:p-7">
                     <span class="font-mono text-xs font-semibold text-accent">0{{ $index + 1 }}</span>
                     <h3 class="mt-3 text-lg font-semibold leading-7 text-ink">{{ $focus['title'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">{{ $focus['description'] }}</p>
+                    <p class="mt-3 text-sm leading-7 text-ink">{{ $focus['description'] }}</p>
                 </article>
             @endforeach
         </div>
@@ -59,7 +59,7 @@
                 <h2 id="topic-articles-heading" class="mt-3 font-serif text-3xl font-medium tracking-[-0.03em] text-ink">
                     Bacaan terkait {{ $topic['heading'] }}
                 </h2>
-                <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+                <p class="mt-3 max-w-3xl text-sm leading-7 text-ink">
                     {{ count($articles) }} rujukan dari katalog. Setiap kartu mencantumkan asal publikasi dan membuka sumber eksternal secara langsung.
                 </p>
             </div>
@@ -78,7 +78,7 @@
             @forelse ($articles as $article)
                 <x-article.card :article="$article" />
             @empty
-                <p class="border border-line p-7 text-sm leading-7 text-slate-600">
+                <p class="border border-line p-7 text-sm leading-7 text-ink">
                     Belum ada publikasi yang tercatat dalam kategori ini.
                 </p>
             @endforelse
@@ -107,7 +107,7 @@
                     class="group block border border-line bg-white p-6 transition hover:border-slate-400 hover:shadow-sm"
                 >
                     <h3 class="font-serif text-xl font-medium text-ink group-hover:text-accent">{{ $related['heading'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">{{ $related['teaser'] }}</p>
+                    <p class="mt-3 text-sm leading-7 text-ink">{{ $related['teaser'] }}</p>
                     <span class="mt-4 inline-block text-xs font-semibold text-ink">Buka peta bacaan →</span>
                 </a>
             @endforeach

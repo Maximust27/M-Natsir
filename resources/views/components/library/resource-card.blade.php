@@ -17,12 +17,12 @@
                 {{ $resource['collectionLabel'] }}
             </x-ui.badge>
 
-            <x-ui.badge class="bg-slate-100 text-slate-700">
+            <x-ui.badge class="bg-slate-100 text-ink">
                 {{ $resource['typeLabel'] }}
             </x-ui.badge>
         </div>
 
-        <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] font-medium text-slate-500">
+        <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs font-medium text-slate-500">
             <span class="font-semibold uppercase tracking-[0.05em]">
                 {{ $resource['institutionLabel'] }}
             </span>
@@ -44,7 +44,7 @@
         </h2>
 
         @if (! empty($resource['authorLabel']))
-            <p class="mt-3 text-sm font-semibold text-slate-700">
+            <p class="mt-3 text-sm font-semibold text-ink">
                 {{ $resource['authorLabel'] }}
             </p>
         @elseif (! empty($resource['roleLabel']))
@@ -53,13 +53,13 @@
             </p>
         @endif
 
-        <p class="mt-4 text-[15px] leading-7 text-slate-600">
+        <p class="mt-4 text-base leading-7 text-ink">
             {{ $resource['summary'] }}
         </p>
 
         <div class="mt-5 flex flex-wrap gap-2" aria-label="Topik">
             @foreach ($resource['topicLabels'] as $label)
-                <span class="rounded-full border border-line bg-paper px-2.5 py-1 text-xs font-medium text-slate-600">
+                <span class="rounded-full border border-line bg-paper px-2.5 py-1 text-xs font-medium text-ink">
                     {{ $label }}
                 </span>
             @endforeach

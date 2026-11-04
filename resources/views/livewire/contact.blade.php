@@ -10,7 +10,7 @@
                     Hubungi M. Natsir Kongah
                 </h1>
 
-                <p class="mt-6 max-w-[58ch] font-serif text-lg leading-8 text-slate-600 sm:text-xl sm:leading-9">
+                <p class="mt-6 max-w-[58ch] font-serif text-lg leading-8 text-ink sm:text-xl sm:leading-9">
                     Pusat pertanyaan profesional untuk jurnalis, akademisi, dan konsultan kepatuhan yang mencari keahlian dalam intelijen keuangan dan kejahatan kerah putih.
                 </p>
             </div>
@@ -87,7 +87,7 @@
 
                     <div class="grid gap-6 md:grid-cols-2">
                         <div>
-                            <label for="contact-name" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-slate-600">
+                            <label for="contact-name" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-ink">
                                 Nama Lengkap
                             </label>
                             <input
@@ -97,12 +97,12 @@
                                 required
                                 maxlength="120"
                                 autocomplete="name"
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                         </div>
 
                         <div>
-                            <label for="contact-email" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-slate-600">
+                            <label for="contact-email" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-ink">
                                 Email Kerja Institusi
                             </label>
                             <input
@@ -112,12 +112,12 @@
                                 required
                                 maxlength="190"
                                 autocomplete="email"
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                         </div>
 
                         <div>
-                            <label for="contact-institution" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-slate-600">
+                            <label for="contact-institution" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-ink">
                                 Institusi / Media
                             </label>
                             <input
@@ -127,19 +127,19 @@
                                 required
                                 maxlength="190"
                                 autocomplete="organization"
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                         </div>
 
                         <div>
-                            <label for="contact-purpose" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-slate-600">
+                            <label for="contact-purpose" class="mb-2 block font-mono text-xs font-semibold tracking-[0.04em] text-ink">
                                 Tujuan Kontak
                             </label>
                             <select
                                 id="contact-purpose"
                                 name="purpose"
                                 required
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                                 <option value="">Pilih Tujuan...</option>
                                 @foreach ($purposes as $label)
@@ -151,10 +151,10 @@
 
                     <div class="mt-6">
                         <div class="mb-2 flex items-center justify-between gap-4">
-                            <label for="contact-message" class="font-mono text-xs font-semibold tracking-[0.04em] text-slate-600">
+                            <label for="contact-message" class="font-mono text-xs font-semibold tracking-[0.04em] text-ink">
                                 Pesan &amp; Tenggat Waktu (Deadline)
                             </label>
-                            <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400">
+                            <span class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-slate-400">
                                 Opsional
                             </span>
                         </div>
@@ -164,7 +164,7 @@
                             name="message"
                             rows="7"
                             maxlength="3000"
-                            class="w-full resize-y rounded-none border border-line bg-white px-4 py-3 text-[15px] leading-7 text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                            class="w-full resize-y rounded-none border border-line bg-white px-4 py-3 text-base leading-7 text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             placeholder="Jelaskan konteks pertanyaan, kebutuhan wawancara, atau tenggat waktu jika ada."
                         ></textarea>
                     </div>
@@ -231,7 +231,7 @@
                             </svg>
                             <div>
                                 <dt class="text-sm font-semibold text-ink">Waktu Respons</dt>
-                                <dd class="mt-1 text-sm leading-6 text-slate-600">24–48 jam untuk pertanyaan terverifikasi.</dd>
+                                <dd class="mt-1 text-sm leading-6 text-ink">24–48 jam untuk pertanyaan terverifikasi.</dd>
                             </div>
                         </div>
 
@@ -242,7 +242,7 @@
                             </svg>
                             <div>
                                 <dt class="text-sm font-semibold text-ink">Spesialisasi</dt>
-                                <dd class="mt-1 text-sm leading-6 text-slate-600">AML, Kejahatan Kerah Putih, Intelijen Keuangan.</dd>
+                                <dd class="mt-1 text-sm leading-6 text-ink">AML, Kejahatan Kerah Putih, Intelijen Keuangan.</dd>
                             </div>
                         </div>
                     </dl>
@@ -250,14 +250,14 @@
 
                 <section class="border border-line bg-white p-6 sm:p-7">
                     <div class="flex items-center gap-3">
-                        <svg class="size-5 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                        <svg class="size-5 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
                             <path d="M5 5h14v10H9l-4 4V5Z" />
                             <path d="M8 9h8M8 12h5" />
                         </svg>
                         <h2 class="text-lg font-semibold text-ink">WhatsApp</h2>
                     </div>
 
-                    <p class="mt-3 text-sm leading-6 text-slate-600">
+                    <p class="mt-3 text-sm leading-6 text-ink">
                         Untuk konfirmasi berita cepat atau koordinasi waktu wawancara mendesak.
                     </p>
 

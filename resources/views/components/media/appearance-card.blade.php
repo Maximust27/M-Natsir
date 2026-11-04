@@ -26,12 +26,12 @@
                 {{ $appearance['categoryLabel'] }}
             </x-ui.badge>
 
-            <span class="font-mono text-[11px] font-medium uppercase tracking-[0.045em] text-slate-500">
+            <span class="font-mono text-xs font-medium uppercase tracking-[0.045em] text-slate-500">
                 {{ $appearance['date'] }}
             </span>
         </div>
 
-        <p class="mt-4 font-mono text-[11px] font-semibold uppercase tracking-[0.05em] text-slate-500">
+        <p class="mt-4 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-slate-500">
             {{ $appearance['outlet'] }}
         </p>
 
@@ -46,17 +46,17 @@
             </a>
         </h2>
 
-        <p class="mt-3 text-sm font-semibold leading-6 text-slate-700">
+        <p class="mt-3 text-sm font-semibold leading-6 text-ink">
             {{ $appearance['role'] }}
         </p>
 
-        <p class="mt-4 text-[15px] leading-7 text-slate-600">
+        <p class="mt-4 text-base leading-7 text-ink">
             {{ $appearance['summary'] }}
         </p>
 
         <div class="mt-5 flex flex-wrap gap-2" aria-label="Topik">
             @foreach ($appearance['topics'] as $topic)
-                <span class="rounded-full border border-line bg-paper px-2.5 py-1 text-xs font-medium text-slate-600">
+                <span class="rounded-full border border-line bg-paper px-2.5 py-1 text-xs font-medium text-ink">
                     {{ $topic }}
                 </span>
             @endforeach

@@ -27,14 +27,14 @@
                     </h1>
 
                     <p
-                        class="mt-5 max-w-[60ch] font-serif text-lg italic leading-8 text-slate-600 sm:text-xl"
+                        class="mt-5 max-w-[60ch] font-serif text-xl italic leading-[1.4] text-ink sm:text-2xl"
                         data-home-hero-item
                     >
                         “Membaca jejak transaksi, menyingkap arsitektur kejahatan keuangan.”
                     </p>
 
                     <p
-                        class="mt-8 max-w-[68ch] text-[15px] leading-7 text-slate-700 sm:text-base sm:leading-8"
+                        class="mt-8 max-w-[62ch] text-base leading-[1.75] text-ink sm:text-lg sm:leading-[1.75]"
                         data-home-hero-item
                     >
                         Analisis terkurasi dan perpustakaan intelijen yang didedikasikan untuk mengungkap jaringan pencucian uang profesional, menganalisis kerangka regulasi, dan mengantisipasi titik temu teknologi masa depan dan kejahatan finansial.
@@ -62,7 +62,7 @@
         <h2 id="knowledge-pillars-heading" class="mt-3 font-serif text-3xl font-medium tracking-[-0.03em] text-ink">
             Mulai dari topik utama
         </h2>
-        <p class="mt-3 max-w-3xl text-sm leading-7 text-slate-600">
+        <p class="mt-3 max-w-3xl text-sm leading-7 text-ink">
             Pilih bidang kajian untuk membaca konteks, pertanyaan kunci, dan rujukan publikasi asli yang saling terkait.
         </p>
         <nav class="mt-8 grid gap-4 md:grid-cols-3" aria-label="Topik kajian utama">
@@ -73,7 +73,7 @@
                     class="group block border border-line bg-white p-6 transition hover:border-slate-400 hover:shadow-sm"
                 >
                     <h3 class="font-serif text-xl font-medium text-ink group-hover:text-accent">{{ $topic['heading'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-slate-600">{{ $topic['teaser'] }}</p>
+                    <p class="mt-3 text-sm leading-7 text-ink">{{ $topic['teaser'] }}</p>
                     <span class="mt-4 inline-block text-xs font-semibold text-ink">Jelajahi topik →</span>
                 </a>
             @endforeach
@@ -98,7 +98,7 @@
                             </x-ui.badge>
                         </div>
 
-                        <p class="mt-4 font-mono text-[11px] font-medium uppercase tracking-[0.045em] text-slate-500">
+                        <p class="mt-4 font-mono text-xs font-medium uppercase tracking-[0.045em] text-slate-500">
                             {{ $writing['source'] }}
                             <span class="mx-1 text-slate-300" aria-hidden="true">•</span>
                             {{ $writing['date'] }}
@@ -115,7 +115,7 @@
                             </a>
                         </h3>
 
-                        <p class="mt-5 line-clamp-5 text-base leading-7 text-slate-600">
+                        <p class="mt-5 line-clamp-5 text-base leading-7 text-ink">
                             {{ $writing['excerpt'] }}
                         </p>
                     </div>
@@ -148,7 +148,7 @@
 
                 <div class="border-t border-line pt-6">
                     <span class="block text-sm font-semibold text-ink">{{ $spotlight['source'] }}</span>
-                    <span class="mt-1 block font-mono text-[11px] uppercase tracking-[0.05em] text-slate-500">{{ $spotlight['date'] }}</span>
+                    <span class="mt-1 block font-mono text-xs uppercase tracking-[0.05em] text-slate-500">{{ $spotlight['date'] }}</span>
                 </div>
             </x-ui.card>
 

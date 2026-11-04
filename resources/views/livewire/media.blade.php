@@ -11,7 +11,7 @@
                         MEDIA &amp; APPEARANCES
                     </h1>
 
-                    <p class="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+                    <p class="mt-5 max-w-3xl text-base leading-8 text-ink sm:text-lg">
                         Wawancara, forum publik, media visit, dan penampilan profesional M. Natsir Kongah yang dapat ditelusuri ke sumber terbuka.
                     </p>
                 </div>
@@ -19,19 +19,19 @@
                 <div class="grid grid-cols-2 divide-x divide-y divide-line border border-line bg-paper sm:grid-cols-4 sm:divide-y-0">
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $totalAppearances }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Appearance</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Appearance</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $interviewCount }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Interview</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Interview</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $publicEventCount }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Public Event</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Public Event</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-lg font-semibold leading-7 text-ink">{{ $yearSpan }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Timeline</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Timeline</span>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             <x-ui.card class="overflow-hidden p-0">
                 <div class="grid lg:grid-cols-[16rem_minmax(0,1fr)]">
                     <div class="border-b border-line bg-paper p-6 sm:p-7 lg:border-b-0 lg:border-r">
-                        <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-accent">
+                        <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">
                             Featured Appearance
                         </p>
 
@@ -53,7 +53,7 @@
                             </x-ui.badge>
                         </div>
 
-                        <p class="mt-5 font-mono text-[11px] font-semibold uppercase tracking-[0.05em] text-slate-500">
+                        <p class="mt-5 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-slate-500">
                             {{ $featuredAppearance['date'] }}
                         </p>
                         <p class="mt-2 text-sm font-semibold leading-6 text-ink">
@@ -73,17 +73,17 @@
                             </a>
                         </h2>
 
-                        <p class="mt-4 text-sm font-semibold leading-6 text-slate-700">
+                        <p class="mt-4 text-sm font-semibold leading-6 text-ink">
                             {{ $featuredAppearance['role'] }}
                         </p>
 
-                        <p class="mt-5 max-w-[90ch] text-[15px] leading-7 text-slate-600 sm:text-base sm:leading-8">
+                        <p class="mt-5 max-w-[90ch] text-base leading-7 text-ink sm:text-base sm:leading-8">
                             {{ $featuredAppearance['summary'] }}
                         </p>
 
                         <div class="mt-6 flex flex-wrap gap-2">
                             @foreach ($featuredAppearance['topics'] as $topic)
-                                <span class="rounded-full border border-line bg-white px-2.5 py-1 text-xs font-medium text-slate-600">
+                                <span class="rounded-full border border-line bg-white px-2.5 py-1 text-xs font-medium text-ink">
                                     {{ $topic }}
                                 </span>
                             @endforeach
@@ -111,7 +111,7 @@
         <div class="border border-line bg-white p-5 sm:p-6">
             <div class="grid gap-5 xl:grid-cols-[minmax(19rem,26rem)_minmax(0,1fr)] xl:items-end">
                 <div>
-                    <label for="media-search" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="media-search" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Cari appearance
                     </label>
 
@@ -134,13 +134,13 @@
                             wire:model.live.debounce.350ms="search"
                             placeholder="Judul, outlet, peran, atau topik…"
                             autocomplete="off"
-                            class="min-h-13 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 text-[15px] text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                            class="min-h-13 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                         >
                     </div>
                 </div>
 
                 <div class="min-w-0">
-                    <span class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <span class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Format
                     </span>
 
@@ -153,7 +153,7 @@
                                 :inactive-classes="$category['classes']"
                             >
                                 <span>{{ $category['label'] }}</span>
-                                <span class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-[10px] leading-none {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}">
+                                <span class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-xs leading-none {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}">
                                     {{ $category['count'] }}
                                 </span>
                             </x-ui.filter-chip>
@@ -206,7 +206,7 @@
                         Appearance belum ditemukan
                     </h2>
 
-                    <p class="mx-auto mt-2 max-w-xl text-sm leading-7 text-slate-600">
+                    <p class="mx-auto mt-2 max-w-xl text-sm leading-7 text-ink">
                         Coba kata kunci yang lebih umum atau tampilkan kembali seluruh format media.
                     </p>
 
@@ -221,7 +221,7 @@
 
         <aside class="mt-12 grid gap-5 border-t border-line pt-8 lg:grid-cols-[16rem_minmax(0,1fr)]" aria-labelledby="media-note-title">
             <div>
-                <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-accent">
+                <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">
                     Kriteria Arsip
                 </p>
                 <h2 id="media-note-title" class="mt-2 font-serif text-2xl font-medium tracking-[-0.02em] text-ink">
@@ -229,7 +229,7 @@
                 </h2>
             </div>
 
-            <p class="max-w-4xl text-[15px] leading-7 text-slate-600">
+            <p class="max-w-4xl text-base leading-7 text-ink">
                 Halaman ini hanya memuat wawancara, siaran, forum publik, media visit, dan recognition ketika M. Natsir Kongah memiliki peran aktif yang disebut jelas oleh sumber.
                 Halaman yang hanya mencantumkan nama sebagai narahubung media tidak dimasukkan. Tulisan opini tetap berada di
                 <a href="{{ route('articles') }}" wire:navigate class="font-semibold text-ink underline decoration-slate-300 underline-offset-4 transition hover:decoration-ink">Articles</a>,

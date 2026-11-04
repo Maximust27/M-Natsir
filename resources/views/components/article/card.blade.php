@@ -20,14 +20,14 @@
                 <x-ui.badge :class="$article['badgeClasses']">{{ $article['categoryLabel'] }}</x-ui.badge>
             @endif
 
-            <span class="font-mono text-[11px] font-medium uppercase tracking-[0.045em] text-slate-500">
+            <span class="font-mono text-xs font-medium uppercase tracking-[0.045em] text-slate-500">
                 {{ $article['source'] }}
                 <span class="mx-1 text-slate-300" aria-hidden="true">•</span>
                 {{ $article['date'] }}
             </span>
 
             @if (($article['isPrimarySource'] ?? true) === false)
-                <span class="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-900">
+                <span class="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-900">
                     Sumber sekunder
                 </span>
             @endif
@@ -44,7 +44,7 @@
             </a>
         </h2>
 
-        <p class="mt-4 max-w-[94ch] text-[15px] leading-7 text-slate-600 sm:text-base sm:leading-8">
+        <p class="mt-4 max-w-[94ch] text-base leading-7 text-ink sm:text-base sm:leading-8">
             {{ $article['excerpt'] }}
         </p>
 
