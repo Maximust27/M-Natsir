@@ -50,7 +50,7 @@ it('uses typography roles for semantic headings across every Blade page', functi
 });
 
 it('uses the same title and body roles for every collection card', function (string $path) {
-    $html = File::get(resource_path('views/'.$path));
+    $html = File::get(resource_path('views/components/'.$path));
 
     expect($html)
         ->toContain('type-card-title')
@@ -86,15 +86,26 @@ it('normalizes visible form controls to the same readable input size', function 
     expect($matches[1])->not->toBeEmpty();
 
     foreach ($matches[1] as $classes) {
+        // Hidden CSRF/honeypot inputs are not typography-bearing form controls.
+        if (trim($classes) === 'hidden') {
+            continue;
+        }
+
         expect($classes)->toContain('type-form-control');
     }
 })->with(['articles', 'library', 'media', 'contact']);
 
-it('preserves the same editorial hierarchy when public pages are rendered', function (string $route) {
+it('uses the expected semantic text roles on each public route', function (string $route, array $roles) {
     $html = $this->get(route($route))->assertOk()->getContent();
 
-    expect($html)
-        ->toContain('type-section-title')
-        ->toContain('type-card-title')
-        ->toContain('type-body');
-})->with(['home', 'about', 'articles', 'library', 'media', 'contact']);
+    foreach ($roles as $role) {
+        expect($html)->toContain($role);
+    }
+})->with([
+    'home' => ['home', ['type-section-title', 'type-card-title', 'type-body']],
+    'about' => ['about', ['type-page-title', 'type-section-title', 'type-subheading', 'type-body']],
+    'articles' => ['articles', ['type-page-title', 'type-card-title', 'type-body']],
+    'library' => ['library', ['type-page-title', 'type-section-title', 'type-card-title', 'type-body']],
+    'media' => ['media', ['type-page-title', 'type-section-title', 'type-card-title', 'type-body']],
+    'contact' => ['contact', ['type-page-title', 'type-section-title', 'type-subheading', 'type-body']],
+]);
