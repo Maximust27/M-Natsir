@@ -22,7 +22,7 @@
             </x-ui.badge>
         </div>
 
-        <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] font-medium text-slate-500">
+        <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs font-medium text-slate-500">
             <span class="font-semibold uppercase tracking-[0.05em]">
                 {{ $resource['institutionLabel'] }}
             </span>
@@ -53,7 +53,7 @@
             </p>
         @endif
 
-        <p class="mt-4 text-[15px] leading-7 text-slate-600">
+        <p class="mt-4 text-base leading-7 text-slate-600">
             {{ $resource['summary'] }}
         </p>
 

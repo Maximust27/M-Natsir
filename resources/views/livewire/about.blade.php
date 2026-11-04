@@ -105,7 +105,7 @@
                         <p class="font-serif text-lg italic leading-8 text-ink">
                             Benang merah yang tampak dari tulisan-tulisannya: pencucian uang tidak cukup dibaca sebagai perpindahan dana antar-rekening, tetapi sebagai arsitektur yang melibatkan manusia, profesi, dokumen, badan usaha, teknologi, aset, dan yurisdiksi.
                         </p>
-                        <p class="mt-3 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-500">
+                        <p class="mt-3 font-mono text-xs font-semibold uppercase tracking-[0.06em] text-slate-500">
                             Ringkasan tema tulisan publik — bukan kutipan langsung
                         </p>
                     </div>
@@ -125,11 +125,11 @@
                     <div class="mt-5 grid gap-4">
                         @foreach ($focusAreas as $focus)
                             <x-ui.card :interactive="false" class="p-5 sm:p-5">
-                                <span class="inline-flex rounded-full px-3 py-1.5 font-mono text-[11px] font-semibold leading-none tracking-[0.03em] {{ $focus['classes'] }}">
+                                <span class="inline-flex rounded-full px-3 py-1.5 font-mono text-xs font-semibold leading-none tracking-[0.03em] {{ $focus['classes'] }}">
                                     {{ $focus['label'] }}
                                 </span>
 
-                                <h3 class="mt-4 text-[15px] font-semibold leading-6 text-ink">
+                                <h3 class="mt-4 text-base font-semibold leading-6 text-ink">
                                     {{ $focus['title'] }}
                                 </h3>
 
@@ -183,7 +183,7 @@
                         rel="noopener noreferrer"
                         class="group border border-line bg-white p-5 transition hover:border-slate-400 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                     >
-                        <span class="font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-slate-500">
+                        <span class="font-mono text-xs font-semibold uppercase tracking-[0.06em] text-slate-500">
                             {{ $source['source'] }}
                         </span>
                         <span class="mt-2 block text-sm font-semibold leading-6 text-ink group-hover:text-accent">

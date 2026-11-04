@@ -32,12 +32,12 @@
             <span class="block font-serif text-[1.45rem] font-semibold leading-none tracking-[-0.035em] sm:text-[1.65rem]">
                 M. NATSIR KONGAH
             </span>
-            <span class="mt-2 block font-mono text-[10px] font-medium leading-[1.45] tracking-[0.045em] text-slate-500 sm:text-[11px]">
+            <span class="mt-2 block font-mono text-xs font-medium leading-[1.45] tracking-[0.045em] text-slate-500 sm:text-xs">
                 Financial Intelligence Hub
             </span>
         </a>
 
-        <nav class="hidden items-center gap-6 lg:flex xl:gap-7" aria-label="Navigasi utama">
+        <nav class="hidden items-center gap-5 xl:flex xl:gap-6" aria-label="Navigasi utama">
             <x-ui.nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                 Home
             </x-ui.nav-link>
@@ -54,7 +54,7 @@
 
         <button
             type="button"
-            class="inline-flex size-12 items-center justify-center rounded-sm border border-line bg-white text-ink transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:hidden"
+            class="inline-flex size-12 items-center justify-center rounded-sm border border-line bg-white text-ink transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink xl:hidden"
             @click="mobileOpen = ! mobileOpen; hidden = false"
             :aria-expanded="mobileOpen"
             aria-controls="mobile-navigation"
@@ -69,7 +69,7 @@
 
     <nav
         id="mobile-navigation"
-        class="site-container border-t border-line py-4 lg:hidden"
+        class="site-container border-t border-line py-4 xl:hidden"
         x-show="mobileOpen"
         x-cloak
         x-transition.opacity.duration.150ms

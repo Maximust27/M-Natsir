@@ -8,7 +8,7 @@
             >
                 M. NATSIR KONGAH
             </a>
-            <p class="mt-5 max-w-sm text-[15px] leading-7 text-slate-600">
+            <p class="mt-5 max-w-sm text-base leading-7 text-slate-600">
                 Pembelajar Anti Pencucian Uang &amp; Kejahatan Keuangan Terorganisir.
             </p>
             <p class="mt-7 max-w-lg text-xs leading-6 text-slate-500">
@@ -21,11 +21,11 @@
                 Knowledge Pillars
             </h2>
             <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
-                <a href="{{ route('topics.show', ['slug' => 'anti-pencucian-uang']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Anti-Money Laundering</a>
-                <a href="{{ route('topics.show', ['slug' => 'pencucian-uang-profesional']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Professional Money Laundering</a>
-                <a href="{{ route('topics.show', ['slug' => 'intelijen-keuangan']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Financial Intelligence</a>
-                <a href="{{ route('articles', ['category' => 'white-collar']) }}" wire:navigate class="min-h-8 transition hover:text-ink">White-Collar Crime</a>
-                <a href="{{ route('articles', ['category' => 'future-crime']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Future Crime (AI &amp; Crypto)</a>
+                <a href="{{ route('topics.show', ['slug' => 'anti-pencucian-uang']) }}" wire:navigate class="min-h-10 transition hover:text-ink">Anti-Money Laundering</a>
+                <a href="{{ route('topics.show', ['slug' => 'pencucian-uang-profesional']) }}" wire:navigate class="min-h-10 transition hover:text-ink">Professional Money Laundering</a>
+                <a href="{{ route('topics.show', ['slug' => 'intelijen-keuangan']) }}" wire:navigate class="min-h-10 transition hover:text-ink">Financial Intelligence</a>
+                <a href="{{ route('articles', ['category' => 'white-collar']) }}" wire:navigate class="min-h-10 transition hover:text-ink">White-Collar Crime</a>
+                <a href="{{ route('articles', ['category' => 'future-crime']) }}" wire:navigate class="min-h-10 transition hover:text-ink">Future Crime (AI &amp; Crypto)</a>
             </div>
         </div>
 
@@ -34,11 +34,11 @@
                 Navigasi Situs
             </h2>
             <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
-                <a href="{{ route('articles') }}" wire:navigate class="min-h-8 transition hover:text-ink">Articles Archive</a>
-                <a href="{{ route('library') }}" wire:navigate class="min-h-8 transition hover:text-ink">Sources Library</a>
-                <a href="{{ route('about') }}" wire:navigate class="min-h-8 transition hover:text-ink">About</a>
-                <a href="{{ route('media') }}" wire:navigate class="min-h-8 transition hover:text-ink">Media &amp; Appearances</a>
-                <a href="{{ route('contact') }}" wire:navigate class="min-h-8 transition hover:text-ink">Contact</a>
+                <a href="{{ route('articles') }}" wire:navigate class="min-h-10 transition hover:text-ink">Articles Archive</a>
+                <a href="{{ route('library') }}" wire:navigate class="min-h-10 transition hover:text-ink">Sources Library</a>
+                <a href="{{ route('about') }}" wire:navigate class="min-h-10 transition hover:text-ink">About</a>
+                <a href="{{ route('media') }}" wire:navigate class="min-h-10 transition hover:text-ink">Media &amp; Appearances</a>
+                <a href="{{ route('contact') }}" wire:navigate class="min-h-10 transition hover:text-ink">Contact</a>
             </div>
         </div>
     </div>

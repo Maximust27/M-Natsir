@@ -97,7 +97,7 @@
                                 required
                                 maxlength="120"
                                 autocomplete="name"
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                         </div>
 
@@ -112,7 +112,7 @@
                                 required
                                 maxlength="190"
                                 autocomplete="email"
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                         </div>
 
@@ -127,7 +127,7 @@
                                 required
                                 maxlength="190"
                                 autocomplete="organization"
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                         </div>
 
@@ -139,7 +139,7 @@
                                 id="contact-purpose"
                                 name="purpose"
                                 required
-                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-[15px] text-ink outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                                class="min-h-12 w-full rounded-none border border-line bg-white px-4 py-3 text-base text-ink outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             >
                                 <option value="">Pilih Tujuan...</option>
                                 @foreach ($purposes as $label)
@@ -154,7 +154,7 @@
                             <label for="contact-message" class="font-mono text-xs font-semibold tracking-[0.04em] text-slate-600">
                                 Pesan &amp; Tenggat Waktu (Deadline)
                             </label>
-                            <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-400">
+                            <span class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-slate-400">
                                 Opsional
                             </span>
                         </div>
@@ -164,7 +164,7 @@
                             name="message"
                             rows="7"
                             maxlength="3000"
-                            class="w-full resize-y rounded-none border border-line bg-white px-4 py-3 text-[15px] leading-7 text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                            class="w-full resize-y rounded-none border border-line bg-white px-4 py-3 text-base leading-7 text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                             placeholder="Jelaskan konteks pertanyaan, kebutuhan wawancara, atau tenggat waktu jika ada."
                         ></textarea>
                     </div>

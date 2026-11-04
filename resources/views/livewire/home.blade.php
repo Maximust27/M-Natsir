@@ -42,7 +42,7 @@
                     </p>
 
                     <p
-                        class="mt-8 max-w-[68ch] text-[15px] leading-7 text-slate-700 sm:text-base sm:leading-8"
+                        class="mt-8 max-w-[68ch] text-base leading-7 text-slate-700 sm:text-base sm:leading-8"
                         data-home-hero-item
                     >
                         Analisis terkurasi dan perpustakaan intelijen yang didedikasikan untuk mengungkap jaringan pencucian uang profesional, menganalisis kerangka regulasi, dan mengantisipasi titik temu teknologi masa depan dan kejahatan finansial.
@@ -106,7 +106,7 @@
                             </x-ui.badge>
                         </div>
 
-                        <p class="mt-4 font-mono text-[11px] font-medium uppercase tracking-[0.045em] text-slate-500">
+                        <p class="mt-4 font-mono text-xs font-medium uppercase tracking-[0.045em] text-slate-500">
                             {{ $writing['source'] }}
                             <span class="mx-1 text-slate-300" aria-hidden="true">•</span>
                             {{ $writing['date'] }}
@@ -156,7 +156,7 @@
 
                 <div class="border-t border-line pt-6">
                     <span class="block text-sm font-semibold text-ink">{{ $spotlight['source'] }}</span>
-                    <span class="mt-1 block font-mono text-[11px] uppercase tracking-[0.05em] text-slate-500">{{ $spotlight['date'] }}</span>
+                    <span class="mt-1 block font-mono text-xs uppercase tracking-[0.05em] text-slate-500">{{ $spotlight['date'] }}</span>
                 </div>
             </x-ui.card>
 

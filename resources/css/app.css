@@ -10,6 +10,22 @@
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
+    /* Readable, consistent type scale: minimum label size 14 px. */
+    --text-xs: 0.875rem;
+    --text-xs--line-height: 1.5rem;
+    --text-sm: 1rem;
+    --text-sm--line-height: 1.65rem;
+    --text-base: 1.0625rem;
+    --text-base--line-height: 1.8rem;
+    --text-lg: 1.25rem;
+    --text-lg--line-height: 1.95rem;
+
+    /* Stronger contrast for secondary text on paper backgrounds. */
+    --color-slate-400: #64748b;
+    --color-slate-500: #475569;
+    --color-slate-600: #334155;
+    --color-slate-700: #1e293b;
+
     --color-paper: #fbfbfa;
     --color-ink: #0e1c2f;
     --color-line: #dfe5eb;
@@ -24,10 +40,10 @@
     body {
         margin: 0;
         background: var(--color-paper);
-        color: #3f4650;
+        color: var(--color-slate-700);
         font-family: var(--font-sans);
-        font-size: 1rem;
-        line-height: 1.65;
+        font-size: var(--text-base);
+        line-height: 1.75;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }
