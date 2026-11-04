@@ -4,40 +4,35 @@
         aria-labelledby="home-hero-title"
         data-home-hero
     >
-        <div class="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-slate-100">
+        {{-- On phones and tablets the portrait sits above the copy, never behind text.
+             On desktop a narrow left content column protects the face on the right. --}}
+        <div class="relative overflow-hidden bg-paper lg:min-h-[calc(100svh-5rem)]">
             <img
                 src="{{ asset('images/home-hero.jpeg') }}"
                 alt="Potret M. Natsir Kongah berdiri di ruang kerja"
                 width="1200"
                 height="675"
                 fetchpriority="high"
-                class="absolute inset-0 h-full w-full object-cover object-[72%_center] sm:object-[70%_center]"
+                class="block aspect-[16/9] w-full object-cover object-[70%_center] sm:aspect-[2/1] lg:absolute lg:inset-0 lg:h-full lg:aspect-auto lg:object-[72%_center]"
                 data-home-hero-image
             >
-            <div class="absolute inset-0 bg-gradient-to-r from-white/95 via-white/75 to-white/15 sm:from-white/88 sm:via-white/55 sm:to-transparent lg:from-white/72 lg:via-white/30"></div>
+            <div class="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-white/95 via-white/70 to-transparent lg:block xl:from-white/90 xl:via-white/45"></div>
 
-            <div class="site-container relative z-10 flex min-h-[calc(100svh-5rem)] items-center">
-                <div class="max-w-4xl py-12 lg:py-16">
+            <div class="site-container relative z-10 flex items-center lg:min-h-[calc(100svh-5rem)]">
+                <div class="w-full py-10 sm:py-12 lg:max-w-[34rem] lg:py-16 xl:max-w-[39rem]">
                     <h1
                         id="home-hero-title"
-                        class="max-w-3xl font-serif text-4xl font-semibold leading-[1.04] tracking-[-0.04em] text-black sm:text-5xl lg:text-[3.7rem]"
+                        class="max-w-[19ch] font-serif text-[2.5rem] font-semibold leading-[1.06] tracking-[-0.035em] text-ink sm:text-[3.2rem] lg:max-w-[15ch] lg:text-[3.05rem] xl:text-[3.55rem]"
                         data-home-hero-item
                     >
-                        M. NATSIR KONGAH
+                        MEMBONGKAR PENCUCIAN UANG DAN KEJAHATAN KERAH PUTIH
                     </h1>
 
                     <p
-                        class="mt-5 max-w-[60ch] font-serif text-xl italic leading-[1.4] text-ink sm:text-2xl"
+                        class="mt-6 max-w-[62ch] text-base leading-[1.75] text-ink sm:text-lg sm:leading-[1.75]"
                         data-home-hero-item
                     >
-                        “Membaca jejak transaksi, menyingkap arsitektur kejahatan keuangan.”
-                    </p>
-
-                    <p
-                        class="mt-8 max-w-[62ch] text-base leading-[1.75] text-ink sm:text-lg sm:leading-[1.75]"
-                        data-home-hero-item
-                    >
-                        Analisis terkurasi dan perpustakaan intelijen yang didedikasikan untuk mengungkap jaringan pencucian uang profesional, menganalisis kerangka regulasi, dan mengantisipasi titik temu teknologi masa depan dan kejahatan finansial.
+                        Analisis terkurasi dan perpustakaan intelijen keuangan sebagai ruang belajar bersama M. Natsir Kongah. Pelajari kasus pencucian uang profesional, jejak transaksi, kerangka regulasi, dan tantangan kejahatan finansial melalui artikel serta rujukan sumber asli yang dapat ditelusuri.
                     </p>
 
                     <div class="mt-9 flex flex-wrap gap-3 sm:gap-4" data-home-hero-item>
@@ -58,23 +53,23 @@
 
 
     <section class="site-container border-b border-line py-14 lg:py-18" aria-labelledby="knowledge-pillars-heading">
-        <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">Peta Kajian</p>
-        <h2 id="knowledge-pillars-heading" class="mt-3 font-serif text-3xl font-medium tracking-[-0.03em] text-ink">
+        <p class="font-mono text-sm font-semibold uppercase tracking-[0.08em] text-accent">Peta Kajian</p>
+        <h2 id="knowledge-pillars-heading" class="mt-3 font-serif text-4xl font-medium leading-[1.12] tracking-[-0.03em] text-ink sm:text-[2.6rem]">
             Mulai dari topik utama
         </h2>
-        <p class="mt-3 max-w-3xl text-sm leading-7 text-ink">
+        <p class="mt-4 max-w-4xl text-base leading-8 text-ink">
             Pilih bidang kajian untuk membaca konteks, pertanyaan kunci, dan rujukan publikasi asli yang saling terkait.
         </p>
-        <nav class="mt-8 grid gap-4 md:grid-cols-3" aria-label="Topik kajian utama">
+        <nav class="mt-9 grid gap-5 md:grid-cols-3" aria-label="Topik kajian utama">
             @foreach (\App\Support\Content\TopicCatalog::all() as $topic)
                 <a
                     href="{{ route('topics.show', ['slug' => $topic['slug']]) }}"
                     wire:navigate
-                    class="group block border border-line bg-white p-6 transition hover:border-slate-400 hover:shadow-sm"
+                    class="group flex h-full flex-col border border-line bg-white p-6 transition hover:border-slate-400 hover:shadow-sm sm:p-7"
                 >
-                    <h3 class="font-serif text-xl font-medium text-ink group-hover:text-accent">{{ $topic['heading'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-ink">{{ $topic['teaser'] }}</p>
-                    <span class="mt-4 inline-block text-xs font-semibold text-ink">Jelajahi topik →</span>
+                    <h3 class="font-serif text-2xl font-semibold leading-[1.15] tracking-[-0.025em] text-ink group-hover:text-accent sm:text-[1.85rem]">{{ $topic['heading'] }}</h3>
+                    <p class="mt-4 text-base leading-[1.7] text-ink">{{ $topic['teaser'] }}</p>
+                    <span class="mt-auto inline-flex min-h-11 items-center pt-5 text-sm font-bold text-ink group-hover:text-accent">Jelajahi topik →</span>
                 </a>
             @endforeach
         </nav>

@@ -38,7 +38,7 @@
                 <a href="{{ route('library') }}" wire:navigate class="min-h-8 transition hover:text-ink">Sources Library</a>
                 <a href="{{ route('about') }}" wire:navigate class="min-h-8 transition hover:text-ink">About</a>
                 <a href="{{ route('media') }}" wire:navigate class="min-h-8 transition hover:text-ink">Media &amp; Appearances</a>
-                <a href="{{ route('contact') }}" wire:navigate class="min-h-8 transition hover:text-ink">Contact</a>
+                <a href="/#" class="min-h-8 transition hover:text-ink" aria-label="Admin Page (segera hadir)">Admin Page</a>
             </div>
         </div>
     </div>

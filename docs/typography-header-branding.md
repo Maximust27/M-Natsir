@@ -23,4 +23,10 @@ Perubahan ini dibuat **dari branch `feat/seo-topic-hubs`**, tanpa mengambil PR #
 4. Jalankan `npm run build` dan `php artisan test`.
 5. Periksa kontras teks pada latar putih maupun kartu gelap.
 
-Hanya memperbaiki tipografi dan logo/urutan branding header. **Headline hero tetap “M. NATSIR KONGAH”**; penggantian headline dan fitur admin bisa dikerjakan di revisi berikutnya setelah desain ini disetujui.
+## Revisi tambahan pada branch yang sama
+- Kartu **Peta Kajian** diselaraskan dengan hierarki halaman lain: label 16 px, judul kartu 24–30 px, ringkasan 18 px, tautan 16 px dengan bidang sentuh minimal 44 px.
+- Hero menampilkan H1 **MEMBONGKAR PENCUCIAN UANG DAN KEJAHATAN KERAH PUTIH**, menghapus kutipan lama, dan mengganti deskripsi menjadi ajakan belajar melalui analisis dan rujukan asli bersama **M. Natsir Kongah**.
+- Layout hero dipisahkan antara **foto di atas dan teks di bawah untuk HP/tablet**. Pada desktop, teks dibatasi pada kolom kiri dengan gradasi putih agar **tidak menutupi wajah** di sisi kanan. Periksa pemotongan gambar di layar nyata.
+- Link **Contact di footer** diganti **Admin Page**, sementara diarahkan ke `/#`; **belum ada login/admin route**. Contact di header dan route lama belum diubah.
+
+Hanya memperbaiki copy dan layout homepage serta tautan footer. Fitur admin/database masih menunggu tahap berikutnya.

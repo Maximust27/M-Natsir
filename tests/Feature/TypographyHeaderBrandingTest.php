@@ -52,16 +52,53 @@ it('renders an accessible header with the sharp SVG favicon and correct brand hi
     expect($nameIndex)->toBeGreaterThan($titleIndex);
 });
 
-it('keeps the home hero content readable without changing its original messaging', function () {
+it('renders the new learning-focused hero headline without covering the portrait', function () {
+    $html = $this->get(route('home'))->assertOk()->getContent();
+
+    preg_match('/<h1\b(?=[^>]*id="home-hero-title")[^>]*>(.*?)<\/h1>/s', $html, $match);
+    $headline = trim(preg_replace('/\s+/', ' ', strip_tags($match[1] ?? '')));
+
+    expect($headline)
+        ->toBe('MEMBONGKAR PENCUCIAN UANG DAN KEJAHATAN KERAH PUTIH');
+
+    expect($html)
+        ->toContain('Analisis terkurasi dan perpustakaan intelijen keuangan')
+        ->toContain('ruang belajar bersama M. Natsir Kongah')
+        ->toContain('rujukan sumber asli yang dapat ditelusuri')
+        ->toContain('sm:aspect-[2/1] lg:absolute')
+        ->toContain('lg:max-w-[34rem]')
+        ->not->toContain('“Membaca jejak transaksi, menyingkap arsitektur kejahatan keuangan.”');
+});
+
+it('enlarges every topic hub card while preserving its crawlable link', function () {
     $html = $this->get(route('home'))->assertOk()->getContent();
 
     expect($html)
-        ->toContain('M. NATSIR KONGAH')
-        ->toContain('“Membaca jejak transaksi, menyingkap arsitektur kejahatan keuangan.”')
-        ->toContain('Analisis terkurasi dan perpustakaan intelijen')
-        ->toContain('font-serif text-xl italic')
-        ->toContain('max-w-[62ch] text-base')
-        ->toContain('sm:text-lg');
+        ->toContain('id="knowledge-pillars-heading"')
+        ->toContain('Peta Kajian')
+        ->toContain('text-4xl font-medium')
+        ->toContain('text-2xl font-semibold')
+        ->toContain('mt-4 text-base leading-[1.7]')
+        ->toContain('pt-5 text-sm font-bold');
+
+    foreach (\App\Support\Content\TopicCatalog::all() as $topic) {
+        expect($html)->toContain('href="'.route('topics.show', ['slug' => $topic['slug']]).'"');
+    }
+});
+
+it('replaces only the footer contact link with an admin placeholder', function () {
+    $html = $this->get(route('home'))->assertOk()->getContent();
+
+    preg_match('/<footer\b.*?<\/footer>/s', $html, $match);
+    $footer = $match[0] ?? '';
+
+    expect($footer)
+        ->toContain('href="/#"')
+        ->toContain('Admin Page')
+        ->not->toContain('>Contact</a>');
+
+    // The existing Contact page stays available until the admin/auth revision.
+    $this->get(route('contact'))->assertOk();
 });
 
 it('still renders the article library media and about pages', function (string $page) {
