@@ -44,3 +44,14 @@ it('keeps the public editorial pages and footer renderable', function (string $r
         ->assertSee('<footer', false)
         ->assertSee('M. NATSIR KONGAH');
 })->with(['home', 'about', 'articles', 'library', 'media']);
+
+it('keeps remote font styles non-blocking with a no-JavaScript fallback', function () {
+    $html = $this->get(route('home'))->assertOk()->getContent();
+
+    expect($html)
+        ->toContain('rel="preload"')
+        ->toContain('as="style"')
+        ->toContain('display=optional')
+        ->toContain("onload=\"this.onload=null;this.rel='stylesheet'\"")
+        ->toContain('<noscript>');
+});

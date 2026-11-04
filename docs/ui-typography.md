@@ -6,7 +6,7 @@
 - Seluruh ukuran kustom lama `text-[10px]` sampai `text-[15px]` pada Blade diubah ke token baru, sehingga keterangan paling kecil tidak lagi 10–11 px.
 - Warna sekunder dipergelap: slate-500 `#475569`, slate-600 `#334155`, slate-700 `#1e293b`; warna isi utama sekarang slate-700.
 - Tinggi sentuh menu, tombol, filter dinaikkan menjadi minimal 44 px. Navbar desktop muncul mulai breakpoint `xl` agar tidak bertabrakan pada lebar tablet/laptop sedang.
-- Tidak menambahkan font atau package baru. Huruf, identitas brand, struktur konten, dan URL tetap sama pada revisi ini.
+- Google Fonts dimuat tanpa memblokir first paint melalui preload stylesheet dan `font-display: optional`, disertai fallback saat JavaScript dinonaktifkan. Pada jaringan lambat, browser mungkin mempertahankan font sistem sampai kunjungan selanjutnya demi mencegah layout shift; ini disengaja. Tidak menambahkan font atau package baru. Huruf, identitas brand, struktur konten, dan URL tetap sama pada revisi ini.
 
 ## Pemeriksaan visual sebelum merge
 1. Buka Home, Tentang, Articles, Library, Media, dan Topik pada lebar 375, 768, 1024, dan 1280 px.
