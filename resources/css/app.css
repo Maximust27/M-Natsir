@@ -10,6 +10,22 @@
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
+    /* Readable hierarchy: captions 14px, UI 16px, body 18px, leads 20px. */
+    --text-xs: 0.875rem;
+    --text-xs--line-height: 1.5rem;
+    --text-sm: 1rem;
+    --text-sm--line-height: 1.625rem;
+    --text-base: 1.125rem;
+    --text-base--line-height: 1.875rem;
+    --text-lg: 1.25rem;
+    --text-lg--line-height: 2rem;
+
+    /* Secondary content remains dark and legible against paper/white. */
+    --color-slate-400: #475569;
+    --color-slate-500: #253044;
+    --color-slate-600: #0e1c2f;
+    --color-slate-700: #0e1c2f;
+
     --color-paper: #fbfbfa;
     --color-ink: #0e1c2f;
     --color-line: #dfe5eb;
@@ -24,10 +40,10 @@
     body {
         margin: 0;
         background: var(--color-paper);
-        color: #3f4650;
+        color: var(--color-ink);
         font-family: var(--font-sans);
-        font-size: 1rem;
-        line-height: 1.65;
+        font-size: var(--text-base);
+        line-height: 1.7;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }
@@ -68,6 +84,99 @@
 }
 
 @layer components {
+    /*
+     * Typography contract: one source of truth, by semantic role.
+     * Keep headings consistent across Home, About, Articles, Library,
+     * Media, Topic, Contact, and shared cards. Minimum text: 14px.
+     */
+    .type-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    .type-page-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.625rem, 4vw, 3.5rem);
+        font-weight: 600;
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+    }
+
+    .type-section-title {
+        font-family: var(--font-serif);
+        font-size: clamp(2.25rem, 3vw, 2.625rem);
+        font-weight: 500;
+        line-height: 1.14;
+        letter-spacing: -0.025em;
+    }
+
+    .type-card-title {
+        font-family: var(--font-serif);
+        font-size: clamp(1.625rem, 2.1vw, 1.875rem);
+        font-weight: 600;
+        line-height: 1.22;
+        letter-spacing: -0.02em;
+    }
+
+    .type-subheading {
+        font-family: var(--font-sans);
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+
+    .type-lead {
+        font-size: clamp(1.25rem, 1.8vw, 1.375rem);
+        line-height: 1.65;
+    }
+
+    .type-quote {
+        font-family: var(--font-serif);
+        font-size: 1.25rem;
+        font-style: italic;
+        line-height: 1.55;
+    }
+
+    .type-body {
+        font-size: 1.125rem;
+        line-height: 1.75;
+    }
+
+    .type-support {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .type-meta {
+        font-size: 0.875rem;
+        line-height: 1.55;
+        font-weight: 600;
+        letter-spacing: 0.015em;
+    }
+
+    .type-action {
+        font-size: 1rem;
+        line-height: 1.45;
+        font-weight: 600;
+    }
+
+    .type-stat {
+        font-family: var(--font-serif);
+        font-size: clamp(1.375rem, 2.3vw, 1.75rem);
+        line-height: 1.2;
+        font-weight: 600;
+    }
+
+    .type-form-control {
+        font-family: var(--font-sans);
+        font-size: 1.125rem;
+        line-height: 1.6;
+    }
+
     .site-container {
         width: min(calc(100% - 2rem), 102.5rem);
         margin-inline: auto;

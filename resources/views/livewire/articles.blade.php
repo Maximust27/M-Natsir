@@ -1,23 +1,23 @@
 <div data-motion-static>
     <section class="site-container border-b border-line py-14 sm:py-18 lg:py-22" aria-labelledby="articles-title">
         <div class="max-w-5xl">
-            <p class="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-accent">
+            <p class="type-eyebrow text-accent">
                 Knowledge Archive
             </p>
 
             <h1
                 id="articles-title"
-                class="mt-4 font-serif text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-ink sm:text-5xl lg:text-[3.35rem]"
+                class="type-page-title mt-4 text-ink"
             >
                 ARTIKEL &amp; ANALISIS
             </h1>
 
-            <p class="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
+            <p class="type-lead mt-5 max-w-3xl text-ink">
                 Tulisan, ringkasan opini media, dan catatan kritis seputar kejahatan keuangan.
             </p>
 
             <nav class="mt-8" aria-label="Peta bacaan menurut topik">
-                <span class="block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">Mulai dari topik utama</span>
+                <span class="type-meta block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">Mulai dari topik utama</span>
                 <div class="mt-3 flex flex-wrap gap-3">
                     @foreach (\App\Support\Content\TopicCatalog::all() as $topic)
                         <a
@@ -35,7 +35,7 @@
 
         <div class="mt-10 grid gap-5 xl:grid-cols-[minmax(19rem,26rem)_minmax(0,1fr)] xl:items-end">
             <div>
-                <label for="article-search" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                <label for="article-search" class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                     Cari artikel
                 </label>
 
@@ -58,13 +58,13 @@
                         wire:model.live.debounce.350ms="search"
                         placeholder="Cari judul, topik, atau media…"
                         autocomplete="off"
-                        class="min-h-13 w-full rounded-sm border border-line bg-white py-3 pl-12 pr-4 text-[15px] text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                        class="min-h-13 w-full rounded-sm border border-line bg-white py-3 pl-12 pr-4 type-form-control text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                     >
                 </div>
             </div>
 
             <div class="min-w-0">
-                <span class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                <span class="type-meta mb-2 block font-mono font-semibold uppercase tracking-[0.07em] text-slate-500">
                     Filter topik
                 </span>
 
@@ -78,7 +78,7 @@
                         >
                             <span>{{ $category['label'] }}</span>
                             <span
-                                class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-[10px] leading-none {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}"
+                                class="type-meta ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}"
                             >
                                 {{ $category['count'] }}
                             </span>
@@ -91,7 +91,7 @@
 
     <section class="site-container py-10 sm:py-12 lg:py-16" aria-label="Daftar artikel">
         <div class="flex flex-col gap-2 border-b border-line pb-5 sm:flex-row sm:items-center sm:justify-between">
-            <p class="text-sm font-medium text-ink" aria-live="polite">
+            <p class="type-body font-medium text-ink" aria-live="polite">
                 @if ($resultCount > 0)
                     Menampilkan {{ $resultFrom }}–{{ $resultTo }} dari {{ $resultCount }} artikel
                 @else
@@ -99,7 +99,7 @@
                 @endif
             </p>
 
-            <p class="text-xs leading-6 text-slate-500">
+            <p class="type-support text-slate-500">
                 Arsip disusun dari publikasi asli dan sumber media terbuka.
             </p>
         </div>
@@ -123,11 +123,11 @@
                         </svg>
                     </div>
 
-                    <h2 class="mt-4 font-serif text-2xl font-medium text-ink">
+                    <h2 class="type-card-title mt-4 text-ink">
                         Artikel belum ditemukan
                     </h2>
 
-                    <p class="mx-auto mt-2 max-w-xl text-sm leading-7 text-slate-600">
+                    <p class="type-body mx-auto mt-2 max-w-xl text-ink">
                         Coba gunakan kata kunci yang lebih umum atau kembali ke seluruh kategori.
                     </p>
 
@@ -162,7 +162,7 @@
                 @else
                     <span
                         aria-disabled="true"
-                        class="inline-flex min-h-11 min-w-11 cursor-not-allowed items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink opacity-40"
+                        class="type-action inline-flex min-h-11 min-w-11 cursor-not-allowed items-center justify-center rounded-sm border border-line bg-white px-3 font-semibold text-ink opacity-40"
                         aria-label="Halaman sebelumnya"
                     >
                         <span aria-hidden="true">←</span>
@@ -194,7 +194,7 @@
                 @else
                     <span
                         aria-disabled="true"
-                        class="inline-flex min-h-11 min-w-11 cursor-not-allowed items-center justify-center rounded-sm border border-line bg-white px-3 text-sm font-semibold text-ink opacity-40"
+                        class="type-action inline-flex min-h-11 min-w-11 cursor-not-allowed items-center justify-center rounded-sm border border-line bg-white px-3 font-semibold text-ink opacity-40"
                         aria-label="Halaman berikutnya"
                     >
                         <span aria-hidden="true">→</span>

@@ -20,20 +20,20 @@
                 <x-ui.badge :class="$article['badgeClasses']">{{ $article['categoryLabel'] }}</x-ui.badge>
             @endif
 
-            <span class="font-mono text-[11px] font-medium uppercase tracking-[0.045em] text-slate-500">
+            <span class="type-meta font-mono uppercase text-slate-500">
                 {{ $article['source'] }}
                 <span class="mx-1 text-slate-300" aria-hidden="true">•</span>
                 {{ $article['date'] }}
             </span>
 
             @if (($article['isPrimarySource'] ?? true) === false)
-                <span class="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-semibold text-amber-900">
+                <span class="rounded-full border border-amber-200 bg-amber-50 px-2.5 py-1 type-meta text-amber-900">
                     Sumber sekunder
                 </span>
             @endif
         </div>
 
-        <h2 class="mt-5 max-w-5xl font-serif text-2xl font-medium leading-[1.15] tracking-[-0.025em] text-ink sm:text-[1.8rem] lg:text-[2rem]">
+        <h2 class="mt-5 max-w-5xl type-card-title text-ink">
             <a
                 href="{{ $article['url'] }}"
                 target="_blank"
@@ -44,12 +44,12 @@
             </a>
         </h2>
 
-        <p class="mt-4 max-w-[94ch] text-[15px] leading-7 text-slate-600 sm:text-base sm:leading-8">
+        <p class="mt-4 max-w-[94ch] type-body text-ink">
             {{ $article['excerpt'] }}
         </p>
 
         @if (! empty($article['sourceNote']))
-            <p class="mt-5 max-w-[94ch] border-l-2 border-amber-200 pl-3 text-xs leading-6 text-slate-500">
+            <p class="mt-5 max-w-[94ch] border-l-2 border-amber-200 pl-3 type-support text-slate-500">
                 {{ $article['sourceNote'] }}
             </p>
         @endif
@@ -66,7 +66,7 @@
                 <span aria-hidden="true">→</span>
             </x-ui.button>
 
-            <span class="text-xs leading-6 text-slate-500">
+            <span class="type-meta text-slate-500">
                 {{ ($article['isPrimarySource'] ?? true) ? 'Sumber publik:' : 'Referensi atribusi:' }}
                 {{ $article['source'] }}
             </span>

@@ -17,12 +17,12 @@
                 {{ $resource['collectionLabel'] }}
             </x-ui.badge>
 
-            <x-ui.badge class="bg-slate-100 text-slate-700">
+            <x-ui.badge class="bg-slate-100 text-ink">
                 {{ $resource['typeLabel'] }}
             </x-ui.badge>
         </div>
 
-        <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11px] font-medium text-slate-500">
+        <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 type-meta font-mono text-slate-500">
             <span class="font-semibold uppercase tracking-[0.05em]">
                 {{ $resource['institutionLabel'] }}
             </span>
@@ -32,7 +32,7 @@
             <span>{{ $resource['language'] }}</span>
         </div>
 
-        <h2 class="mt-5 font-serif text-[1.65rem] font-medium leading-[1.15] tracking-[-0.025em] text-ink">
+        <h2 class="mt-5 type-card-title text-ink">
             <a
                 href="{{ $resource['url'] }}"
                 target="_blank"
@@ -44,29 +44,29 @@
         </h2>
 
         @if (! empty($resource['authorLabel']))
-            <p class="mt-3 text-sm font-semibold text-slate-700">
+            <p class="mt-3 type-support font-semibold text-ink">
                 {{ $resource['authorLabel'] }}
             </p>
         @elseif (! empty($resource['roleLabel']))
-            <p class="mt-3 text-sm font-semibold text-teal-800">
+            <p class="mt-3 type-support font-semibold text-teal-800">
                 {{ $resource['roleLabel'] }}
             </p>
         @endif
 
-        <p class="mt-4 text-[15px] leading-7 text-slate-600">
+        <p class="mt-4 type-body text-ink">
             {{ $resource['summary'] }}
         </p>
 
         <div class="mt-5 flex flex-wrap gap-2" aria-label="Topik">
             @foreach ($resource['topicLabels'] as $label)
-                <span class="rounded-full border border-line bg-paper px-2.5 py-1 text-xs font-medium text-slate-600">
+                <span class="rounded-full border border-line bg-paper px-2.5 py-1 type-meta text-ink">
                     {{ $label }}
                 </span>
             @endforeach
         </div>
 
         @if (! empty($resource['sourceNote']))
-            <p class="mt-5 border-l-2 border-slate-200 pl-3 text-xs leading-6 text-slate-500">
+            <p class="mt-5 border-l-2 border-slate-200 pl-3 type-support text-slate-500">
                 {{ $resource['sourceNote'] }}
             </p>
         @endif

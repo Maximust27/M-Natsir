@@ -22,22 +22,33 @@
     @keydown.escape.window="mobileOpen = false"
     :class="{ '-translate-y-full': hidden }"
 >
-    <div class="site-container flex min-h-20 items-center justify-between gap-6 py-3">
+    <div class="site-container flex min-h-20 items-center justify-between gap-4 py-3 xl:gap-6">
         <a
             href="{{ route('home') }}"
             wire:navigate
-            class="shrink-0 rounded-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
-            aria-label="M. Natsir Kongah - Home"
+            class="flex min-w-0 items-center gap-3 rounded-sm text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink sm:gap-3.5"
+            aria-label="Financial Intelligence Hub — M. Natsir Kongah, ke beranda"
         >
-            <span class="block font-serif text-[1.45rem] font-semibold leading-none tracking-[-0.035em] sm:text-[1.65rem]">
-                M. NATSIR KONGAH
-            </span>
-            <span class="mt-2 block font-mono text-[10px] font-medium leading-[1.45] tracking-[0.045em] text-slate-500 sm:text-[11px]">
-                Financial Intelligence Hub
+            {{-- Reuse the vector favicon to keep the monogram crisp on retina screens. --}}
+            <img
+                src="{{ asset('favicon.svg') }}"
+                width="56"
+                height="56"
+                alt=""
+                aria-hidden="true"
+                class="size-11 shrink-0 rounded-md sm:size-14"
+            >
+            <span class="min-w-0 max-w-[11.5rem] sm:max-w-none">
+                <span class="block font-serif text-[1.125rem] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[1.5rem] xl:text-[1.4rem] 2xl:text-[1.5rem]">
+                    Financial Intelligence Hub
+                </span>
+                <span class="mt-1 block font-sans text-sm font-medium leading-snug tracking-[-0.01em] text-ink">
+                    M. Natsir Kongah
+                </span>
             </span>
         </a>
 
-        <nav class="hidden items-center gap-6 lg:flex xl:gap-7" aria-label="Navigasi utama">
+        <nav class="hidden shrink-0 items-center gap-4 xl:flex 2xl:gap-6" aria-label="Navigasi utama">
             <x-ui.nav-link :href="route('home')" :active="request()->routeIs('home')" wire:navigate>
                 Home
             </x-ui.nav-link>
@@ -54,7 +65,7 @@
 
         <button
             type="button"
-            class="inline-flex size-12 items-center justify-center rounded-sm border border-line bg-white text-ink transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:hidden"
+            class="inline-flex size-12 shrink-0 items-center justify-center rounded-sm border border-line bg-white text-ink transition hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink xl:hidden"
             @click="mobileOpen = ! mobileOpen; hidden = false"
             :aria-expanded="mobileOpen"
             aria-controls="mobile-navigation"
@@ -69,7 +80,7 @@
 
     <nav
         id="mobile-navigation"
-        class="site-container border-t border-line py-4 lg:hidden"
+        class="site-container border-t border-line py-4 xl:hidden"
         x-show="mobileOpen"
         x-cloak
         x-transition.opacity.duration.150ms
