@@ -27,19 +27,19 @@
                 <div class="grid grid-cols-2 divide-x divide-y divide-line border border-line bg-paper sm:grid-cols-4 sm:divide-y-0">
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $totalResources }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Total</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Total</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $natsirWorksCount }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Karya Natsir</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Karya Natsir</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $institutionalCount }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Institusional</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Institusional</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="block font-serif text-2xl font-semibold text-ink">{{ $referenceCount }}</span>
-                        <span class="mt-1 block text-[11px] font-medium uppercase tracking-[0.05em] text-slate-500">Referensi</span>
+                        <span class="mt-1 block text-xs font-medium uppercase tracking-[0.05em] text-slate-500">Referensi</span>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
     <section class="site-container py-8 sm:py-10" aria-label="Filter library">
         <div class="border border-line bg-white p-5 sm:p-6">
             <div>
-                <span class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                <span class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                     Koleksi
                 </span>
 
@@ -62,7 +62,7 @@
                             :inactive-classes="$item['classes']"
                         >
                             <span>{{ $item['label'] }}</span>
-                            <span class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-[10px] leading-none {{ $collection === $key ? 'bg-white/15 text-white' : '' }}">
+                            <span class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-xs leading-none {{ $collection === $key ? 'bg-white/15 text-white' : '' }}">
                                 {{ $item['count'] }}
                             </span>
                         </x-ui.filter-chip>
@@ -72,7 +72,7 @@
 
             <div class="mt-6 grid gap-4 border-t border-line pt-6 lg:grid-cols-[minmax(16rem,1.6fr)_repeat(3,minmax(10rem,1fr))]">
                 <div>
-                    <label for="library-search" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="library-search" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Cari referensi
                     </label>
 
@@ -95,19 +95,19 @@
                             wire:model.live.debounce.350ms="search"
                             placeholder="Judul, topik, penulis, sumber…"
                             autocomplete="off"
-                            class="min-h-12 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 text-[15px] text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                            class="min-h-12 w-full rounded-sm border border-line bg-paper py-3 pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                         >
                     </div>
                 </div>
 
                 <div>
-                    <label for="resource-type" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="resource-type" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Jenis dokumen
                     </label>
                     <select
                         id="resource-type"
                         wire:model.live="resourceType"
-                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-[14px] font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-sm font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                     >
                         @foreach ($resourceTypes as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -116,13 +116,13 @@
                 </div>
 
                 <div>
-                    <label for="resource-institution" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="resource-institution" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Institusi / sumber
                     </label>
                     <select
                         id="resource-institution"
                         wire:model.live="institution"
-                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-[14px] font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-sm font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                     >
                         @foreach ($institutions as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -131,13 +131,13 @@
                 </div>
 
                 <div>
-                    <label for="resource-topic" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                    <label for="resource-topic" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                         Topik
                     </label>
                     <select
                         id="resource-topic"
                         wire:model.live="topic"
-                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-[14px] font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
+                        class="min-h-12 w-full rounded-sm border border-line bg-paper px-3 text-sm font-medium text-ink outline-none transition hover:border-slate-300 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200"
                     >
                         @foreach ($topics as $value => $label)
                             <option value="{{ $value }}">{{ $label }}</option>
@@ -205,7 +205,7 @@
 
         <aside class="mt-12 grid gap-5 border-t border-line pt-8 lg:grid-cols-[16rem_minmax(0,1fr)]" aria-labelledby="library-note-title">
             <div>
-                <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-accent">
+                <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">
                     Cara membaca Library
                 </p>
                 <h2 id="library-note-title" class="mt-2 font-serif text-2xl font-medium tracking-[-0.02em] text-ink">
@@ -213,7 +213,7 @@
                 </h2>
             </div>
 
-            <p class="max-w-4xl text-[15px] leading-7 text-slate-600">
+            <p class="max-w-4xl text-base leading-7 text-slate-600">
                 <strong class="font-semibold text-ink">Karya M. Natsir Kongah</strong> memuat paper, makalah, dan tulisan arsip yang atribusinya dapat ditelusuri.
                 <strong class="font-semibold text-ink">Kontribusi Institusional</strong> mencatat peran editorial atau kontribusi pada publikasi lembaga tanpa menyebutnya sebagai karya tunggal.
                 <strong class="font-semibold text-ink">Reference Sources</strong> adalah bahan rujukan eksternal. Untuk kolom dan opini media, gunakan halaman

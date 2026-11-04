@@ -26,12 +26,12 @@
                 {{ $appearance['categoryLabel'] }}
             </x-ui.badge>
 
-            <span class="font-mono text-[11px] font-medium uppercase tracking-[0.045em] text-slate-500">
+            <span class="font-mono text-xs font-medium uppercase tracking-[0.045em] text-slate-500">
                 {{ $appearance['date'] }}
             </span>
         </div>
 
-        <p class="mt-4 font-mono text-[11px] font-semibold uppercase tracking-[0.05em] text-slate-500">
+        <p class="mt-4 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-slate-500">
             {{ $appearance['outlet'] }}
         </p>
 
@@ -50,7 +50,7 @@
             {{ $appearance['role'] }}
         </p>
 
-        <p class="mt-4 text-[15px] leading-7 text-slate-600">
+        <p class="mt-4 text-base leading-7 text-slate-600">
             {{ $appearance['summary'] }}
         </p>
 

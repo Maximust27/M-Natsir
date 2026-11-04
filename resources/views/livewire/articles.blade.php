@@ -17,7 +17,7 @@
             </p>
 
             <nav class="mt-8" aria-label="Peta bacaan menurut topik">
-                <span class="block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">Mulai dari topik utama</span>
+                <span class="block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">Mulai dari topik utama</span>
                 <div class="mt-3 flex flex-wrap gap-3">
                     @foreach (\App\Support\Content\TopicCatalog::all() as $topic)
                         <a
@@ -35,7 +35,7 @@
 
         <div class="mt-10 grid gap-5 xl:grid-cols-[minmax(19rem,26rem)_minmax(0,1fr)] xl:items-end">
             <div>
-                <label for="article-search" class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                <label for="article-search" class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                     Cari artikel
                 </label>
 
@@ -58,13 +58,13 @@
                         wire:model.live.debounce.350ms="search"
                         placeholder="Cari judul, topik, atau media…"
                         autocomplete="off"
-                        class="min-h-13 w-full rounded-sm border border-line bg-white py-3 pl-12 pr-4 text-[15px] text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+                        class="min-h-13 w-full rounded-sm border border-line bg-white py-3 pl-12 pr-4 text-base text-ink outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
                     >
                 </div>
             </div>
 
             <div class="min-w-0">
-                <span class="mb-2 block font-mono text-[11px] font-semibold uppercase tracking-[0.07em] text-slate-500">
+                <span class="mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.07em] text-slate-500">
                     Filter topik
                 </span>
 
@@ -78,7 +78,7 @@
                         >
                             <span>{{ $category['label'] }}</span>
                             <span
-                                class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-[10px] leading-none {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}"
+                                class="ml-1.5 rounded-full bg-black/5 px-1.5 py-0.5 text-xs leading-none {{ $activeCategory === $key ? 'bg-white/15 text-white' : '' }}"
                             >
                                 {{ $category['count'] }}
                             </span>
