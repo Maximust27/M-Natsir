@@ -26,16 +26,16 @@
                 {{ $appearance['categoryLabel'] }}
             </x-ui.badge>
 
-            <span class="font-mono text-xs font-medium uppercase tracking-[0.045em] text-slate-500">
+            <span class="type-meta font-mono uppercase text-slate-500">
                 {{ $appearance['date'] }}
             </span>
         </div>
 
-        <p class="mt-4 font-mono text-xs font-semibold uppercase tracking-[0.05em] text-slate-500">
+        <p class="mt-4 type-meta font-mono uppercase text-slate-500">
             {{ $appearance['outlet'] }}
         </p>
 
-        <h2 class="mt-3 font-serif text-[1.65rem] font-medium leading-[1.15] tracking-[-0.025em] text-ink">
+        <h2 class="mt-3 type-card-title text-ink">
             <a
                 href="{{ $appearance['url'] }}"
                 target="_blank"
@@ -46,24 +46,24 @@
             </a>
         </h2>
 
-        <p class="mt-3 text-sm font-semibold leading-6 text-ink">
+        <p class="mt-3 type-support font-semibold text-ink">
             {{ $appearance['role'] }}
         </p>
 
-        <p class="mt-4 text-base leading-7 text-ink">
+        <p class="mt-4 type-body text-ink">
             {{ $appearance['summary'] }}
         </p>
 
         <div class="mt-5 flex flex-wrap gap-2" aria-label="Topik">
             @foreach ($appearance['topics'] as $topic)
-                <span class="rounded-full border border-line bg-paper px-2.5 py-1 text-xs font-medium text-ink">
+                <span class="rounded-full border border-line bg-paper px-2.5 py-1 type-meta text-ink">
                     {{ $topic }}
                 </span>
             @endforeach
         </div>
 
         @if (! empty($appearance['sourceNote']))
-            <p class="mt-5 border-l-2 border-slate-200 pl-3 text-xs leading-6 text-slate-500">
+            <p class="mt-5 border-l-2 border-slate-200 pl-3 type-support text-slate-500">
                 {{ $appearance['sourceNote'] }}
             </p>
         @endif
