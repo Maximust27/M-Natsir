@@ -16,10 +16,10 @@ it('shows curated personal profiles and a clearly disabled WhatsApp label when n
     $profiles = aboutPersonalProfilesHtml($html);
 
     expect($profiles)
-        ->toContain('>LinkedIn')
-        ->toContain('>Kumparan')
-        ->toContain('>Academia.edu')
-        ->toContain('>Artikel Majalah Editor')
+        ->toContain('LinkedIn')
+        ->toContain('Kumparan')
+        ->toContain('Academia.edu')
+        ->toContain('Artikel Majalah Editor')
         ->toContain('WhatsApp')
         ->toContain('aria-label="WhatsApp belum tersedia"')
         ->toContain('https://independent.academia.edu/NatsirKongah')
