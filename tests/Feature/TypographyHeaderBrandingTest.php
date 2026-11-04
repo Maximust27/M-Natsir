@@ -80,10 +80,11 @@ it('enlarges every topic hub card while preserving its crawlable link', function
     expect($html)
         ->toContain('id="knowledge-pillars-heading"')
         ->toContain('Peta Kajian')
-        ->toContain('text-4xl font-medium')
-        ->toContain('text-2xl font-semibold')
-        ->toContain('mt-4 text-base leading-[1.7]')
-        ->toContain('pt-5 text-sm font-bold');
+        ->toContain('type-eyebrow text-accent')
+        ->toContain('type-section-title mt-3 text-ink')
+        ->toContain('type-card-title text-ink')
+        ->toContain('type-body mt-4 text-ink')
+        ->toContain('type-action mt-auto inline-flex min-h-11');
 
     foreach (\App\Support\Content\TopicCatalog::all() as $topic) {
         expect($html)->toContain('href="'.route('topics.show', ['slug' => $topic['slug']]).'"');

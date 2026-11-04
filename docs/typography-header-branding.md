@@ -3,10 +3,10 @@
 Perubahan ini dibuat **dari branch `feat/seo-topic-hubs`**, tanpa mengambil PR #12 lama atau perubahan fase lain pada `main`.
 
 ## Hierarki ukuran
-- Keterangan, label kategori, meta, eyebrow: **14 px** (Tailwind `text-xs`).
-- Navbar, tombol, filter, link kecil: **16 px** (`text-sm`).
-- Teks narasi utama dan ringkasan kartu: **18 px** (`text-base`).
-- Teks pengantar, kutipan, dan lead: **20–24 px**.
+- Keterangan, metadata dan label input: **14 px** (`type-meta`); label section: **16 px** (`type-eyebrow`).
+- Navbar, tombol, filter, link: **16 px** (`type-action`).
+- Teks narasi utama dan ringkasan kartu: **18 px** (`type-body`).
+- Teks pengantar: **20–22 px** (`type-lead`); kutipan: **20 px** (`type-quote`).
 - Judul tetap memakai Newsreader, body dan navigasi Plus Jakarta Sans, sedangkan metadata JetBrains Mono.
 - Teks dengan utilitas warna `text-slate-600`/`text-slate-700` di view diganti menjadi `text-ink`; warna teks sekunder `text-slate-500` dipergelap sehingga label tetap jelas pada latar terang.
 
@@ -36,3 +36,7 @@ Hanya memperbaiki copy dan layout homepage serta tautan footer. Fitur admin/data
 - Ukuran H1 desktop disesuaikan sekitar 47–54px dengan lebar yang baru agar pemenggalan kata menjadi lebih seimbang.
 - Deskripsi tetap lebih sempit, maksimal 34–39rem, untuk menjaga keterbacaan dan menghindari area wajah dalam foto.
 - Pada layar mobile/tablet, foto tetap berada di atas teks. Periksa ulang pada browser dengan ukuran layar dan zoom berbeda sebelum merge.
+
+## Kontrak lintas halaman
+
+Seluruh elemen konten kini mengikuti panduan pusat di [Sistem Tipografi](design-system-typography.md). Ukuran judul section **36–42 px** dan judul kartu **26–30 px** berlaku di Home, Articles, Library, Media, About, Topic dan halaman lainnya; bukan hanya Peta Kajian.
