@@ -30,3 +30,9 @@ Perubahan ini dibuat **dari branch `feat/seo-topic-hubs`**, tanpa mengambil PR #
 - Link **Contact di footer** diganti **Admin Page**, sementara diarahkan ke `/#`; **belum ada login/admin route**. Contact di header dan route lama belum diubah.
 
 Hanya memperbaiki copy dan layout homepage serta tautan footer. Fitur admin/database masih menunggu tahap berikutnya.
+
+## Penyempurnaan lebar judul hero
+- Pada desktop, lebar judul diperluas bertahap menjadi 38rem (laptop), 49rem (desktop) dan 58rem (layar lebar). Pembatas lama 15ch dihapus agar headline tidak menumpuk pada sisi kiri.
+- Ukuran H1 desktop disesuaikan sekitar 47–54px dengan lebar yang baru agar pemenggalan kata menjadi lebih seimbang.
+- Deskripsi tetap lebih sempit, maksimal 34–39rem, untuk menjaga keterbacaan dan menghindari area wajah dalam foto.
+- Pada layar mobile/tablet, foto tetap berada di atas teks. Periksa ulang pada browser dengan ukuran layar dan zoom berbeda sebelum merge.

@@ -66,7 +66,11 @@ it('renders the new learning-focused hero headline without covering the portrait
         ->toContain('ruang belajar bersama M. Natsir Kongah')
         ->toContain('rujukan sumber asli yang dapat ditelusuri')
         ->toContain('sm:aspect-[2/1] lg:absolute')
-        ->toContain('lg:max-w-[34rem]')
+        ->toContain('lg:max-w-[38rem]')
+        ->toContain('xl:max-w-[49rem]')
+        ->toContain('2xl:max-w-[58rem]')
+        ->toContain('lg:max-w-none')
+        ->toContain('lg:max-w-[34rem] xl:max-w-[39rem]')
         ->not->toContain('“Membaca jejak transaksi, menyingkap arsitektur kejahatan keuangan.”');
 });
 

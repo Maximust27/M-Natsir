@@ -4,8 +4,9 @@
         aria-labelledby="home-hero-title"
         data-home-hero
     >
-        {{-- On phones and tablets the portrait sits above the copy, never behind text.
-             On desktop a narrow left content column protects the face on the right. --}}
+        {{-- On phones and tablets the portrait stays above the copy.
+             On desktop the wide headline reaches toward the center, while narrower body copy
+             and the right-side portrait preserve a clear reading/portrait separation. --}}
         <div class="relative overflow-hidden bg-paper lg:min-h-[calc(100svh-5rem)]">
             <img
                 src="{{ asset('images/home-hero.jpeg') }}"
@@ -19,17 +20,17 @@
             <div class="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-white/95 via-white/70 to-transparent lg:block xl:from-white/90 xl:via-white/45"></div>
 
             <div class="site-container relative z-10 flex items-center lg:min-h-[calc(100svh-5rem)]">
-                <div class="w-full py-10 sm:py-12 lg:max-w-[34rem] lg:py-16 xl:max-w-[39rem]">
+                <div class="w-full py-10 sm:py-12 lg:max-w-[38rem] lg:py-16 xl:max-w-[49rem] 2xl:max-w-[58rem]">
                     <h1
                         id="home-hero-title"
-                        class="max-w-[19ch] font-serif text-[2.5rem] font-semibold leading-[1.06] tracking-[-0.035em] text-ink sm:text-[3.2rem] lg:max-w-[15ch] lg:text-[3.05rem] xl:text-[3.55rem]"
+                        class="max-w-[22ch] font-serif text-[2.5rem] font-semibold leading-[1.07] tracking-[-0.035em] text-ink sm:max-w-[26ch] sm:text-[3.2rem] lg:max-w-none lg:text-[2.95rem] xl:text-[3.15rem] 2xl:text-[3.35rem]"
                         data-home-hero-item
                     >
                         MEMBONGKAR PENCUCIAN UANG DAN KEJAHATAN KERAH PUTIH
                     </h1>
 
                     <p
-                        class="mt-6 max-w-[62ch] text-base leading-[1.75] text-ink sm:text-lg sm:leading-[1.75]"
+                        class="mt-6 max-w-[62ch] text-base leading-[1.75] text-ink sm:text-lg sm:leading-[1.75] lg:max-w-[34rem] xl:max-w-[39rem]"
                         data-home-hero-item
                     >
                         Analisis terkurasi dan perpustakaan intelijen keuangan sebagai ruang belajar bersama M. Natsir Kongah. Pelajari kasus pencucian uang profesional, jejak transaksi, kerangka regulasi, dan tantangan kejahatan finansial melalui artikel serta rujukan sumber asli yang dapat ditelusuri.
