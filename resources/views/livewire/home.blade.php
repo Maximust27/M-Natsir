@@ -30,7 +30,7 @@
                     </h1>
 
                     <p
-                        class="mt-6 max-w-[62ch] text-base leading-[1.75] text-ink sm:text-lg sm:leading-[1.75] lg:max-w-[34rem] xl:max-w-[39rem]"
+                        class="type-lead mt-6 max-w-[62ch] text-ink lg:max-w-[34rem] xl:max-w-[39rem]"
                         data-home-hero-item
                     >
                         Analisis terkurasi dan perpustakaan intelijen keuangan sebagai ruang belajar bersama M. Natsir Kongah. Pelajari kasus pencucian uang profesional, jejak transaksi, kerangka regulasi, dan tantangan kejahatan finansial melalui artikel serta rujukan sumber asli yang dapat ditelusuri.
@@ -54,11 +54,11 @@
 
 
     <section class="site-container border-b border-line py-14 lg:py-18" aria-labelledby="knowledge-pillars-heading">
-        <p class="font-mono text-sm font-semibold uppercase tracking-[0.08em] text-accent">Peta Kajian</p>
-        <h2 id="knowledge-pillars-heading" class="mt-3 font-serif text-4xl font-medium leading-[1.12] tracking-[-0.03em] text-ink sm:text-[2.6rem]">
+        <p class="type-eyebrow text-accent">Peta Kajian</p>
+        <h2 id="knowledge-pillars-heading" class="type-section-title mt-3 text-ink">
             Mulai dari topik utama
         </h2>
-        <p class="mt-4 max-w-4xl text-base leading-8 text-ink">
+        <p class="type-body mt-4 max-w-4xl text-ink">
             Pilih bidang kajian untuk membaca konteks, pertanyaan kunci, dan rujukan publikasi asli yang saling terkait.
         </p>
         <nav class="mt-9 grid gap-5 md:grid-cols-3" aria-label="Topik kajian utama">
@@ -68,9 +68,9 @@
                     wire:navigate
                     class="group flex h-full flex-col border border-line bg-white p-6 transition hover:border-slate-400 hover:shadow-sm sm:p-7"
                 >
-                    <h3 class="font-serif text-2xl font-semibold leading-[1.15] tracking-[-0.025em] text-ink group-hover:text-accent sm:text-[1.85rem]">{{ $topic['heading'] }}</h3>
-                    <p class="mt-4 text-base leading-[1.7] text-ink">{{ $topic['teaser'] }}</p>
-                    <span class="mt-auto inline-flex min-h-11 items-center pt-5 text-sm font-bold text-ink group-hover:text-accent">Jelajahi topik →</span>
+                    <h3 class="type-card-title text-ink group-hover:text-accent">{{ $topic['heading'] }}</h3>
+                    <p class="type-body mt-4 text-ink">{{ $topic['teaser'] }}</p>
+                    <span class="type-action mt-auto inline-flex min-h-11 items-center pt-5 font-bold text-ink group-hover:text-accent">Jelajahi topik →</span>
                 </a>
             @endforeach
         </nav>
@@ -94,13 +94,13 @@
                             </x-ui.badge>
                         </div>
 
-                        <p class="mt-4 font-mono text-xs font-medium uppercase tracking-[0.045em] text-slate-500">
+                        <p class="type-meta mt-4 font-mono font-medium uppercase tracking-[0.045em] text-slate-500">
                             {{ $writing['source'] }}
                             <span class="mx-1 text-slate-300" aria-hidden="true">•</span>
                             {{ $writing['date'] }}
                         </p>
 
-                        <h3 class="mt-5 text-lg font-semibold leading-[1.45] tracking-[-0.02em] text-black lg:text-xl">
+                        <h3 class="type-card-title mt-5 text-black">
                             <a
                                 href="{{ $writing['url'] }}"
                                 target="_blank"
@@ -111,7 +111,7 @@
                             </a>
                         </h3>
 
-                        <p class="mt-5 line-clamp-5 text-base leading-7 text-ink">
+                        <p class="type-body mt-5 line-clamp-5 text-ink">
                             {{ $writing['excerpt'] }}
                         </p>
                     </div>
@@ -120,7 +120,7 @@
                         href="{{ $writing['url'] }}"
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="mt-auto inline-flex min-h-11 items-center gap-2 self-start rounded-sm pt-7 text-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                        class="type-action mt-auto inline-flex min-h-11 items-center gap-2 self-start rounded-sm pt-7 font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                     >
                         {{ $writing['accessLabel'] }}
                         <span aria-hidden="true">→</span>
@@ -134,17 +134,17 @@
         <div class="grid items-center gap-12 lg:grid-cols-[22rem_1fr] lg:gap-20 xl:gap-28">
             <x-ui.card :interactive="false" class="mx-auto flex aspect-[0.72] w-full max-w-72 flex-col justify-between px-8 py-9 sm:max-w-80">
                 <div>
-                    <span class="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                    <span class="type-meta font-mono font-semibold uppercase tracking-[0.12em] text-slate-500">
                         Primary Source
                     </span>
-                    <h3 class="mt-8 font-serif text-3xl font-medium leading-[1.08] tracking-[-0.03em] text-black sm:text-[2.15rem]">
+                    <h3 class="type-card-title mt-8 text-black">
                         {{ $spotlight['title'] }}
                     </h3>
                 </div>
 
                 <div class="border-t border-line pt-6">
-                    <span class="block text-sm font-semibold text-ink">{{ $spotlight['source'] }}</span>
-                    <span class="mt-1 block font-mono text-xs uppercase tracking-[0.05em] text-slate-500">{{ $spotlight['date'] }}</span>
+                    <span class="type-support block font-semibold text-ink">{{ $spotlight['source'] }}</span>
+                    <span class="type-meta mt-1 block font-mono uppercase tracking-[0.05em] text-slate-500">{{ $spotlight['date'] }}</span>
                 </div>
             </x-ui.card>
 
@@ -156,7 +156,7 @@
                     :description="$spotlight['excerpt']"
                 />
 
-                <p class="mt-6 max-w-[72ch] text-sm leading-7 text-slate-500">
+                <p class="type-body mt-6 max-w-[72ch] text-slate-500">
                     Spotlight ini menggunakan publikasi primer yang dapat dibuka langsung pada sumber aslinya—bukan judul buku atau riset placeholder.
                 </p>
 
@@ -193,7 +193,7 @@
                 <a
                     href="{{ route('about') }}"
                     wire:navigate
-                    class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                    class="type-action mt-8 inline-flex min-h-11 items-center gap-2 rounded-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
                 >
                     Baca Profil Lengkap
                     <span aria-hidden="true">→</span>

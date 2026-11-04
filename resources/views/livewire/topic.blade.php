@@ -9,15 +9,15 @@
                 <span aria-current="page">{{ $topic['heading'] }}</span>
             </nav>
 
-            <p class="font-mono text-xs font-semibold uppercase tracking-[0.1em] text-accent">
+            <p class="type-eyebrow text-accent">
                 Peta Bacaan &amp; Kajian
             </p>
 
-            <h1 class="mt-4 max-w-5xl font-serif text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-ink sm:text-5xl lg:text-[3.35rem]">
+            <h1 class="type-page-title mt-4 max-w-5xl text-ink">
                 {{ $topic['heading'] }}
             </h1>
 
-            <p class="mt-6 max-w-3xl text-lg leading-8 text-ink">
+            <p class="type-lead mt-6 max-w-3xl text-ink">
                 {{ $topic['teaser'] }}
             </p>
 
@@ -27,7 +27,7 @@
                 @endforeach
             </div>
 
-            <p class="mt-7 max-w-4xl border-l-2 border-amber-500 bg-stone-50 px-5 py-4 text-sm leading-7 text-ink">
+            <p class="type-body mt-7 max-w-4xl border-l-2 border-amber-500 bg-stone-50 px-5 py-4 text-ink">
                 Halaman ini adalah pengantar dan peta bacaan yang disusun dari tema publikasi yang tercatat di situs.
                 Kutipan serta rincian tulisan tetap harus diperiksa melalui sumber aslinya; halaman ini bukan nasihat hukum.
                 <a href="{{ route('about') }}" wire:navigate class="font-semibold text-ink underline underline-offset-4">Lihat profil dan rujukan penulis</a>.
@@ -37,16 +37,16 @@
 
     <section class="site-container border-b border-line py-14 lg:py-20" aria-labelledby="topic-focus-heading">
         <div class="max-w-4xl">
-            <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">Cara Membaca Topik</p>
-            <h2 id="topic-focus-heading" class="mt-3 font-serif text-3xl font-medium tracking-[-0.03em] text-ink">Tiga pertanyaan untuk didalami</h2>
+            <p class="type-eyebrow text-accent">Cara Membaca Topik</p>
+            <h2 id="topic-focus-heading" class="type-section-title mt-3 text-ink">Tiga pertanyaan untuk didalami</h2>
         </div>
 
         <div class="mt-9 grid gap-5 md:grid-cols-3">
             @foreach ($topic['readingFocus'] as $index => $focus)
                 <article class="border border-line bg-white p-6 sm:p-7">
-                    <span class="font-mono text-xs font-semibold text-accent">0{{ $index + 1 }}</span>
-                    <h3 class="mt-3 text-lg font-semibold leading-7 text-ink">{{ $focus['title'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-ink">{{ $focus['description'] }}</p>
+                    <span class="type-meta font-mono font-semibold text-accent">0{{ $index + 1 }}</span>
+                    <h3 class="type-subheading mt-3 text-ink">{{ $focus['title'] }}</h3>
+                    <p class="type-body mt-3 text-ink">{{ $focus['description'] }}</p>
                 </article>
             @endforeach
         </div>
@@ -55,11 +55,11 @@
     <section class="site-container border-b border-line py-14 lg:py-20" aria-labelledby="topic-articles-heading">
         <div class="flex flex-wrap items-end justify-between gap-5">
             <div>
-                <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">Rujukan &amp; Publikasi</p>
-                <h2 id="topic-articles-heading" class="mt-3 font-serif text-3xl font-medium tracking-[-0.03em] text-ink">
+                <p class="type-eyebrow text-accent">Rujukan &amp; Publikasi</p>
+                <h2 id="topic-articles-heading" class="type-section-title mt-3 text-ink">
                     Bacaan terkait {{ $topic['heading'] }}
                 </h2>
-                <p class="mt-3 max-w-3xl text-sm leading-7 text-ink">
+                <p class="type-body mt-3 max-w-3xl text-ink">
                     {{ count($articles) }} rujukan dari katalog. Setiap kartu mencantumkan asal publikasi dan membuka sumber eksternal secara langsung.
                 </p>
             </div>
@@ -78,7 +78,7 @@
             @forelse ($articles as $article)
                 <x-article.card :article="$article" />
             @empty
-                <p class="border border-line p-7 text-sm leading-7 text-ink">
+                <p class="type-body border border-line p-7 text-ink">
                     Belum ada publikasi yang tercatat dalam kategori ini.
                 </p>
             @endforelse
@@ -87,7 +87,7 @@
 
     <section class="site-container py-14 lg:py-20" aria-labelledby="topic-next-heading">
         <div class="flex flex-wrap items-center justify-between gap-4">
-            <h2 id="topic-next-heading" class="font-serif text-3xl font-medium tracking-[-0.03em] text-ink">
+            <h2 id="topic-next-heading" class="type-section-title text-ink">
                 Lanjutkan penelusuran
             </h2>
             <a
@@ -106,9 +106,9 @@
                     wire:navigate
                     class="group block border border-line bg-white p-6 transition hover:border-slate-400 hover:shadow-sm"
                 >
-                    <h3 class="font-serif text-xl font-medium text-ink group-hover:text-accent">{{ $related['heading'] }}</h3>
-                    <p class="mt-3 text-sm leading-7 text-ink">{{ $related['teaser'] }}</p>
-                    <span class="mt-4 inline-block text-xs font-semibold text-ink">Buka peta bacaan →</span>
+                    <h3 class="type-card-title text-ink group-hover:text-accent">{{ $related['heading'] }}</h3>
+                    <p class="type-body mt-3 text-ink">{{ $related['teaser'] }}</p>
+                    <span class="type-meta mt-4 inline-block font-semibold text-ink">Buka peta bacaan →</span>
                 </a>
             @endforeach
         </nav>
