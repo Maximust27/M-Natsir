@@ -35,17 +35,24 @@
                     Jakarta, Indonesia
                 </div>
 
-                <div class="mt-7 flex flex-wrap gap-x-6 gap-y-3">
+                <div class="mt-7 flex flex-wrap gap-x-5 gap-y-3" aria-label="Profil dan kontak personal">
                     @foreach ($profiles as $profile)
-                        <a
-                            href="{{ $profile['url'] }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex min-h-10 items-center gap-2 rounded-sm text-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                        >
-                            {{ $profile['label'] }}
-                            <span aria-hidden="true">→</span>
-                        </a>
+                        @if (filled($profile['url']))
+                            <a
+                                href="{{ $profile['url'] }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex min-h-11 items-center gap-2 rounded-sm text-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                            >
+                                {{ $profile['label'] }}
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        @else
+                            <span class="inline-flex min-h-11 items-center gap-2 rounded-sm border border-line px-3 text-sm font-semibold text-ink" title="Tautan WhatsApp belum dikonfigurasi" aria-label="WhatsApp belum tersedia">
+                                {{ $profile['label'] }}
+                                <span class="text-xs font-normal" aria-hidden="true">(segera tersedia)</span>
+                            </span>
+                        @endif
                     @endforeach
                 </div>
             </div>
