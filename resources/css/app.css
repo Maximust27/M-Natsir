@@ -10,6 +10,22 @@
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
+    /* Readable hierarchy: captions 14px, UI 16px, body 18px, leads 20px. */
+    --text-xs: 0.875rem;
+    --text-xs--line-height: 1.5rem;
+    --text-sm: 1rem;
+    --text-sm--line-height: 1.625rem;
+    --text-base: 1.125rem;
+    --text-base--line-height: 1.875rem;
+    --text-lg: 1.25rem;
+    --text-lg--line-height: 2rem;
+
+    /* Secondary content remains dark and legible against paper/white. */
+    --color-slate-400: #475569;
+    --color-slate-500: #253044;
+    --color-slate-600: #0e1c2f;
+    --color-slate-700: #0e1c2f;
+
     --color-paper: #fbfbfa;
     --color-ink: #0e1c2f;
     --color-line: #dfe5eb;
@@ -24,10 +40,10 @@
     body {
         margin: 0;
         background: var(--color-paper);
-        color: #3f4650;
+        color: var(--color-ink);
         font-family: var(--font-sans);
-        font-size: 1rem;
-        line-height: 1.65;
+        font-size: var(--text-base);
+        line-height: 1.7;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }

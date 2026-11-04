@@ -20,7 +20,7 @@
     </h2>
 
     @if ($description)
-        <p class="mt-5 max-w-[72ch] text-base leading-8 text-slate-600">
+        <p class="mt-5 max-w-[72ch] text-base leading-8 text-ink">
             {{ $description }}
         </p>
     @endif

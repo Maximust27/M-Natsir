@@ -8,7 +8,7 @@
             >
                 M. NATSIR KONGAH
             </a>
-            <p class="mt-5 max-w-sm text-[15px] leading-7 text-slate-600">
+            <p class="mt-5 max-w-sm text-base leading-7 text-ink">
                 Pembelajar Anti Pencucian Uang &amp; Kejahatan Keuangan Terorganisir.
             </p>
             <p class="mt-7 max-w-lg text-xs leading-6 text-slate-500">
@@ -20,7 +20,7 @@
             <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-ink">
                 Knowledge Pillars
             </h2>
-            <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
+            <div class="mt-5 grid gap-2 text-sm leading-6 text-ink">
                 <a href="{{ route('topics.show', ['slug' => 'anti-pencucian-uang']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Anti-Money Laundering</a>
                 <a href="{{ route('topics.show', ['slug' => 'pencucian-uang-profesional']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Professional Money Laundering</a>
                 <a href="{{ route('topics.show', ['slug' => 'intelijen-keuangan']) }}" wire:navigate class="min-h-8 transition hover:text-ink">Financial Intelligence</a>
@@ -33,7 +33,7 @@
             <h2 class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-ink">
                 Navigasi Situs
             </h2>
-            <div class="mt-5 grid gap-2 text-sm leading-6 text-slate-600">
+            <div class="mt-5 grid gap-2 text-sm leading-6 text-ink">
                 <a href="{{ route('articles') }}" wire:navigate class="min-h-8 transition hover:text-ink">Articles Archive</a>
                 <a href="{{ route('library') }}" wire:navigate class="min-h-8 transition hover:text-ink">Sources Library</a>
                 <a href="{{ route('about') }}" wire:navigate class="min-h-8 transition hover:text-ink">About</a>

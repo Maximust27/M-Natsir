@@ -12,9 +12,9 @@
     ];
 
     $sizes = [
-        'sm' => 'min-h-10 px-4 py-2 text-sm',
-        'md' => 'min-h-11 px-5 py-2.5 text-sm',
-        'lg' => 'min-h-12 px-6 py-3 text-sm sm:text-[15px]',
+        'sm' => 'min-h-11 px-4 py-2 text-sm',
+        'md' => 'min-h-12 px-5 py-2.5 text-sm',
+        'lg' => 'min-h-13 px-6 py-3 text-sm sm:text-base',
     ];
 
     $classes = [

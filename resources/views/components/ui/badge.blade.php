@@ -4,7 +4,7 @@
 
 @php
     $variants = [
-        'neutral' => 'bg-slate-100 text-slate-700',
+        'neutral' => 'bg-slate-100 text-ink',
         'amber' => 'bg-amber-100 text-amber-900',
         'teal' => 'bg-teal-100 text-teal-900',
         'indigo' => 'bg-indigo-100 text-indigo-900',
