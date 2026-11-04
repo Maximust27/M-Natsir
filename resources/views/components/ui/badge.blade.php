@@ -13,7 +13,7 @@
 
 <span
     {{ $attributes->class([
-        'inline-flex items-center rounded-full px-3 py-1.5 font-mono text-xs font-semibold leading-none tracking-[0.035em]',
+        'type-meta inline-flex items-center rounded-full px-3 py-1.5 font-mono',
         $variants[$variant] ?? $variants['neutral'],
     ]) }}
 >

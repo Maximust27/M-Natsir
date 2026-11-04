@@ -12,13 +12,13 @@
     ];
 
     $sizes = [
-        'sm' => 'min-h-11 px-4 py-2 text-sm',
-        'md' => 'min-h-12 px-5 py-2.5 text-sm',
-        'lg' => 'min-h-13 px-6 py-3 text-sm sm:text-base',
+        'sm' => 'min-h-11 px-4 py-2',
+        'md' => 'min-h-12 px-5 py-2.5',
+        'lg' => 'min-h-13 px-6 py-3',
     ];
 
     $classes = [
-        'inline-flex items-center justify-center gap-2 rounded-sm font-sans font-semibold leading-none transition duration-200',
+        'type-action inline-flex items-center justify-center gap-2 rounded-sm font-sans transition duration-200',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink',
         $variants[$variant] ?? $variants['primary'],
         $sizes[$size] ?? $sizes['md'],
