@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\SeoController;
 use App\Livewire\About;
 use App\Livewire\Articles;
@@ -45,3 +47,14 @@ Route::get('/contact/cv', function () {
 })->name('contact.cv.download');
 
 Route::livewire('/contact', Contact::class)->name('contact');
+
+// Authentication remains session-based. There is deliberately no registration route.
+Route::prefix('admin')->name('admin.')->middleware('admin.no-cache')->group(function (): void {
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:admin-login')->name('authenticate');
+
+    Route::middleware(['auth', 'admin'])->group(function (): void {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+    });
+});
