@@ -98,7 +98,7 @@ it('replaces only the footer contact link with an admin placeholder', function (
     $footer = $match[0] ?? '';
 
     expect($footer)
-        ->toContain('href="/#"')
+        ->toContain('href="'.route('admin.login').'"')
         ->toContain('Admin Page')
         ->not->toContain('>Contact</a>');
 

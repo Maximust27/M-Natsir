@@ -16,6 +16,7 @@ class PreventAdminCaching
         $response = $next($request);
         $response->headers->set('Cache-Control', 'private, no-store, no-cache, max-age=0');
         $response->headers->set('Pragma', 'no-cache');
+        $response->headers->set('X-Robots-Tag', 'noindex, nofollow');
 
         return $response;
     }
