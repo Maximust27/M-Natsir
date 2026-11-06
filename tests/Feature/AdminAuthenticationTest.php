@@ -56,7 +56,7 @@ it('authenticates a real administrator with email and password', function () {
     $this->get(route('admin.dashboard'))
         ->assertOk()
         ->assertSee('Ruang Pengelolaan Konten')
-        ->assertSee('staff', false)
+        ->assertSee($admin->name)
         ->assertSee('Artikel')
         ->assertSee('Library')
         ->assertSee('Media')
@@ -103,7 +103,7 @@ it('invalidates the authenticated session when logging out', function () {
 
     $this->assertGuest();
     $this->get(route('admin.dashboard'))->assertRedirect(route('admin.login'));
-    $this->get(route('admin.logout'))->assertMethodNotAllowed();
+    $this->get(route('admin.logout'))->assertStatus(405);
 });
 
 it('limits repetitive login attempts by identity and IP', function () {
