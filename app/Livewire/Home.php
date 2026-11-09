@@ -15,7 +15,7 @@ class Home extends Component
     public function render(): View
     {
         $spotlight = ArticleCatalog::findByTitle('Campaign funding: Lesson from Watergate')
-            ?? ArticleCatalog::featured(1)[0];
+            ?? (ArticleCatalog::featured(1)[0] ?? null);
 
         return view('livewire.home', [
             'featuredWritings' => ArticleCatalog::featured(3),

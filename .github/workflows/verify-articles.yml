@@ -12,6 +12,7 @@ on:
     branches:
       - main
       - feat/seo-topic-hubs
+      - feat/typography-header-brand
 
 jobs:
   test:

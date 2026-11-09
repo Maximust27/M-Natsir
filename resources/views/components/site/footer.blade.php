@@ -38,7 +38,7 @@
                 <a href="{{ route('library') }}" wire:navigate class="type-action flex min-h-11 items-center transition hover:text-accent">Sources Library</a>
                 <a href="{{ route('about') }}" wire:navigate class="type-action flex min-h-11 items-center transition hover:text-accent">About</a>
                 <a href="{{ route('media') }}" wire:navigate class="type-action flex min-h-11 items-center transition hover:text-accent">Media &amp; Appearances</a>
-                <a href="/#" class="type-action flex min-h-11 items-center transition hover:text-accent" aria-label="Admin Page (segera hadir)">Admin Page</a>
+                <a href="{{ route('admin.login') }}" class="type-action flex min-h-11 items-center transition hover:text-accent">Admin Page</a>
             </div>
         </div>
     </div>
