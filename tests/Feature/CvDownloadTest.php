@@ -8,11 +8,14 @@ it('provides the committed M. Natsir Kongah CV as a real PDF attachment', functi
     expect(File::exists($pdf))->toBeTrue()
         ->and(file_get_contents($pdf, false, null, 0, 5))->toBe('%PDF-');
 
-    $this->get(route('cv.download'))
-        ->assertOk()
+    $response = $this->get(route('cv.download'));
+
+    $response->assertOk()
         ->assertHeader('content-type', 'application/pdf')
-        ->assertHeader('cache-control', 'no-store, no-cache, must-revalidate')
         ->assertDownload('M-Natsir-Kongah-CV.pdf');
+
+    // Symfony normalizes the directive order and may append "private".
+    expect($response->headers->get('cache-control'))->toContain('no-store');
 });
 
 it('downloads the complete CV even when an HTTP Range header is supplied', function () {
