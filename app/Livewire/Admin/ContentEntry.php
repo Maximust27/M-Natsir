@@ -707,22 +707,58 @@ class ContentEntry extends Component
     {
         $this->assertAdmin();
 
+        $counts = [
+            'articles' => [
+                'published' => Article::query()->where('is_published', true)->count(),
+                'draft' => Article::query()->where('is_published', false)->count(),
+                'trash' => Article::onlyTrashed()->count(),
+            ],
+            'library' => [
+                'published' => LibraryResource::query()->where('is_published', true)->count(),
+                'draft' => LibraryResource::query()->where('is_published', false)->count(),
+                'trash' => LibraryResource::onlyTrashed()->count(),
+            ],
+            'media' => [
+                'published' => MediaAppearance::query()->where('is_published', true)->count(),
+                'draft' => MediaAppearance::query()->where('is_published', false)->count(),
+                'trash' => MediaAppearance::onlyTrashed()->count(),
+            ],
+        ];
+
+        $records = collect();
+        $totalResults = 0;
+        $totalPages = 1;
+        $details = null;
+        $editingRecord = null;
+
+        if ($this->selected !== '' && array_key_exists($this->selected, self::MODULES)) {
+            $query = $this->filteredQuery();
+            $totalResults = (clone $query)->count();
+            $totalPages = max(1, (int) ceil($totalResults / self::PAGE_SIZE));
+            $this->page = max(1, min($this->page, $totalPages));
+
+            $records = $query->orderBy('sort_order')->orderBy('id')
+                ->skip(($this->page - 1) * self::PAGE_SIZE)
+                ->take(self::PAGE_SIZE)
+                ->get();
+
+            if ($this->viewingId !== null) {
+                $details = $this->recordQuery()->withTrashed()->find($this->viewingId);
+            }
+
+            if ($this->editingId !== null) {
+                $editingRecord = $this->recordQuery()->find($this->editingId);
+            }
+        }
+
         return view('livewire.admin.content-entry', [
             'modules' => self::MODULES,
-            'counts' => [
-                'articles' => [
-                    'published' => Article::query()->where('is_published', true)->count(),
-                    'draft' => Article::query()->where('is_published', false)->count(),
-                ],
-                'library' => [
-                    'published' => LibraryResource::query()->where('is_published', true)->count(),
-                    'draft' => LibraryResource::query()->where('is_published', false)->count(),
-                ],
-                'media' => [
-                    'published' => MediaAppearance::query()->where('is_published', true)->count(),
-                    'draft' => MediaAppearance::query()->where('is_published', false)->count(),
-                ],
-            ],
+            'counts' => $counts,
+            'records' => $records,
+            'totalResults' => $totalResults,
+            'totalPages' => $totalPages,
+            'details' => $details,
+            'editingRecord' => $editingRecord,
             'articleCategories' => self::ARTICLE_CATEGORIES,
             'libraryCollections' => self::COLLECTIONS,
             'libraryTypes' => self::LIBRARY_TYPES,
@@ -731,4 +767,5 @@ class ContentEntry extends Component
             'mediaCategories' => self::MEDIA_CATEGORIES,
         ]);
     }
+
 }
