@@ -57,7 +57,7 @@ it('authenticates a real administrator with email and password', function () {
         ->assertSee('Artikel')
         ->assertSee('Library')
         ->assertSee('Media')
-        ->assertSee('Pengelolaan segera hadir')
+        ->assertSee('Pilih salah satu dari tiga kartu')
         ->assertSee('type-card-title', false)
         ->assertSee('meta name="robots" content="noindex, nofollow"', false);
 });

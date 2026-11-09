@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\LibraryResource;
 
+use App\Models\LibraryResource;
+
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -145,7 +147,7 @@ class Library extends Component
      */
     private function institutions(): array
     {
-        return [
+        $institutions = [
             'all' => 'Semua institusi / sumber',
             'academia' => 'Academia.edu',
             'bumn-watch' => 'BUMN Watch',
@@ -156,6 +158,14 @@ class Library extends Component
             'star' => 'StAR / World Bank',
             'jdih-bpk' => 'JDIH BPK',
         ];
+
+        // Keep the public filter usable for custom institutions entered by admin.
+        foreach (LibraryResource::query()->where('is_published', true)
+            ->distinct()->get(['institution', 'institution_label']) as $resource) {
+            $institutions[$resource->institution] ??= $resource->institution_label;
+        }
+
+        return $institutions;
     }
 
     /**

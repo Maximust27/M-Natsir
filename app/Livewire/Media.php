@@ -88,6 +88,10 @@ class Media extends Component
                 'label' => 'Talks & Panels',
                 'classes' => 'bg-teal-50 text-teal-800 hover:bg-teal-100',
             ],
+            'case-coverage' => [
+                'label' => 'Case Coverage',
+                'classes' => 'bg-amber-50 text-amber-900 hover:bg-amber-100',
+            ],
         ];
 
         foreach ($definitions as $key => &$definition) {
