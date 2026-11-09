@@ -74,7 +74,7 @@
                         Catatan afiliasi &amp; kredibilitas
                     </h2>
                     <p class="type-body mt-2 max-w-[95ch] text-ink">
-                        Halaman ini adalah profil personal berbasis sumber publik. Riwayat afiliasi dan aktivitas profesional diringkas secara konservatif dari profil LinkedIn, dokumen PPATK/PPID, rekam pengajaran, serta tulisan yang dipublikasikan di media. Analisis dan opini pada situs ini diposisikan sebagai pandangan personal, bukan pernyataan resmi institusi.
+                        Halaman ini adalah profil personal berbasis sumber publik. Riwayat afiliasi dan aktivitas profesional diringkas secara konservatif dari profil LinkedIn, rekam pengajaran, serta tulisan yang dipublikasikan di media. Analisis dan opini pada situs ini diposisikan sebagai pandangan personal, bukan pernyataan resmi institusi.
                     </p>
                 </div>
             </div>
