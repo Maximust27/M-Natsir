@@ -5,8 +5,8 @@ Branch: `feat/admin-auth-foundation` (berdasarkan `feat/typography-header-brand`
 ## Yang sudah tersedia
 
 - **`/admin/login`**: halaman masuk dengan email, password, tombol, pesan error, CSRF dan `autocomplete` yang sesuai.
-- **`/admin`**: dashboard awal hanya untuk akun admin. Memperlihatkan tiga modul rencana **Artikel, Library, Media** (belum ada CRUD/unggah).
-- **`POST /admin/logout`**: logout melalui form dengan CSRF, menghapus session dan meregenerasi CSRF token.
+- **`/admin`**: dashboard awal hanya untuk akun admin. Menampilkan tiga modul **Artikel, Library, Media** dengan jumlah data yang dibaca langsung dari tabel SQL (belum ada CRUD/unggah).
+- **`POST /admin/logout`**: logout melalui form dengan CSRF, menghapus session dan meregenerasi CSRF token. Kontrol logout serta **Kembali ke website** berada di layout admin; tombol logout tidak diduplikasi di dashboard.
 - Tidak ada halaman / route registrasi.
 - Middleware `auth` + `admin` melindungi dashboard dan semua route admin berikutnya. Akun biasa mendapat HTTP 403.
 - **Perlindungan tambahan:** lima percobaan login per menit per pasangan email/IP; plafon umum per IP, noindex/nofollow, dan no-store HTTP response agar halaman admin tidak tercache.
@@ -23,7 +23,9 @@ Branch: `feat/admin-auth-foundation` (berdasarkan `feat/typography-header-brand`
    npm ci
    npm run build
    php artisan migrate
+   php artisan db:seed --class=ContentSeeder
    ```
+   Data awal **13 Artikel, 22 Library dan 16 Media** diimpor ke MySQL tanpa menyentuh user/admin. Pada setup dengan akun admin yang sudah dibuat, **cukup jalankan migrasi dan `ContentSeeder`**, tidak perlu mengulang `AdminSeeder`.
 2. Tambahkan variabel **sementara** di `.env` lokal (jangan pernah commit `.env`):
    ```dotenv
    ADMIN_SEED_NAME="Pengelola Website"
@@ -61,4 +63,4 @@ Uji tampilannya pada 375px, 768px, dan 1280px, serta zoom 200% untuk aksesibilit
 
 ## Batas lingkup
 
-Ini **fondasi autentikasi saja**: dashboard masih berupa tiga kartu penanda modul. Struktur tabel konten, upload gambar/PDF, CRUD artikel/library/media, filtering editorial kasus, dan CV bukan bagian PR ini. Jangan mengklaim fitur manajemen konten sudah aktif.
+Dashboard kini membaca statistik dari **tiga tabel konten** yang sudah dibuat dan di-seed. Sumber data untuk halaman Home, Articles, Topic, Library dan Media juga sudah pindah ke SQL. **CRUD, upload gambar/PDF, formulir editor, audit perubahan, dan CV belum tersedia**. Panduan migrasi lengkap: `docs/content-database.md`.
