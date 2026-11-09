@@ -78,7 +78,7 @@
                         </div>
                         <div>
                             <label for="article-date" class="{{ $labelClass }}">Tanggal publikasi {{ $editingId ? '(ubah bila perlu)' : '*' }}</label>
-                            <input id="article-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" @required(! $editingId)>
+                            <input id="article-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" {{ $editingId ? '' : 'required' }}>
                             @if ($editingRecord)
                                 <p class="type-support mt-2 text-slate-500">Tanggal sebelumnya: {{ $editingRecord->date_label }}. Kosongkan untuk mempertahankannya.</p>
                             @endif
@@ -199,7 +199,7 @@
                         </div>
                         <div>
                             <label for="media-date" class="{{ $labelClass }}">Tanggal penampilan {{ $editingId ? '(ubah bila perlu)' : '*' }}</label>
-                            <input id="media-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" @required(! $editingId)>
+                            <input id="media-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" {{ $editingId ? '' : 'required' }}>
                             @if ($editingRecord)
                                 <p class="type-support mt-2 text-slate-500">Tanggal sebelumnya: {{ $editingRecord->date_label }}. Kosongkan untuk mempertahankannya.</p>
                             @endif
@@ -319,12 +319,15 @@
                 <fieldset class="min-w-0">
                     <legend class="type-meta mb-3 font-semibold text-ink">Filter status</legend>
                     <div class="flex flex-wrap gap-2" role="group" aria-label="Status konten">
-                        @foreach ([
-                            'all' => ['label' => 'Semua', 'count' => $counts[$selected]['published'] + $counts[$selected]['draft']],
-                            'draft' => ['label' => 'Draf', 'count' => $counts[$selected]['draft']],
-                            'published' => ['label' => 'Terbit', 'count' => $counts[$selected]['published']],
-                            'trash' => ['label' => 'Sampah', 'count' => $counts[$selected]['trash']],
-                        ] as $filter => $definition)
+                        @php
+                            $statusChoices = [
+                                'all' => ['label' => 'Semua', 'count' => $counts[$selected]['published'] + $counts[$selected]['draft']],
+                                'draft' => ['label' => 'Draf', 'count' => $counts[$selected]['draft']],
+                                'published' => ['label' => 'Terbit', 'count' => $counts[$selected]['published']],
+                                'trash' => ['label' => 'Sampah', 'count' => $counts[$selected]['trash']],
+                            ];
+                        @endphp
+                        @foreach ($statusChoices as $filter => $definition)
                             <button
                                 type="button"
                                 wire:key="status-{{ $selected }}-{{ $filter }}"
@@ -381,7 +384,7 @@
                     </p>
                     @if ($selected !== 'articles')
                         <div class="mt-4 flex flex-wrap gap-2">
-                            @foreach ($details->topic_labels ?? $details->topics ?? [] as $topic)
+                            @foreach (($selected === 'library' ? $details->topic_labels : $details->topics) ?? [] as $topic)
                                 <span class="type-meta rounded-full border border-line bg-white px-3 py-1 text-ink">{{ $topic }}</span>
                             @endforeach
                         </div>
@@ -461,8 +464,8 @@
                 <nav class="mt-7 flex flex-wrap items-center justify-between gap-3" aria-label="Navigasi halaman daftar konten">
                     <p class="type-meta text-slate-500">Halaman {{ $page }} dari {{ $totalPages }} · {{ $totalResults }} data</p>
                     <div class="flex gap-2">
-                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page - 1 }})" @disabled($page <= 1)>Sebelumnya</x-ui.button>
-                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page + 1 }})" @disabled($page >= $totalPages)>Berikutnya</x-ui.button>
+                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page - 1 }})" {{ $page <= 1 ? 'disabled' : '' }}>Sebelumnya</x-ui.button>
+                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page + 1 }})" {{ $page >= $totalPages ? 'disabled' : '' }}>Berikutnya</x-ui.button>
                     </div>
                 </nav>
             @endif
