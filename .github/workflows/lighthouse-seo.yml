@@ -54,6 +54,11 @@ jobs:
           cp .env.example .env
           php artisan key:generate
           php artisan config:clear
+          # The public pages now query Article, Library and Media SQL tables.
+          # Run the same content migrations and idempotent seed in this disposable CI DB.
+          touch database/database.sqlite
+          php artisan migrate --force
+          php artisan db:seed --class=ContentSeeder --force
 
       - name: Build production assets and responsive WebP
         run: npm run build

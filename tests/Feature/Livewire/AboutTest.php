@@ -11,9 +11,12 @@ it('renders the about page', function () {
         ->assertSeeLivewire(About::class);
 });
 
-it('exposes verified public profile links', function () {
+it('exposes selected professional and publication links on the about page', function () {
     Livewire::test(About::class)
         ->assertSee('LinkedIn')
-        ->assertSee('PPATK / PPID')
-        ->assertSee('Kumparan');
+        ->assertSee('WhatsApp')
+        ->assertSee('Kumparan')
+        ->assertSee('Academia.edu')
+        ->assertSee('Artikel Majalah Editor')
+        ->assertDontSee('PPATK / PPID');
 });

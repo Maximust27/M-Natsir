@@ -22,22 +22,39 @@ class About extends Component
     }
 
     /**
-     * @return array<int, array{label: string, url: string}>
+     * @return array<int, array{label: string, url: ?string}>
      */
     private function profiles(): array
     {
+        $whatsappUrl = config('contact.whatsapp_url');
+
+        // Never invent a contact number or render an invalid WhatsApp link.
+        $whatsappHost = is_string($whatsappUrl) ? parse_url($whatsappUrl, PHP_URL_HOST) : null;
+        $validWhatsapp = is_string($whatsappUrl)
+            && parse_url($whatsappUrl, PHP_URL_SCHEME) === 'https'
+            && in_array($whatsappHost, ['wa.me', 'api.whatsapp.com', 'web.whatsapp.com'], true);
+
         return [
             [
                 'label' => 'LinkedIn',
                 'url' => 'https://id.linkedin.com/in/m-natsir-kongah-221615130',
             ],
             [
-                'label' => 'PPATK / PPID',
-                'url' => 'https://ppid.ppatk.go.id/?p=15022',
+                'label' => 'WhatsApp',
+                'url' => $validWhatsapp ? $whatsappUrl : null,
             ],
             [
                 'label' => 'Kumparan',
                 'url' => 'https://kumparan.com/natsir-kongah',
+            ],
+            [
+                'label' => 'Academia.edu',
+                'url' => 'https://independent.academia.edu/NatsirKongah',
+            ],
+            [
+                // A verified publication, not a stand-alone author profile.
+                'label' => 'Artikel Majalah Editor',
+                'url' => 'https://majalaheditor.com/nilai-bergerak-informasi-tertinggal/',
             ],
         ];
     }
@@ -126,6 +143,11 @@ class About extends Component
                 'source' => 'Kumparan',
                 'title' => 'Tulisan mengenai professional money laundering dan perlindungan hak dalam asset recovery.',
                 'url' => 'https://kumparan.com/natsir-kongah',
+            ],
+            [
+                'source' => 'Academia.edu',
+                'title' => 'Arsip tulisan dan dokumen publik mengenai perbankan, hukum, dan pencucian uang.',
+                'url' => 'https://independent.academia.edu/NatsirKongah',
             ],
             [
                 'source' => 'Detik',

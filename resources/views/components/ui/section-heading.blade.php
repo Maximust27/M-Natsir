@@ -7,20 +7,20 @@
 
 <div {{ $attributes }}>
     @if ($eyebrow)
-        <p class="font-mono text-xs font-semibold uppercase tracking-[0.08em] text-accent">
+        <p class="type-eyebrow text-accent">
             {{ $eyebrow }}
         </p>
     @endif
 
     <h2
         @if ($headingId) id="{{ $headingId }}" @endif
-        class="@if ($eyebrow) mt-4 @endif max-w-4xl font-serif text-[1.9rem] font-medium leading-tight tracking-[-0.025em] text-black sm:text-[2.2rem] lg:text-[2.35rem]"
+        class="@if ($eyebrow) mt-4 @endif type-section-title max-w-4xl text-ink"
     >
         {{ $title }}
     </h2>
 
     @if ($description)
-        <p class="mt-5 max-w-[72ch] text-base leading-8 text-slate-600">
+        <p class="type-body mt-5 max-w-[72ch] text-ink">
             {{ $description }}
         </p>
     @endif

@@ -9,6 +9,7 @@ return [
         'same_as' => [
             'https://id.linkedin.com/in/m-natsir-kongah-221615130',
             'https://kumparan.com/natsir-kongah',
+            'https://independent.academia.edu/NatsirKongah',
         ],
         'knows_about' => [
             'Financial Intelligence',
