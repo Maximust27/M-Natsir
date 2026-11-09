@@ -60,7 +60,7 @@ class Media extends Component
             )),
             'publicEventCount' => count(array_filter(
                 $allAppearances,
-                fn (array $appearance): bool => in_array($appearance['category'], ['talks', 'media-visits', 'recognition'], true),
+                fn (array $appearance): bool => $appearance['category'] === 'talks',
             )),
             'yearSpan' => $allAppearances === []
                 ? '—'
@@ -88,13 +88,9 @@ class Media extends Component
                 'label' => 'Talks & Panels',
                 'classes' => 'bg-teal-50 text-teal-800 hover:bg-teal-100',
             ],
-            'media-visits' => [
-                'label' => 'Media Visits',
+            'case-coverage' => [
+                'label' => 'Case Coverage',
                 'classes' => 'bg-amber-50 text-amber-900 hover:bg-amber-100',
-            ],
-            'recognition' => [
-                'label' => 'Recognition',
-                'classes' => 'bg-rose-50 text-rose-800 hover:bg-rose-100',
             ],
         ];
 

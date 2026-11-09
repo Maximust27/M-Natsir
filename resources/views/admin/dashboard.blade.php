@@ -16,29 +16,13 @@
 
         <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
             <h2 class="type-section-title text-ink">Pilih ruang pengelolaan</h2>
-            <span class="type-meta rounded-full border border-line bg-white px-4 py-2 text-ink">Fondasi admin aktif</span>
+            <span class="type-meta rounded-full border border-line bg-white px-4 py-2 text-ink">Form tambah konten</span>
         </div>
         <p class="type-body mt-4 max-w-[80ch] text-ink">
-            Login dan perlindungan akses sudah tersedia. Data Artikel, Library, dan Media kini disimpan di database; fitur unggah, penyuntingan, dan penghapusan akan menyusul pada revisi berikutnya.
+            Pilih salah satu dari tiga kartu di bawah. Form tambah akan muncul sesuai jenis konten, dengan pilihan menyimpan sebagai draf atau langsung memublikasikannya.
         </p>
 
-        <div class="mt-9 grid gap-5 md:grid-cols-3 lg:gap-7">
-            @foreach ([
-                ['number' => '01', 'key' => 'articles', 'title' => 'Artikel', 'description' => 'Kelola arsip tulisan, kategori, dan sumber publikasi asli.'],
-                ['number' => '02', 'key' => 'library', 'title' => 'Library', 'description' => 'Atur pustaka referensi, karya, dan dokumen pendukung pembelajaran.'],
-                ['number' => '03', 'key' => 'media', 'title' => 'Media', 'description' => 'Susun liputan, wawancara, serta dokumentasi penampilan publik.'],
-            ] as $module)
-                <x-ui.card :interactive="false" class="flex h-full flex-col">
-                    <span class="type-meta text-accent">{{ $module['number'] }} / MODUL</span>
-                    <h3 class="type-card-title mt-4 text-ink">{{ $module['title'] }}</h3>
-                    <p class="type-body mt-4 text-ink">{{ $module['description'] }}</p>
-                    <p class="type-meta mt-auto border-t border-line pt-6 text-slate-500">{{ number_format($moduleCounts[$module['key']] ?? 0, 0, ',', '.') }} data tersimpan · Pengelolaan segera hadir</p>
-                </x-ui.card>
-            @endforeach
-        </div>
+        <livewire:admin.content-entry />
 
-        <p class="type-support mt-10 text-slate-500">
-            Semua halaman administrasi berikutnya akan menggunakan sistem tipografi dan autentikasi yang sama.
-        </p>
     </section>
 @endsection

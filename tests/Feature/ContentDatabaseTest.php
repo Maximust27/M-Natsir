@@ -15,7 +15,7 @@ use App\Livewire\Media;
 it('creates separate schemas for each public card type and imports the original catalogues', function () {
     $this->assertDatabaseCount('articles', 13);
     $this->assertDatabaseCount('library_resources', 22);
-    $this->assertDatabaseCount('media_appearances', 16);
+    $this->assertDatabaseCount('media_appearances', 10);
 
     foreach ([
         'articles' => ['category', 'category_label', 'source', 'date_label', 'excerpt', 'url', 'access_label', 'is_primary_source', 'source_note'],
@@ -111,7 +111,7 @@ it('seeds data idempotently without overwriting edited content or existing admin
 
     $this->assertDatabaseCount('articles', 13);
     $this->assertDatabaseCount('library_resources', 22);
-    $this->assertDatabaseCount('media_appearances', 16);
+    $this->assertDatabaseCount('media_appearances', 10);
 
     expect($record->fresh()->title)->toBe('Judul hasil penyuntingan')
         ->and($admin->fresh()->is_admin)->toBeTrue()
@@ -127,9 +127,9 @@ it('uses the layout for the sole logout action and shows live content counts on 
     $html = $this->actingAs($admin)
         ->get(route('admin.dashboard'))
         ->assertOk()
-        ->assertSee('12 data tersimpan')
-        ->assertSee('22 data tersimpan')
-        ->assertSee('16 data tersimpan')
+        ->assertSee('12 terbit')
+        ->assertSee('22 terbit')
+        ->assertSee('10 terbit')
         ->assertSee('Kembali ke website')
         ->getContent();
 
