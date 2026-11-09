@@ -110,7 +110,6 @@ it('renders verified appearance thumbnails', function () {
             'https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Pusat_Pemberitaan/o/1737344507040-natsir/4w3o4szadcmcvnz.jpeg',
             false
         )
-
         ->assertSee(
             'https://cdn.antaranews.com/cache/1200x800/2024/06/15/natsir-kongah.jpeg',
             false
@@ -119,7 +118,6 @@ it('renders verified appearance thumbnails', function () {
             'https://rricoid-assets.obs.ap-southeast-4.myhuaweicloud.com/berita/Pusat_Pemberitaan/o/1718278388869-natsir_kongah_PPATK/lie2qjmppm8tl7r.jpeg',
             false
         )
-
         ->assertSee(
             'https://i.ytimg.com/vi/4fzhn91AS9Q/hqdefault.jpg',
             false
@@ -128,11 +126,8 @@ it('renders verified appearance thumbnails', function () {
             'https://i.ytimg.com/vi/BdxYgioGFxI/hqdefault.jpg',
             false
         )
-
-
         ->assertSee(
             'https://img.antaranews.com/cache/1200x800/2019/12/20/WhatsApp-Image-2019-12-20-at-06.04.35.jpeg.webp',
             false
-        )
-;
+        );
 });

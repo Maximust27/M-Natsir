@@ -127,9 +127,9 @@ it('uses the layout for the sole logout action and shows live content counts on 
     $html = $this->actingAs($admin)
         ->get(route('admin.dashboard'))
         ->assertOk()
-        ->assertSee('12 data tersimpan')
-        ->assertSee('22 data tersimpan')
-        ->assertSee('10 data tersimpan')
+        ->assertSee('12 terbit')
+        ->assertSee('22 terbit')
+        ->assertSee('10 terbit')
         ->assertSee('Kembali ke website')
         ->getContent();
 

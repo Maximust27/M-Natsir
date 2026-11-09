@@ -8,11 +8,13 @@ on:
       - feat/media-livewire
       - feat/contact-livewire
       - feat/motion-system
+      - feat/admin-content-entry-media-curation
   pull_request:
     branches:
       - main
       - feat/seo-topic-hubs
       - feat/typography-header-brand
+      - feat/admin-auth-foundation
 
 jobs:
   test:

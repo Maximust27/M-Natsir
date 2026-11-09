@@ -222,7 +222,7 @@ class ContentEntry extends Component
                 'entry.collection' => ['required', Rule::in(array_keys(self::COLLECTIONS))],
                 'entry.type' => ['required', Rule::in(array_keys(self::LIBRARY_TYPES))],
                 'entry.institution' => ['required', Rule::in(array_keys(self::INSTITUTIONS))],
-                'entry.institution_other' => $this->entry['institution'] === 'other'
+                'entry.institution_other' => ($this->entry['institution'] ?? null) === 'other'
                     ? ['required', 'string', 'min:2', 'max:255']
                     : ['nullable', 'string', 'max:255'],
                 'entry.year' => ['required', 'regex:/^(?:[0-9]{4}|Arsip)$/'],
