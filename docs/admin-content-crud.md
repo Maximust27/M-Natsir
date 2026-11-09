@@ -12,7 +12,7 @@ Branch: `feat/admin-content-crud` (berbasis `feat/admin-content-entry-media-cura
 6. Tombol **Hapus** membuka **konfirmasi kedua**. Jika disetujui, data pindah ke **Sampah**, bukan langsung hilang permanen.
 7. Pada tab **Sampah** tekan **Pulihkan**. Data kembali **sebagai Draf** agar tidak mendadak muncul ke publik. Untuk menerbitkan, buka tab Draf lalu tekan Publikasikan.
 
-Aksi disimpan ke tabel MySQL asli. **Halaman publik hanya membaca konten \`is_published=true\` dan \`deleted_at=null\`**. Daftar di admin menampilkan konten yang sudah ada, termasuk hasil ContentSeeder.
+Aksi disimpan ke tabel MySQL asli. **Halaman publik hanya membaca konten `is_published=true` dan `deleted_at=null`**. Daftar di admin menampilkan konten yang sudah ada, termasuk hasil ContentSeeder.
 
 ## Field yang bisa diubah
 
@@ -26,7 +26,7 @@ Untuk thumbnail Media: pilih JPG, PNG, atau WebP, maksimal **2 MB**. URL gambar 
 
 ## Migrasi aman untuk MySQL Laragon
 
-Jalankan di Git Bash pada database lokal \`m_natsir\` yang sudah memiliki akun admin:
+Jalankan di Git Bash pada database lokal `m_natsir` yang sudah memiliki akun admin:
 
 ```bash
 git status
@@ -43,7 +43,7 @@ php artisan test
 
 Jika branch lokal sudah tersedia, gunakan `git switch feat/admin-content-crud` lalu `git pull --ff-only origin feat/admin-content-crud`. Pastikan tidak menimpa perubahan lokal. **Jangan** gunakan `git reset --hard`, `git clean -fd`, atau `php artisan migrate:fresh` pada data kerja. Biarkan file gambar WebP lokal yang belum tracked tetap aman.
 
-Migration baru **menambah `deleted_at`** pada tiga tabel, tanpa menghapus data/akun. \`ContentSeeder\` hanya mengisi data awal yang belum ada dan menyembunyikan enam seed Media humas non-kasus yang masih identik dengan arsip lama. **Record yang masuk Sampah tetap memiliki seed_key**, jadi menjalankan seeder ulang tidak akan menghidupkannya kembali. Tidak perlu \`AdminSeeder\` jika akun admin sudah dibuat.
+Migration baru **menambah `deleted_at`** pada tiga tabel, tanpa menghapus data/akun. `ContentSeeder` hanya mengisi data awal yang belum ada dan menyembunyikan enam seed Media humas non-kasus yang masih identik dengan arsip lama. **Record yang masuk Sampah tetap memiliki seed_key**, jadi menjalankan seeder ulang tidak akan menghidupkannya kembali. Tidak perlu `AdminSeeder` jika akun admin sudah dibuat.
 
 ## Keamanan dan batas fitur
 
