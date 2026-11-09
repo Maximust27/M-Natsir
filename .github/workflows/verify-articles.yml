@@ -69,6 +69,44 @@ jobs:
               if ('<?php if(' in line or '<?php endif;' in line or '<?php foreach(' in line or '<?php endforeach;' in line) and (i > 480):
                   print(str(i)+': '+line[:240])
           PY
+            FILE_TO_SCAN="$FILE" php <<'PHP'
+          <?php
+          $tokens = token_get_all(file_get_contents(getenv('FILE_TO_SCAN')));
+          $openers = [T_IF => 'if', T_FOREACH => 'foreach', T_FOR => 'for', T_WHILE => 'while', T_SWITCH => 'switch'];
+          $closers = [T_ENDIF => 'if', T_ENDFOREACH => 'foreach', T_ENDFOR => 'for', T_ENDWHILE => 'while', T_ENDSWITCH => 'switch'];
+          $stack = [];
+          $last = [];
+          foreach ($tokens as $i => $token) {
+              if (!is_array($token)) continue;
+              if (isset($openers[$token[0]])) {
+                  $j = $i + 1;
+                  while (isset($tokens[$j]) && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) $j++;
+                  if (($tokens[$j] ?? null) !== '(') continue;
+                  $depth = 0;
+                  for (; $j < count($tokens); $j++) {
+                      if ($tokens[$j] === '(') $depth++;
+                      if ($tokens[$j] === ')') {
+                          $depth--;
+                          if ($depth === 0) break;
+                      }
+                  }
+                  $j++;
+                  while (isset($tokens[$j]) && is_array($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) $j++;
+                  if (($tokens[$j] ?? null) === ':') $stack[] = [$openers[$token[0]], $token[2]];
+              } elseif (isset($closers[$token[0]])) {
+                  $last[] = [$closers[$token[0]], $token[2], count($stack)];
+                  if (count($last) > 16) array_shift($last);
+                  $top = array_pop($stack);
+                  if (!$top || $top[0] !== $closers[$token[0]]) {
+                      echo 'Mismatch closing '.token_name($token[0]).' at line '.$token[2].' expecting '.json_encode($top)."\n";
+                      echo 'Recent closers '.json_encode($last)."\n";
+                      break;
+                  }
+                  if (count($stack) === 0 && $token[2] >= 530) echo "Stack became empty near line {$token[2]}\n";
+              }
+          }
+          echo 'Remaining stack '.json_encode($stack)."\n";
+          PHP
           fi
 
       - name: Run tests
