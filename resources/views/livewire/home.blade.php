@@ -130,6 +130,7 @@
         </div>
     </section>
 
+    @if ($spotlight !== null)
     <section id="spotlight" class="site-container border-b border-line py-16 lg:py-24" aria-labelledby="spotlight-heading">
         <div class="grid items-center gap-12 lg:grid-cols-[22rem_1fr] lg:gap-20 xl:gap-28">
             <x-ui.card :interactive="false" class="mx-auto flex aspect-[0.72] w-full max-w-72 flex-col justify-between px-8 py-9 sm:max-w-80">
@@ -180,6 +181,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <section id="about" class="site-container py-16 lg:py-24" aria-label="About and contact">
         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
