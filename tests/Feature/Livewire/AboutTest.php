@@ -14,9 +14,10 @@ it('renders the about page', function () {
 it('exposes selected professional and publication links on the about page', function () {
     Livewire::test(About::class)
         ->assertSee('LinkedIn')
-        ->assertSee('WhatsApp')
+        ->assertSee('Download CV')
         ->assertSee('Kumparan')
         ->assertSee('Academia.edu')
         ->assertSee('Artikel Majalah Editor')
-        ->assertDontSee('PPATK / PPID');
+        ->assertDontSee('PPATK / PPID')
+        ->assertDontSee('Buka Contact');
 });
