@@ -22,26 +22,14 @@ class About extends Component
     }
 
     /**
-     * @return array<int, array{label: string, url: ?string}>
+     * @return array<int, array{label: string, url: string}>
      */
     private function profiles(): array
     {
-        $whatsappUrl = config('contact.whatsapp_url');
-
-        // Never invent a contact number or render an invalid WhatsApp link.
-        $whatsappHost = is_string($whatsappUrl) ? parse_url($whatsappUrl, PHP_URL_HOST) : null;
-        $validWhatsapp = is_string($whatsappUrl)
-            && parse_url($whatsappUrl, PHP_URL_SCHEME) === 'https'
-            && in_array($whatsappHost, ['wa.me', 'api.whatsapp.com', 'web.whatsapp.com'], true);
-
         return [
             [
                 'label' => 'LinkedIn',
                 'url' => 'https://id.linkedin.com/in/m-natsir-kongah-221615130',
-            ],
-            [
-                'label' => 'WhatsApp',
-                'url' => $validWhatsapp ? $whatsappUrl : null,
             ],
             [
                 'label' => 'Kumparan',
