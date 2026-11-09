@@ -48,24 +48,17 @@
                     Jakarta, Indonesia
                 </div>
 
-                <div class="mt-7 flex flex-wrap gap-x-5 gap-y-3" aria-label="Profil dan kontak personal">
+                <div class="mt-7 flex flex-wrap gap-x-5 gap-y-3" aria-label="Profil profesional">
                     @foreach ($profiles as $profile)
-                        @if (filled($profile['url']))
-                            <a
-                                href="{{ $profile['url'] }}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="type-action inline-flex min-h-11 items-center gap-2 rounded-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-                            >
-                                {{ $profile['label'] }}
-                                <span aria-hidden="true">→</span>
-                            </a>
-                        @else
-                            <span class="type-action inline-flex min-h-11 items-center gap-2 rounded-sm border border-line px-3 font-semibold text-ink" title="Tautan WhatsApp belum dikonfigurasi" aria-label="WhatsApp belum tersedia">
-                                {{ $profile['label'] }}
-                                <span class="type-meta font-normal" aria-hidden="true">(segera tersedia)</span>
-                            </span>
-                        @endif
+                        <a
+                            href="{{ $profile['url'] }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="type-action inline-flex min-h-11 items-center gap-2 rounded-sm font-semibold text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+                        >
+                            {{ $profile['label'] }}
+                            <span aria-hidden="true">→</span>
+                        </a>
                     @endforeach
                 </div>
             </div>
@@ -205,14 +198,14 @@
     <section class="site-container pb-16 lg:pb-24">
         <div class="flex flex-col gap-7 bg-ink px-7 py-9 text-white sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:px-12">
             <div>
-                <h2 class="type-section-title ">Keperluan Akademik &amp; Media?</h2>
+                <h2 class="type-section-title ">Unduh Curriculum Vitae</h2>
                 <p class="type-body mt-3 max-w-2xl text-slate-300">
-                    Untuk kebutuhan wawancara, diskusi akademik, atau pengenalan narasumber, gunakan Media Hub agar permintaan dapat diarahkan dengan konteks yang tepat.
+                    Lihat riwayat profesional, pengalaman, dan informasi akademik M. Natsir Kongah melalui dokumen CV yang dapat diunduh dalam format PDF.
                 </p>
             </div>
 
-            <x-ui.button :href="route('home') . '#contact'" variant="secondary" size="lg" class="shrink-0">
-                Buka Contact &amp; Media Hub
+            <x-ui.button  :href="route('cv.download')" variant="secondary" size="lg" class="shrink-0">
+                Download CV
                 <span aria-hidden="true">→</span>
             </x-ui.button>
         </div>
