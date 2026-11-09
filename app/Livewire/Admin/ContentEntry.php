@@ -517,6 +517,11 @@ class ContentEntry extends Component
      */
     private function rules(): array
     {
+        $mediaCategories = array_keys(self::MEDIA_CATEGORIES);
+        if ($this->selected === 'media' && $this->editingId !== null) {
+            $mediaCategories[] = $this->recordQuery()->findOrFail($this->editingId)->category;
+        }
+
         $common = [
             'entry.title' => ['required', 'string', 'min:5', 'max:500'],
             'entry.url' => ['required', 'url:http,https', 'max:2000'],
@@ -527,7 +532,7 @@ class ContentEntry extends Component
         return $common + match ($this->selected) {
             'articles' => [
                 'entry.category' => ['required', Rule::in(array_keys(self::ARTICLE_CATEGORIES))],
-                'entry.date' => ['required', 'date_format:Y-m-d'],
+                'entry.date' => [$this->editingId === null ? 'required' : 'nullable', 'date_format:Y-m-d'],
                 'entry.source' => ['required', 'string', 'max:255'],
                 'entry.excerpt' => ['required', 'string', 'min:15', 'max:5000'],
                 'entry.is_primary_source' => ['required', 'boolean'],
@@ -548,14 +553,14 @@ class ContentEntry extends Component
                 'entry.language' => ['required', Rule::in(['ID', 'EN', 'EN / ID'])],
             ],
             'media' => [
-                'entry.category' => ['required', Rule::in(array_keys(self::MEDIA_CATEGORIES))],
-                'entry.date' => ['required', 'date_format:Y-m-d'],
+                'entry.category' => ['required', Rule::in($mediaCategories)],
+                'entry.date' => [$this->editingId === null ? 'required' : 'nullable', 'date_format:Y-m-d'],
                 'entry.outlet' => ['required', 'string', 'max:255'],
                 'entry.role' => ['required', 'string', 'max:255'],
                 'entry.summary' => ['required', 'string', 'min:15', 'max:5000'],
                 'entry.topics_text' => ['nullable', 'string', 'max:500'],
                 'entry.thumbnail_url' => ['nullable', 'url:http,https', 'max:2000'],
-                'thumbnail' => ['nullable', 'image', 'max:2048'],
+                'thumbnail' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             ],
         };
     }
@@ -564,22 +569,32 @@ class ContentEntry extends Component
      * @param array<string, mixed> $data
      * @return array<string, mixed>
      */
-    private function articleRecord(array $data, Carbon $date): array
+    /**
+     * Map form values to the article columns and retain verified legacy labels.
+     *
+     * @param array<string, mixed> $data
+     * @return array<string, mixed>
+     */
+    private function articleRecord(array $data, ?Carbon $date, ?Article $old = null): array
     {
         $category = self::ARTICLE_CATEGORIES[$data['category']];
+        $sameCategory = $old !== null && $old->category === $data['category'];
+        $sameSourceType = $old !== null && $old->is_primary_source === (bool) $data['is_primary_source'];
 
         return [
             'category' => $data['category'],
-            'category_label' => $category['label'],
-            'badge_classes' => $category['badge'],
+            'category_label' => $sameCategory ? $old->category_label : $category['label'],
+            'badge_classes' => $sameCategory ? $old->badge_classes : $category['badge'],
             'source' => trim($data['source']),
-            'date_label' => $date->translatedFormat('j F Y'),
+            'date_label' => $date?->translatedFormat('j F Y') ?? $old?->date_label,
             'title' => trim($data['title']),
             'excerpt' => trim($data['excerpt']),
             'url' => trim($data['url']),
-            'access_label' => $data['is_primary_source'] ? 'Baca Publikasi Asli' : 'Lihat Referensi',
+            'access_label' => $sameSourceType
+                ? $old->access_label
+                : ($data['is_primary_source'] ? 'Baca Publikasi Asli' : 'Lihat Referensi'),
             'is_primary_source' => $data['is_primary_source'],
-            'source_note' => $data['source_note'] ?: null,
+            'source_note' => trim($data['source_note'] ?? '') ?: null,
         ];
     }
 
@@ -587,38 +602,43 @@ class ContentEntry extends Component
      * @param array<string, mixed> $data
      * @return array<string, mixed>
      */
-    private function libraryRecord(array $data): array
+    private function libraryRecord(array $data, ?LibraryResource $old = null): array
     {
-        $institution = $data['institution'];
-        $institutionLabel = $institution === 'other'
+        $institutionLabel = $data['institution'] === 'other'
             ? trim($data['institution_other'])
-            : self::INSTITUTIONS[$institution];
-        $institution = $institution === 'other'
+            : self::INSTITUTIONS[$data['institution']];
+        $institution = $data['institution'] === 'other'
             ? (Str::substr(Str::slug($institutionLabel), 0, 100) ?: 'institusi-lain')
-            : $institution;
+            : $data['institution'];
         $topics = array_values(array_unique($data['topics']));
+        $sameTopics = $old !== null && $old->topics === $topics;
 
         return [
             'collection' => $data['collection'],
-            'collection_label' => self::COLLECTIONS[$data['collection']],
+            'collection_label' => $old !== null && $old->collection === $data['collection']
+                ? $old->collection_label : self::COLLECTIONS[$data['collection']],
             'title' => trim($data['title']),
             'document_type' => $data['type'],
-            'type_label' => self::LIBRARY_TYPES[$data['type']],
+            'type_label' => $old !== null && $old->document_type === $data['type']
+                ? $old->type_label : self::LIBRARY_TYPES[$data['type']],
             'institution' => $institution,
-            'institution_label' => $institutionLabel,
+            'institution_label' => $old !== null && $old->institution === $institution
+                ? $old->institution_label : $institutionLabel,
             'year_label' => $data['year'],
             'topics' => json_encode($topics, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
             'topic_labels' => json_encode(
-                array_map(static fn (string $topic): string => self::LIBRARY_TOPICS[$topic], $topics),
+                $sameTopics
+                    ? $old->topic_labels
+                    : array_map(static fn (string $topic): string => self::LIBRARY_TOPICS[$topic], $topics),
                 JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE,
             ),
-            'author_label' => $data['author'] ?: null,
-            'role_label' => $data['role'] ?: null,
+            'author_label' => trim($data['author'] ?? '') ?: null,
+            'role_label' => trim($data['role'] ?? '') ?: null,
             'summary' => trim($data['summary']),
             'url' => trim($data['url']),
             'language' => $data['language'],
-            'access_label' => 'Buka Sumber',
-            'source_note' => $data['source_note'] ?: null,
+            'access_label' => $old?->access_label ?? 'Buka Sumber',
+            'source_note' => trim($data['source_note'] ?? '') ?: null,
         ];
     }
 
@@ -626,40 +646,55 @@ class ContentEntry extends Component
      * @param array<string, mixed> $data
      * @return array<string, mixed>
      */
-    private function mediaRecord(array $data, Carbon $date): array
+    private function mediaRecord(array $data, ?Carbon $date, ?MediaAppearance $old = null, ?string $uploadedPath = null): array
     {
-        $category = self::MEDIA_CATEGORIES[$data['category']];
+        $category = self::MEDIA_CATEGORIES[$data['category']] ?? null;
+        $sameCategory = $old !== null && $old->category === $data['category'];
+
+        if ($category === null && ! $sameCategory) {
+            abort(422);
+        }
+
         $topics = array_values(array_unique(array_filter(array_map(
             'trim',
             explode(',', $data['topics_text'] ?? ''),
         ))));
 
-        $thumbnailUrl = $data['thumbnail_url'] ?: null;
+        $thumbnailUrl = $old?->thumbnail_url;
 
-        if ($this->thumbnail !== null) {
-            // Uploaded files are served from public storage after storage:link.
-            $thumbnailUrl = '/storage/'.$this->thumbnail->store('media/thumbnails', 'public');
+        if ($this->removeThumbnail) {
+            $thumbnailUrl = null;
+        }
+
+        if (! empty($data['thumbnail_url'])) {
+            $thumbnailUrl = trim($data['thumbnail_url']);
+        }
+
+        if ($uploadedPath !== null) {
+            $thumbnailUrl = '/storage/'.$uploadedPath;
         }
 
         return [
             'category' => $data['category'],
-            'category_label' => $category['publicLabel'],
-            'badge_variant' => $category['badge'],
-            'date_label' => $date->translatedFormat('j F Y'),
-            'year' => (int) $date->year,
+            'category_label' => $sameCategory ? $old->category_label : $category['publicLabel'],
+            'badge_variant' => $sameCategory ? $old->badge_variant : $category['badge'],
+            'date_label' => $date?->translatedFormat('j F Y') ?? $old?->date_label,
+            'year' => $date?->year ?? $old?->year,
             'outlet' => trim($data['outlet']),
             'role' => trim($data['role']),
             'title' => trim($data['title']),
             'summary' => trim($data['summary']),
             'topics' => json_encode($topics, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE),
             'url' => trim($data['url']),
-            'action_label' => match ($data['category']) {
-                'interviews' => 'Lihat Wawancara',
-                'talks' => 'Lihat Dokumentasi',
-                'case-coverage' => 'Baca Liputan',
-            },
+            'action_label' => $sameCategory
+                ? $old->action_label
+                : match ($data['category']) {
+                    'interviews' => 'Lihat Wawancara',
+                    'talks' => 'Lihat Dokumentasi',
+                    'case-coverage' => 'Baca Liputan',
+                },
             'thumbnail_url' => $thumbnailUrl,
-            'source_note' => $data['source_note'] ?: null,
+            'source_note' => trim($data['source_note'] ?? '') ?: null,
         ];
     }
 
