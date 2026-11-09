@@ -12,7 +12,7 @@
                     </h1>
 
                     <p class="type-lead mt-5 max-w-3xl text-ink">
-                        Wawancara, forum publik, media visit, dan penampilan profesional M. Natsir Kongah yang dapat ditelusuri ke sumber terbuka.
+                        Wawancara, pembahasan kasus, serta forum tentang penanganan kejahatan keuangan yang dapat ditelusuri ke sumber publik.
                     </p>
                 </div>
 
@@ -27,7 +27,7 @@
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="type-stat block text-ink">{{ $publicEventCount }}</span>
-                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Public Event</span>
+                        <span class="type-meta mt-1 block font-medium uppercase tracking-[0.05em] text-slate-500">Forum Kasus</span>
                     </div>
                     <div class="px-4 py-4 text-center">
                         <span class="type-stat block text-ink">{{ $yearSpan }}</span>
