@@ -191,7 +191,7 @@
     </section>
     @endif
 
-    <section id="about" class="site-container py-16 lg:py-24" aria-label="About and contact">
+    <section id="about" class="site-container py-16 lg:py-24" aria-label="About and professional profile">
         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
             <article class="border border-line border-l-2 border-l-amber-600 bg-stone-50 p-8 sm:p-10 lg:min-h-[22rem]">
                 <span class="font-serif text-5xl leading-none text-amber-700/40" aria-hidden="true">“</span>
@@ -210,15 +210,15 @@
                 </a>
             </article>
 
-            <x-ui.card id="contact" :interactive="false" class="flex lg:min-h-[22rem] lg:flex-col lg:justify-center">
+            <x-ui.card  :interactive="false" class="flex lg:min-h-[22rem] lg:flex-col lg:justify-center">
                 <x-ui.section-heading
-                    title="Inquiries & Consultations"
-                    description="Available for media interviews, regulatory consultations, and academic discourse regarding financial crime investigations and AML policy development."
+                    title="Profil Profesional"
+                    description="Kenali rekam pengalaman dan latar belakang profesional M. Natsir Kongah melalui curriculum vitae."
                 />
 
                 <div class="mt-8">
-                    <x-ui.button :href="route('contact')" variant="outline" size="lg" wire:navigate>
-                        Ajukan Pertanyaan / Undangan Media
+                    <x-ui.button  :href="route('cv.download')" variant="outline" size="lg"  >
+                        Download CV
                         <span aria-hidden="true">→</span>
                     </x-ui.button>
                 </div>
