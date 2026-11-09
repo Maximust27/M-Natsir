@@ -10,7 +10,7 @@ it('emits a clean canonical URL for every public route', function (string $route
         ->assertOk()
         ->assertSee('<link rel="canonical" href="'.route($routeName).'">', false)
         ->assertSee('<meta property="og:url" content="'.route($routeName).'">', false);
-})->with(['home', 'about', 'articles', 'library', 'media', 'contact']);
+})->with(['home', 'about', 'articles', 'library', 'media']);
 
 it('self-canonicalizes valid article archive pages instead of collapsing them into page one', function () {
     config()->set('seo.allow_indexing', true);
@@ -63,7 +63,7 @@ it('publishes a valid XML sitemap of canonical public pages and article paginati
         ->assertSee('<?xml version="1.0" encoding="UTF-8"?>', false)
         ->assertSee('<loc>'.route('home').'</loc>', false)
         ->assertSee('<loc>'.route('articles', ['page' => 2]).'</loc>', false)
-        ->assertDontSee('/contact/cv')
+        ->assertDontSee('/contact')
         ->assertDontSee('?q=');
 
     expect(substr_count($response->getContent(), '<loc>'))
