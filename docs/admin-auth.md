@@ -5,7 +5,7 @@ Branch: `feat/admin-auth-foundation` (berdasarkan `feat/typography-header-brand`
 ## Yang sudah tersedia
 
 - **`/admin/login`**: halaman masuk dengan email, password, tombol, pesan error, CSRF dan `autocomplete` yang sesuai.
-- **`/admin`**: dashboard awal hanya untuk akun admin. Menampilkan tiga modul **Artikel, Library, Media** dengan jumlah data yang dibaca langsung dari tabel SQL (belum ada CRUD/unggah).
+- **`/admin`**: dashboard awal hanya untuk akun admin. Menampilkan tiga modul **Artikel, Library, Media** dengan jumlah data yang dibaca langsung dari tabel SQL. Pada branch lanjutan `feat/admin-content-entry-media-curation`, kartu dapat dipilih untuk menampilkan **form tambah konten** dengan opsi simpan draf atau terbit dan upload foto Media.
 - **`POST /admin/logout`**: logout melalui form dengan CSRF, menghapus session dan meregenerasi CSRF token. Kontrol logout serta **Kembali ke website** berada di layout admin; tombol logout tidak diduplikasi di dashboard.
 - Tidak ada halaman / route registrasi.
 - Middleware `auth` + `admin` melindungi dashboard dan semua route admin berikutnya. Akun biasa mendapat HTTP 403.
@@ -25,7 +25,7 @@ Branch: `feat/admin-auth-foundation` (berdasarkan `feat/typography-header-brand`
    php artisan migrate
    php artisan db:seed --class=ContentSeeder
    ```
-   Data awal **13 Artikel, 22 Library dan 16 Media** diimpor ke MySQL tanpa menyentuh user/admin. Pada setup dengan akun admin yang sudah dibuat, **cukup jalankan migrasi dan `ContentSeeder`**, tidak perlu mengulang `AdminSeeder`.
+   Data awal **13 Artikel, 22 Library dan 10 Media yang relevan dengan kasus** diimpor ke MySQL tanpa menyentuh user/admin. Pada setup dengan akun admin yang sudah dibuat, **cukup jalankan migrasi dan `ContentSeeder`**, tidak perlu mengulang `AdminSeeder`.
 2. Tambahkan variabel **sementara** di `.env` lokal (jangan pernah commit `.env`):
    ```dotenv
    ADMIN_SEED_NAME="Pengelola Website"
@@ -63,4 +63,4 @@ Uji tampilannya pada 375px, 768px, dan 1280px, serta zoom 200% untuk aksesibilit
 
 ## Batas lingkup
 
-Dashboard kini membaca statistik dari **tiga tabel konten** yang sudah dibuat dan di-seed. Sumber data untuk halaman Home, Articles, Topic, Library dan Media juga sudah pindah ke SQL. **CRUD, upload gambar/PDF, formulir editor, audit perubahan, dan CV belum tersedia**. Panduan migrasi lengkap: `docs/content-database.md`.
+Dashboard kini membaca statistik dari **tiga tabel konten** yang sudah dibuat dan di-seed. Sumber data untuk halaman Home, Articles, Topic, Library dan Media juga sudah pindah ke SQL. **Form tambah metadata Artikel/Library/Media dan upload gambar Media** tersedia di branch `feat/admin-content-entry-media-curation`. **Edit/hapus konten, upload PDF, editor artikel lengkap, audit perubahan, dan CV belum tersedia**. Panduan: `docs/content-database.md` dan `docs/admin-content-entry.md`.

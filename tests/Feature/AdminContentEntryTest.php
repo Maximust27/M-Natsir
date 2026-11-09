@@ -123,6 +123,9 @@ it('publishes verified article metadata with its category label and attribution'
         ->and($article->is_primary_source)->toBeFalse()
         ->and($article->access_label)->toBe('Lihat Referensi');
 
+    expect($article->sort_order)->toBe(1);
+    expect(Article::query()->where('seed_key', '!=', $article->seed_key)->min('sort_order'))->toBe(2);
+
     Livewire::test(Articles::class)
         ->set('search', 'Jejak Dana Kasus Aset Digital')
         ->assertSee('Jejak Dana Kasus Aset Digital');

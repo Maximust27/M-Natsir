@@ -137,10 +137,14 @@ class ContentEntry extends Component
                 'media' => 'media_appearances',
             };
 
+            // New records appear first on public lists while keeping existing
+            // editorial order stable. The transaction protects the shift and insert.
+            DB::table($table)->increment('sort_order');
+
             DB::table($table)->insert($record + [
                 'seed_key' => hash('sha256', 'admin:'.Str::uuid()),
                 'is_published' => $validated['is_published'],
-                'sort_order' => ((int) DB::table($table)->max('sort_order')) + 1,
+                'sort_order' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -279,7 +283,9 @@ class ContentEntry extends Component
         $institutionLabel = $institution === 'other'
             ? trim($data['institution_other'])
             : self::INSTITUTIONS[$institution];
-        $institution = $institution === 'other' ? (Str::slug($institutionLabel) ?: 'institusi-lain') : $institution;
+        $institution = $institution === 'other'
+            ? (Str::substr(Str::slug($institutionLabel), 0, 100) ?: 'institusi-lain')
+            : $institution;
         $topics = array_values(array_unique($data['topics']));
 
         return [
