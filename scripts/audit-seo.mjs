@@ -17,7 +17,7 @@ let checkedLinks = 0;
 let checkedImages = 0;
 
 const REQUIRED_PAGES = [
-    '/', '/tentang', '/articles', '/library', '/media', '/contact',
+    '/', '/tentang', '/articles', '/library', '/media',
     '/topik/anti-pencucian-uang',
     '/topik/pencucian-uang-profesional',
     '/topik/intelijen-keuangan',
@@ -93,7 +93,7 @@ async function audit() {
         assert.match(sitemapText, /<urlset\b/);
         assert.match(sitemapText, /<\/urlset>\s*$/);
         sitemapURLs = [...sitemapText.matchAll(/<loc>([^<]+)<\/loc>/g)].map((x) => x[1]);
-        assert.ok(sitemapURLs.length >= 10, 'too few sitemap URLs');
+        assert.ok(sitemapURLs.length >= REQUIRED_PAGES.length, 'too few sitemap URLs');
         assert.equal(new Set(sitemapURLs).size, sitemapURLs.length, 'duplicate URLs in sitemap');
         for (const url of sitemapURLs) {
             assert.equal(new URL(url).origin, origin, 'sitemap has wrong host');
@@ -102,6 +102,7 @@ async function audit() {
         for (const path of REQUIRED_PAGES) {
             assert.ok(sitemapURLs.some((url) => localPath(url) === path), 'missing sitemap page: ' + path);
         }
+        assert.ok(!sitemapURLs.some((url) => localPath(url) === '/contact'), 'retired Contact page must not be indexed');
     });
 
     await check('robots.txt reflects indexable audit mode', async () => {
@@ -184,7 +185,7 @@ async function audit() {
                 const href = attribute(anchor, 'href');
                 if (!href || href.startsWith('#') || /^(mailto:|tel:|javascript:)/i.test(href)) continue;
                 const link = new URL(href, origin);
-                if (link.origin === origin && link.pathname !== '/contact/cv') {
+                if (link.origin === origin) {
                     links.add(link.pathname + link.search);
                 }
             }
@@ -211,6 +212,17 @@ async function audit() {
         });
         assert.equal(response.status, 404);
         await response.text(); // Drain response so Undici can reuse the socket safely.
+    });
+
+    await check('Contact is removed and CV downloads correctly', async () => {
+        const removed = await fetch(new URL('/contact', origin), { signal: AbortSignal.timeout(15000) });
+        assert.equal(removed.status, 404, 'retired Contact page still responds');
+        await removed.arrayBuffer();
+
+        const cv = await request('/cv');
+        assert.match(cv.headers.get('content-type') || '', /application\/pdf/, 'CV MIME type incorrect');
+        assert.match(cv.headers.get('content-disposition') || '', /attachment/i, 'CV is not an attachment');
+        await cv.arrayBuffer();
     });
 
     for (const link of links) {

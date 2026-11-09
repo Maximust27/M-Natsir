@@ -191,7 +191,7 @@
     </section>
     @endif
 
-    <section id="about" class="site-container py-16 lg:py-24" aria-label="About and contact">
+    <section id="about" class="site-container py-16 lg:py-24" aria-label="Profil dan Curriculum Vitae">
         <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
             <article class="border border-line border-l-2 border-l-amber-600 bg-stone-50 p-8 sm:p-10 lg:min-h-[22rem]">
                 <span class="font-serif text-5xl leading-none text-amber-700/40" aria-hidden="true">“</span>
@@ -210,16 +210,16 @@
                 </a>
             </article>
 
-            <x-ui.card id="contact" :interactive="false" class="flex lg:min-h-[22rem] lg:flex-col lg:justify-center">
+            <x-ui.card id="cv" :interactive="false" class="flex lg:min-h-[22rem] lg:flex-col lg:justify-center">
                 <x-ui.section-heading
-                    title="Inquiries & Consultations"
-                    description="Available for media interviews, regulatory consultations, and academic discourse regarding financial crime investigations and AML policy development."
+                    title="Curriculum Vitae"
+                    description="Unduh CV M. Natsir Kongah sebagai referensi profil untuk kebutuhan wawancara, diskusi akademik, dan pengenalan narasumber."
                 />
 
                 <div class="mt-8">
-                    <x-ui.button :href="route('contact')" variant="outline" size="lg" wire:navigate>
-                        Ajukan Pertanyaan / Undangan Media
-                        <span aria-hidden="true">→</span>
+                    <x-ui.button :href="route('cv.download')" variant="outline" size="lg" download="M-Natsir-Kongah-CV.pdf">
+                        Unduh CV (PDF)
+                        <span aria-hidden="true">↓</span>
                     </x-ui.button>
                 </div>
             </x-ui.card>
