@@ -14,9 +14,12 @@
                 <span class="type-body mt-3 block text-ink">{{ $module['description'] }}</span>
                 <span class="type-meta mt-auto block w-full border-t border-line pt-5 text-slate-500">
                     {{ number_format($counts[$key]['published'], 0, ',', '.') }} terbit · {{ number_format($counts[$key]['draft'], 0, ',', '.') }} draf
+                    @if ($counts[$key]['trash'] > 0)
+                        · {{ $counts[$key]['trash'] }} di Sampah
+                    @endif
                 </span>
                 <span class="type-action mt-4 inline-flex items-center gap-2 font-semibold text-accent">
-                    {{ $selected === $key ? 'Form dipilih' : 'Tambah '. $module['title'] }}
+                    {{ $selected === $key ? 'Modul dipilih' : 'Kelola '. $module['title'] }}
                     <span aria-hidden="true">→</span>
                 </span>
             </button>
@@ -43,14 +46,19 @@
 
             <div class="flex flex-wrap items-start justify-between gap-4 border-b border-line pb-6">
                 <div class="max-w-3xl">
-                    <p class="type-eyebrow text-accent">Form tambah konten · {{ $modules[$selected]['number'] }}</p>
-                    <h3 id="admin-entry-heading" class="type-section-title mt-3 text-ink">Tambah {{ $modules[$selected]['title'] }}</h3>
-                    <p class="type-body mt-3 text-slate-500">Isi kolom bertanda *. Data teknis seperti ID, kode unik, dan urutan akan dibuat otomatis. Simpan sebagai draf untuk memeriksa konten sebelum terbit.</p>
+                    <p class="type-eyebrow text-accent">{{ $editingId ? 'Form edit' : 'Form tambah' }} konten · {{ $modules[$selected]['number'] }}</p>
+                    <h3 id="admin-entry-heading" class="type-section-title mt-3 text-ink">{{ $editingId ? 'Edit' : 'Tambah' }} {{ $modules[$selected]['title'] }}</h3>
+                    <p class="type-body mt-3 text-slate-500">Isi kolom bertanda *. Kode unik, ID, dan urutan dikelola otomatis. Konten berstatus draf tidak ditampilkan di website.</p>
                 </div>
-                <x-ui.badge variant="neutral">{{ $modules[$selected]['title'] }}</x-ui.badge>
+                <div class="flex flex-wrap items-center gap-3">
+                    <x-ui.badge variant="neutral">{{ $editingId ? 'Mode Edit' : 'Mode Tambah' }}</x-ui.badge>
+                    @if ($editingId)
+                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="cancelEdit">Batal edit</x-ui.button>
+                    @endif
+                </div>
             </div>
 
-            <form wire:submit="save" wire:key="admin-entry-{{ $selected }}" class="mt-8 space-y-6">
+            <form wire:submit="save" wire:key="admin-entry-{{ $selected }}-{{ $editingId ?? 'new' }}" class="mt-8 space-y-6">
                 <div>
                     <label for="entry-title" class="{{ $labelClass }}">Judul *</label>
                     <input id="entry-title" type="text" wire:model="entry.title" class="{{ $inputClass }}" placeholder="Masukkan judul yang sesuai sumber" maxlength="500" required>
@@ -69,8 +77,11 @@
                             @error('entry.category') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div>
-                            <label for="article-date" class="{{ $labelClass }}">Tanggal publikasi *</label>
-                            <input id="article-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" required>
+                            <label for="article-date" class="{{ $labelClass }}">Tanggal publikasi {{ $editingId ? '(ubah bila perlu)' : '*' }}</label>
+                            <input id="article-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" @required(! $editingId)>
+                            @if ($editingRecord)
+                                <p class="type-support mt-2 text-slate-500">Tanggal sebelumnya: {{ $editingRecord->date_label }}. Kosongkan untuk mempertahankannya.</p>
+                            @endif
                             @error('entry.date') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                     </div>
@@ -180,12 +191,18 @@
                                 @foreach ($mediaCategories as $value => $category)
                                     <option value="{{ $value }}">{{ $category['label'] }}</option>
                                 @endforeach
+                                @if ($editingRecord && ! isset($mediaCategories[$editingRecord->category]))
+                                    <option value="{{ $editingRecord->category }}">Arsip kategori lama: {{ $editingRecord->category }}</option>
+                                @endif
                             </select>
                             @error('entry.category') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                         <div>
-                            <label for="media-date" class="{{ $labelClass }}">Tanggal penampilan *</label>
-                            <input id="media-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" required>
+                            <label for="media-date" class="{{ $labelClass }}">Tanggal penampilan {{ $editingId ? '(ubah bila perlu)' : '*' }}</label>
+                            <input id="media-date" type="date" wire:model="entry.date" class="{{ $inputClass }}" @required(! $editingId)>
+                            @if ($editingRecord)
+                                <p class="type-support mt-2 text-slate-500">Tanggal sebelumnya: {{ $editingRecord->date_label }}. Kosongkan untuk mempertahankannya.</p>
+                            @endif
                             @error('entry.date') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                         </div>
                     </div>
@@ -214,6 +231,20 @@
                     </div>
                     <div class="border border-line bg-paper p-5">
                         <h4 class="type-subheading text-ink">Foto penampilan (opsional)</h4>
+                        @if ($editingRecord && $editingRecord->thumbnail_url)
+                            <p class="type-support mt-2 text-slate-500">
+                                Foto saat ini:
+                                @if (str_starts_with($editingRecord->thumbnail_url, 'https://') || str_starts_with($editingRecord->thumbnail_url, 'http://') || str_starts_with($editingRecord->thumbnail_url, '/storage/'))
+                                    <a class="underline underline-offset-2 hover:text-accent" href="{{ $editingRecord->thumbnail_url }}" target="_blank" rel="noopener noreferrer">Lihat foto yang tersimpan</a>
+                                @else
+                                    Tautan gambar belum valid
+                                @endif
+                            </p>
+                            <label class="type-support mt-3 flex items-center gap-3 text-ink">
+                                <input type="checkbox" wire:model="removeThumbnail" class="size-4 shrink-0 accent-slate-900">
+                                Hapus foto saat menyimpan perubahan
+                            </label>
+                        @endif
                         <p class="type-support mt-2 text-slate-500">Pilih file gambar maksimal 2 MB atau isi URL foto. Jika keduanya ada, file unggahan dipakai.</p>
                         <div class="mt-4 grid gap-5 md:grid-cols-2">
                             <div>
@@ -225,6 +256,9 @@
                             <div>
                                 <label for="media-thumbnail-url" class="{{ $labelClass }}">Atau URL foto</label>
                                 <input id="media-thumbnail-url" type="url" wire:model="entry.thumbnail_url" class="{{ $inputClass }}" placeholder="https://...">
+                                @if ($editingRecord)
+                                    <p class="type-support mt-2 text-slate-500">Jika dibiarkan kosong, foto lama tetap digunakan kecuali opsi hapus dicentang.</p>
+                                @endif
                                 @error('entry.thumbnail_url') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                             </div>
                         </div>
@@ -252,7 +286,7 @@
                 <div class="border border-line bg-paper p-5">
                     <label class="type-body flex cursor-pointer items-start gap-3 font-semibold text-ink">
                         <input type="checkbox" wire:model="entry.is_published" class="mt-1 size-5 shrink-0 accent-slate-900">
-                        <span>Publikasikan langsung
+                        <span>{{ $editingId ? 'Status terbit' : 'Publikasikan langsung' }}
                             <span class="type-support mt-1 block font-normal text-slate-500">Jika tidak dicentang, data disimpan sebagai draf dan belum muncul di halaman publik.</span>
                         </span>
                     </label>
@@ -262,7 +296,7 @@
                 <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
                     <p class="type-support text-slate-500">Periksa judul, ringkasan, serta URL sumber sebelum menerbitkan.</p>
                     <x-ui.button type="submit" variant="primary" size="lg" wire:loading.attr="disabled" wire:target="save,thumbnail">
-                        Simpan {{ $modules[$selected]['title'] }}
+                        {{ $editingId ? 'Simpan Perubahan' : 'Simpan '.$modules[$selected]['title'] }}
                         <span aria-hidden="true">→</span>
                     </x-ui.button>
                 </div>
