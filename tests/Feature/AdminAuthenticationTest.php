@@ -2,11 +2,8 @@
 
 use App\Models\User;
 use Database\Seeders\AdminSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-
-uses(RefreshDatabase::class);
 
 it('serves a readable admin login with CSRF and no registration', function () {
     $this->get(route('admin.login'))

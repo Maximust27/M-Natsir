@@ -38,7 +38,7 @@
         </div>
     </section>
 
-    @if ($search === '' && $activeCategory === 'all')
+    @if ($featuredAppearance !== null && $search === '' && $activeCategory === 'all')
         <section class="site-container py-8 sm:py-10" aria-labelledby="featured-media-title">
             <x-ui.card class="overflow-hidden p-0">
                 <div class="grid lg:grid-cols-[16rem_minmax(0,1fr)]">
