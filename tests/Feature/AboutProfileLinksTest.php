@@ -41,8 +41,8 @@ it('links WhatsApp to the existing configured personal contact rather than an in
         ->toContain('rel="noopener noreferrer"')
         ->not->toContain('WhatsApp belum tersedia');
 
-    // The WhatsApp setting is shared with the existing Contact component.
-    $this->get(route('contact'))->assertSee('href="'.$url.'"', false);
+    // The WhatsApp setting remains available on About without a Contact page.
+    $this->get('/contact')->assertNotFound();
 });
 
 it('rejects unsafe or unrelated URLs in the WhatsApp shortcut', function (string $url) {

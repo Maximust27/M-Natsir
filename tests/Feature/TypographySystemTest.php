@@ -93,7 +93,7 @@ it('normalizes visible form controls to the same readable input size', function 
 
         expect($classes)->toContain('type-form-control');
     }
-})->with(['articles', 'library', 'media', 'contact']);
+})->with(['articles', 'library', 'media']);
 
 it('uses the expected semantic text roles on each public route', function (string $route, array $roles) {
     $html = $this->get(route($route))->assertOk()->getContent();
@@ -107,5 +107,4 @@ it('uses the expected semantic text roles on each public route', function (strin
     'articles' => ['articles', ['type-page-title', 'type-card-title', 'type-body']],
     'library' => ['library', ['type-page-title', 'type-section-title', 'type-card-title', 'type-body']],
     'media' => ['media', ['type-page-title', 'type-section-title', 'type-card-title', 'type-body']],
-    'contact' => ['contact', ['type-page-title', 'type-section-title', 'type-subheading', 'type-body']],
 ]);
