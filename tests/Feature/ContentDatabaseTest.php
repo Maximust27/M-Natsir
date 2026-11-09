@@ -120,7 +120,9 @@ it('seeds data idempotently without overwriting edited content or existing admin
 
 it('uses the layout for the sole logout action and shows live content counts on the admin dashboard', function () {
     $admin = User::factory()->create(['is_admin' => true]);
-    Article::query()->orderBy('sort_order')->firstOrFail()->update(['is_published' => false]);
+    $hiddenArticle = Article::query()->orderBy('sort_order')->firstOrFail();
+    $hiddenArticle->is_published = false;
+    $hiddenArticle->save();
 
     $html = $this->actingAs($admin)
         ->get(route('admin.dashboard'))

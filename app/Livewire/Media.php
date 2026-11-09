@@ -39,9 +39,9 @@ class Media extends Component
     {
         $allAppearances = $this->appearances();
         $appearances = $this->filteredAppearances();
-        $featuredAppearance = $allAppearances[0];
+        $featuredAppearance = $allAppearances[0] ?? null;
 
-        if (trim($this->search) === '' && $this->activeCategory === 'all') {
+        if ($featuredAppearance !== null && trim($this->search) === '' && $this->activeCategory === 'all') {
             $appearances = array_values(array_filter(
                 $appearances,
                 fn (array $appearance): bool => $appearance['title'] !== $featuredAppearance['title'],
@@ -62,7 +62,9 @@ class Media extends Component
                 $allAppearances,
                 fn (array $appearance): bool => in_array($appearance['category'], ['talks', 'media-visits', 'recognition'], true),
             )),
-            'yearSpan' => '2010–2025',
+            'yearSpan' => $allAppearances === []
+                ? '—'
+                : min(array_column($allAppearances, 'year')).'–'.max(array_column($allAppearances, 'year')),
         ]);
     }
 
