@@ -666,7 +666,7 @@ class ContentEntry extends Component
             $thumbnailUrl = null;
         }
 
-        if (! empty($data['thumbnail_url'])) {
+        if (! $this->removeThumbnail && ! empty($data['thumbnail_url'])) {
             $thumbnailUrl = trim($data['thumbnail_url']);
         }
 
