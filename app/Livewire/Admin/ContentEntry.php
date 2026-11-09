@@ -7,15 +7,21 @@ use App\Models\LibraryResource;
 use App\Models\MediaAppearance;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class ContentEntry extends Component
 {
     use WithFileUploads;
+
+    private const PAGE_SIZE = 8;
 
     private const MODULES = [
         'articles' => ['number' => '01', 'title' => 'Artikel', 'description' => 'Tulisan, opini, dan referensi publikasi asli.'],
@@ -82,10 +88,28 @@ class ContentEntry extends Component
         'case-coverage' => ['label' => 'Liputan / Penanganan Kasus', 'publicLabel' => 'Case Coverage', 'badge' => 'amber'],
     ];
 
+    #[Locked]
     public string $selected = '';
+
+    #[Locked]
+    public ?int $editingId = null;
+
+    #[Locked]
+    public ?int $viewingId = null;
+
+    #[Locked]
+    public ?int $pendingDeleteId = null;
 
     /** @var array<string, mixed> */
     public array $entry = [];
+
+    public string $statusFilter = 'all';
+
+    public string $search = '';
+
+    public int $page = 1;
+
+    public bool $removeThumbnail = false;
 
     public $thumbnail = null;
 
@@ -105,10 +129,13 @@ class ContentEntry extends Component
         }
 
         $this->selected = $module;
-        $this->entry = $this->defaults($module);
-        $this->thumbnail = null;
+        $this->resetEditor();
+        $this->viewingId = null;
+        $this->pendingDeleteId = null;
+        $this->statusFilter = 'all';
+        $this->search = '';
+        $this->page = 1;
         $this->notice = null;
-        $this->resetValidation();
     }
 
     public function save(): void
@@ -120,42 +147,68 @@ class ContentEntry extends Component
         }
 
         $validated = $this->validate($this->rules())['entry'];
-        $date = isset($validated['date'])
+        $date = filled($validated['date'] ?? null)
             ? Carbon::createFromFormat('Y-m-d', $validated['date'])->locale('id')
             : null;
+        $editing = $this->editingId !== null ? $this->recordQuery()->findOrFail($this->editingId) : null;
+        $oldThumbnail = $editing instanceof MediaAppearance ? $editing->thumbnail_url : null;
+        $uploadedPath = null;
 
-        DB::transaction(function () use ($validated, $date): void {
-            $record = match ($this->selected) {
-                'articles' => $this->articleRecord($validated, $date),
-                'library' => $this->libraryRecord($validated),
-                'media' => $this->mediaRecord($validated, $date),
-            };
+        if ($this->selected === 'media' && $this->thumbnail !== null) {
+            $uploadedPath = $this->thumbnail->store('media/thumbnails', 'public');
+        }
 
-            $table = match ($this->selected) {
-                'articles' => 'articles',
-                'library' => 'library_resources',
-                'media' => 'media_appearances',
-            };
+        try {
+            DB::transaction(function () use ($validated, $date, $editing, $uploadedPath): void {
+                $record = match ($this->selected) {
+                    'articles' => $this->articleRecord($validated, $date, $editing instanceof Article ? $editing : null),
+                    'library' => $this->libraryRecord($validated, $editing instanceof LibraryResource ? $editing : null),
+                    'media' => $this->mediaRecord($validated, $date, $editing instanceof MediaAppearance ? $editing : null, $uploadedPath),
+                };
 
-            // New records appear first on public lists while keeping existing
-            // editorial order stable. The transaction protects the shift and insert.
-            DB::table($table)->increment('sort_order');
+                if ($editing !== null) {
+                    DB::table($this->tableName())
+                        ->where('id', $editing->getKey())
+                        ->whereNull('deleted_at')
+                        ->update($record + [
+                            'is_published' => $validated['is_published'],
+                            'updated_at' => now(),
+                        ]);
 
-            DB::table($table)->insert($record + [
-                'seed_key' => hash('sha256', 'admin:'.Str::uuid()),
-                'is_published' => $validated['is_published'],
-                'sort_order' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        });
+                    return;
+                }
+
+                DB::table($this->tableName())->increment('sort_order');
+                DB::table($this->tableName())->insert($record + [
+                    'seed_key' => hash('sha256', 'admin:'.Str::uuid()),
+                    'is_published' => $validated['is_published'],
+                    'sort_order' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            });
+        } catch (\Throwable $exception) {
+            if ($uploadedPath !== null) {
+                Storage::disk('public')->delete($uploadedPath);
+            }
+
+            throw $exception;
+        }
+
+        if ($editing instanceof MediaAppearance && $oldThumbnail !== null) {
+            $newThumbnail = $this->recordQuery()->findOrFail($editing->getKey())->thumbnail_url;
+
+            if ($newThumbnail !== $oldThumbnail) {
+                $this->deleteManagedThumbnail($oldThumbnail);
+            }
+        }
 
         $module = self::MODULES[$this->selected]['title'];
         $status = $validated['is_published'] ? 'dipublikasikan' : 'disimpan sebagai draf';
-        $this->entry = $this->defaults($this->selected);
-        $this->thumbnail = null;
-        $this->resetValidation();
-        $this->notice = "Data {$module} berhasil {$status}. Kamu bisa menambahkan data berikutnya.";
+        $operation = $editing !== null ? 'diperbarui dan ' : '';
+
+        $this->resetEditor();
+        $this->notice = "Data {$module} berhasil {$operation}{$status}.";
     }
 
     /**
