@@ -3,8 +3,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "vite build",
-        "dev": "vite"
+        "build": "php scripts/optimize-hero-images.php && vite build",
+        "dev": "php scripts/optimize-hero-images.php && vite"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.3.3",

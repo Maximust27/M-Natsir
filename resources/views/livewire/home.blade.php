@@ -8,15 +8,23 @@
              On desktop the wide headline reaches toward the center, while narrower body copy
              and the right-side portrait preserve a clear reading/portrait separation. --}}
         <div class="relative overflow-hidden bg-paper lg:min-h-[calc(100svh-5rem)]">
-            <img
-                src="{{ asset('images/home-hero.jpeg') }}"
-                alt="Potret M. Natsir Kongah berdiri di ruang kerja"
-                width="1200"
-                height="675"
-                fetchpriority="high"
-                class="block aspect-[16/9] w-full object-cover object-[70%_center] sm:aspect-[2/1] lg:absolute lg:inset-0 lg:h-full lg:aspect-auto lg:object-[72%_center]"
-                data-home-hero-image
-            >
+            @php($homeWebpSrcset = \App\Support\Media\HeroImages::webpSrcset('home-hero'))
+            <picture class="block">
+                @if ($homeWebpSrcset !== '')
+                    <source type="image/webp" srcset="{{ $homeWebpSrcset }}" sizes="100vw">
+                @endif
+                <img
+                    src="{{ asset('images/home-hero.jpeg') }}"
+                    alt="Potret M. Natsir Kongah berdiri di ruang kerja"
+                    width="2730"
+                    height="1536"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                    class="block aspect-[16/9] w-full object-cover object-[70%_center] sm:aspect-[2/1] lg:absolute lg:inset-0 lg:h-full lg:aspect-auto lg:object-[72%_center]"
+                    data-home-hero-image
+                >
+            </picture>
             <div class="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-white/95 via-white/70 to-transparent lg:block xl:from-white/90 xl:via-white/45"></div>
 
             <div class="site-container relative z-10 flex items-center lg:min-h-[calc(100svh-5rem)]">
