@@ -16,10 +16,10 @@
 
         <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
             <h2 class="type-section-title text-ink">Pilih ruang pengelolaan</h2>
-            <span class="type-meta rounded-full border border-line bg-white px-4 py-2 text-ink">Form tambah konten</span>
+            <span class="type-meta rounded-full border border-line bg-white px-4 py-2 text-ink">CRUD konten aktif</span>
         </div>
         <p class="type-body mt-4 max-w-[80ch] text-ink">
-            Pilih salah satu dari tiga kartu di bawah. Form tambah akan muncul sesuai jenis konten, dengan pilihan menyimpan sebagai draf atau langsung memublikasikannya.
+            Pilih salah satu kartu Artikel, Library, atau Media. Form tambah/edit dan daftar konten ada di bawahnya. Kamu bisa memeriksa detail, mencari draf atau konten terbit, serta menghapus atau memulihkan data dengan aman.
         </p>
 
         <livewire:admin.content-entry />
