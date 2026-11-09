@@ -464,8 +464,8 @@
                 <nav class="mt-7 flex flex-wrap items-center justify-between gap-3" aria-label="Navigasi halaman daftar konten">
                     <p class="type-meta text-slate-500">Halaman {{ $page }} dari {{ $totalPages }} · {{ $totalResults }} data</p>
                     <div class="flex gap-2">
-                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page - 1 }})" {{ $page <= 1 ? 'disabled' : '' }}>Sebelumnya</x-ui.button>
-                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page + 1 }})" {{ $page >= $totalPages ? 'disabled' : '' }}>Berikutnya</x-ui.button>
+                        <button type="button" wire:click="goToPage({{ $page - 1 }})" {{ $page <= 1 ? 'disabled' : '' }} class="type-action min-h-11 rounded-sm border border-line bg-white px-4 py-2 text-ink transition hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-40">Sebelumnya</button>
+                        <button type="button" wire:click="goToPage({{ $page + 1 }})" {{ $page >= $totalPages ? 'disabled' : '' }} class="type-action min-h-11 rounded-sm border border-line bg-white px-4 py-2 text-ink transition hover:bg-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink disabled:cursor-not-allowed disabled:opacity-40">Berikutnya</button>
                     </div>
                 </nav>
             @endif
