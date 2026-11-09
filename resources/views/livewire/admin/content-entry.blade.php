@@ -12,7 +12,7 @@
                 <span class="type-meta text-accent">{{ $module['number'] }} / MODUL</span>
                 <span class="type-card-title mt-4 block text-ink">{{ $module['title'] }}</span>
                 <span class="type-body mt-3 block text-ink">{{ $module['description'] }}</span>
-                <span class="type-meta mt-auto block w-full border-t border-line pt-5 text-slate-600">
+                <span class="type-meta mt-auto block w-full border-t border-line pt-5 text-slate-500">
                     {{ number_format($counts[$key]['published'], 0, ',', '.') }} terbit · {{ number_format($counts[$key]['draft'], 0, ',', '.') }} draf
                 </span>
                 <span class="type-action mt-4 inline-flex items-center gap-2 font-semibold text-accent">
@@ -33,7 +33,7 @@
         @if ($selected === '')
             <p class="type-eyebrow text-accent">Langkah 01</p>
             <h3 id="admin-entry-heading" class="type-section-title mt-3 text-ink">Pilih kartu untuk mulai</h3>
-            <p class="type-body mt-4 text-slate-600">Klik Artikel, Library, atau Media. Kolom formulir akan mengikuti data yang dibutuhkan halaman publik tersebut.</p>
+            <p class="type-body mt-4 text-slate-500">Klik Artikel, Library, atau Media. Kolom formulir akan mengikuti data yang dibutuhkan halaman publik tersebut.</p>
         @else
             @php
                 $inputClass = 'type-form-control min-h-12 w-full rounded-sm border border-line bg-paper px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200';
@@ -45,7 +45,7 @@
                 <div class="max-w-3xl">
                     <p class="type-eyebrow text-accent">Form tambah konten · {{ $modules[$selected]['number'] }}</p>
                     <h3 id="admin-entry-heading" class="type-section-title mt-3 text-ink">Tambah {{ $modules[$selected]['title'] }}</h3>
-                    <p class="type-body mt-3 text-slate-600">Isi kolom bertanda *. Data teknis seperti ID, kode unik, dan urutan akan dibuat otomatis. Simpan sebagai draf untuk memeriksa konten sebelum terbit.</p>
+                    <p class="type-body mt-3 text-slate-500">Isi kolom bertanda *. Data teknis seperti ID, kode unik, dan urutan akan dibuat otomatis. Simpan sebagai draf untuk memeriksa konten sebelum terbit.</p>
                 </div>
                 <x-ui.badge variant="neutral">{{ $modules[$selected]['title'] }}</x-ui.badge>
             </div>
@@ -86,7 +86,7 @@
                     </div>
                     <label class="type-body flex cursor-pointer items-start gap-3 text-ink">
                         <input type="checkbox" wire:model="entry.is_primary_source" class="mt-1 size-5 shrink-0 accent-slate-900">
-                        <span>Link menuju publikasi asli <span class="type-support block text-slate-600">Nonaktifkan jika tautan hanya merupakan referensi atau jejak bibliografi.</span></span>
+                        <span>Link menuju publikasi asli <span class="type-support block text-slate-500">Nonaktifkan jika tautan hanya merupakan referensi atau jejak bibliografi.</span></span>
                     </label>
                     @error('entry.is_primary_source') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
 
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <fieldset class="border border-line bg-paper p-5">
-                        <legend class="type-body px-2 font-semibold text-ink">Topik referensi * <span class="type-support font-normal text-slate-600">(boleh lebih dari satu)</span></legend>
+                        <legend class="type-body px-2 font-semibold text-ink">Topik referensi * <span class="type-support font-normal text-slate-500">(boleh lebih dari satu)</span></legend>
                         <div class="grid gap-3 sm:grid-cols-2">
                             @foreach ($libraryTopics as $value => $label)
                                 <label wire:key="library-topic-{{ $value }}" class="type-support flex cursor-pointer items-center gap-3 text-ink">
@@ -209,17 +209,17 @@
                     <div>
                         <label for="media-topics" class="{{ $labelClass }}">Topik (opsional)</label>
                         <input id="media-topics" type="text" wire:model="entry.topics_text" class="{{ $inputClass }}" placeholder="Contoh: Judi Online, TPPU, Penanganan Kasus" maxlength="500">
-                        <p class="type-support mt-2 text-slate-600">Pisahkan beberapa topik dengan koma. Sistem akan menyimpannya sebagai tag otomatis.</p>
+                        <p class="type-support mt-2 text-slate-500">Pisahkan beberapa topik dengan koma. Sistem akan menyimpannya sebagai tag otomatis.</p>
                         @error('entry.topics_text') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                     </div>
                     <div class="border border-line bg-paper p-5">
                         <h4 class="type-subheading text-ink">Foto penampilan (opsional)</h4>
-                        <p class="type-support mt-2 text-slate-600">Pilih file gambar maksimal 2 MB atau isi URL foto. Jika keduanya ada, file unggahan dipakai.</p>
+                        <p class="type-support mt-2 text-slate-500">Pilih file gambar maksimal 2 MB atau isi URL foto. Jika keduanya ada, file unggahan dipakai.</p>
                         <div class="mt-4 grid gap-5 md:grid-cols-2">
                             <div>
                                 <label for="media-thumbnail-upload" class="{{ $labelClass }}">Unggah foto</label>
                                 <input id="media-thumbnail-upload" type="file" wire:model="thumbnail" accept="image/jpeg,image/png,image/webp" class="{{ $inputClass }} file:mr-3 file:border-0 file:bg-transparent file:font-semibold">
-                                <p wire:loading wire:target="thumbnail" class="type-support mt-2 text-slate-600">Mengunggah foto…</p>
+                                <p wire:loading wire:target="thumbnail" class="type-support mt-2 text-slate-500">Mengunggah foto…</p>
                                 @error('thumbnail') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                             </div>
                             <div>
@@ -236,7 +236,7 @@
                         {{ $selected === 'articles' ? 'Tautan publikasi asli *' : ($selected === 'library' ? 'Tautan dokumen / sumber *' : 'Tautan liputan / video asli *') }}
                     </label>
                     <input id="entry-url" type="url" wire:model="entry.url" class="{{ $inputClass }}" placeholder="https://..." required>
-                    <p class="type-support mt-2 text-slate-600">Gunakan URL sumber resmi / publikasi yang dapat diperiksa, bukan tautan tanpa sumber.</p>
+                    <p class="type-support mt-2 text-slate-500">Gunakan URL sumber resmi / publikasi yang dapat diperiksa, bukan tautan tanpa sumber.</p>
                     @error('entry.url') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                 </div>
 
@@ -253,14 +253,14 @@
                     <label class="type-body flex cursor-pointer items-start gap-3 font-semibold text-ink">
                         <input type="checkbox" wire:model="entry.is_published" class="mt-1 size-5 shrink-0 accent-slate-900">
                         <span>Publikasikan langsung
-                            <span class="type-support mt-1 block font-normal text-slate-600">Jika tidak dicentang, data disimpan sebagai draf dan belum muncul di halaman publik.</span>
+                            <span class="type-support mt-1 block font-normal text-slate-500">Jika tidak dicentang, data disimpan sebagai draf dan belum muncul di halaman publik.</span>
                         </span>
                     </label>
                     @error('entry.is_published') <p class="{{ $errorClass }}">{{ $message }}</p> @enderror
                 </div>
 
                 <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6">
-                    <p class="type-support text-slate-600">Periksa judul, ringkasan, serta URL sumber sebelum menerbitkan.</p>
+                    <p class="type-support text-slate-500">Periksa judul, ringkasan, serta URL sumber sebelum menerbitkan.</p>
                     <x-ui.button type="submit" variant="primary" size="lg" wire:loading.attr="disabled" wire:target="save,thumbnail">
                         Simpan {{ $modules[$selected]['title'] }}
                         <span aria-hidden="true">→</span>

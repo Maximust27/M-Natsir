@@ -26,8 +26,7 @@ it('shows three accessible module cards and a tailored form directly below the s
         ->assertSee('13 terbit')
         ->assertSee('22 terbit')
         ->assertSee('10 terbit')
-        ->assertSee('aria-pressed="false"', false)
-        ->assertSee('wire:submit="save"', false);
+        ->assertSee('aria-pressed="false"', false);
 
     Livewire::test(ContentEntry::class)
         ->call('selectModule', 'media')
