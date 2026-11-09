@@ -19,7 +19,7 @@ Form sesuai modul:
 
 Tiga form menggunakan `type-*` dari sistem tipografi global (`resources/css/app.css`). Tombol "Kembali ke website" dan "Keluar" tetap berada di **layout admin bersama**.
 
-**Keamanan:** Livewire memeriksa status admin saat render dan setiap aksi; URL divalidasi HTTP(S); kategori dan topik divalidasi; penulisan database memakai whitelist field eksplisit; foto menggunakan validasi gambar; CSRF/session Livewire aktif. CRUD **edit/hapus/list** belum dibuat — ini adalah **form tambah**.
+**Keamanan:** Livewire memeriksa status admin saat render dan setiap aksi; URL divalidasi HTTP(S); kategori dan topik divalidasi; penulisan database memakai whitelist field eksplisit; foto menggunakan validasi gambar; CSRF/session Livewire aktif. Pada tahap ini fitur utamanya adalah form tambah; **CRUD daftar/edit/hapus/pulihkan** dilanjutkan pada branch `feat/admin-content-crud`. Lihat `docs/admin-content-crud.md` untuk fitur terbaru.
 
 ## Kurasi ulang data seed Media
 
@@ -57,4 +57,4 @@ Tidak perlu menjalankan `AdminSeeder` lagi. **Jangan menjalankan `migrate:fresh`
 
 ## Batas fitur
 
-Belum ada halaman editor, penghapusan, daftar pengelolaan per baris, bulk import, penyuntingan artikel lengkap, atau pengaturan Home/About/Contact melalui admin. Form ini menyimpan **metadata dan ringkasan serta tautan asli**, bukan membuat salinan penuh artikel milik outlet lain.
+Pada branch CRUD lanjutan kini tersedia daftar, edit, dan Sampah yang dapat dipulihkan. Belum ada bulk import, editor tulisan lengkap, atau pengaturan Home/About/Contact melalui admin. Form ini menyimpan **metadata dan ringkasan serta tautan asli**, bukan membuat salinan penuh artikel milik outlet lain.
