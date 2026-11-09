@@ -25,3 +25,8 @@ Shortcut WhatsApp menerima **HTTPS** dengan domain `wa.me`, `api.whatsapp.com` a
 Academia.edu ditambahkan pada `Person.sameAs` karena merupakan profil. Publikasi Majalah Editor tidak ditambahkan pada `sameAs` karena merupakan halaman artikel, bukan akun identitas.
 
 Sumber eksternal dapat berubah atau membatasi akses sewaktu-waktu; periksa secara manual sesudah deployment.
+
+
+## Download CV
+
+Untuk kebutuhan akademik dan media, halaman About sekarang memiliki tombol **Unduh CV (PDF)** yang mengarah ke `/cv`. Dokumen lokal yang sudah tersedia di `public/files/m-natsir-kongah-cv.pdf` disajikan sebagai attachment. Halaman Contact tidak lagi digunakan; kontak pribadi yang terverifikasi (misalnya profil WhatsApp jika dikonfigurasi) tetap ditampilkan di About.

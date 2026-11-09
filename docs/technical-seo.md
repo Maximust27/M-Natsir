@@ -12,7 +12,7 @@ Tahap ini melanjutkan fondasi metadata pada PR #6.
 
 ## Sitemap
 
-Endpoint `/sitemap.xml` otomatis mencantumkan enam halaman publik dan halaman selanjutnya pada arsip artikel sesuai banyaknya konten dan ukuran pagination. Endpoint unduhan CV, URL pencarian, dan filter tidak ikut sitemap.
+Endpoint `/sitemap.xml` otomatis mencantumkan **lima halaman publik utama** (Home, About, Articles, Library, Media), tiga halaman topik, serta halaman selanjutnya pada arsip artikel sesuai banyaknya konten dan ukuran pagination. Halaman Contact sudah dinonaktifkan. Endpoint unduhan CV `/cv`, URL pencarian, dan filter tidak ikut sitemap.
 
 ## Robots dan lingkungan
 
