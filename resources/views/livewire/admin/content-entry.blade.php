@@ -303,4 +303,169 @@
             </form>
         @endif
     </section>
+
+    @if ($selected !== '')
+        <section id="admin-content-list" class="mt-9 scroll-mt-12 border border-line bg-white p-6 sm:p-8 lg:p-10" aria-labelledby="admin-list-heading">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                    <p class="type-eyebrow text-accent">Manajemen Konten</p>
+                    <h3 id="admin-list-heading" class="type-section-title mt-3 text-ink">Daftar {{ $modules[$selected]['title'] }}</h3>
+                    <p class="type-body mt-3 text-slate-500">Lihat, cari, edit, terbitkan, jadikan draf, atau pindahkan konten ke Sampah tanpa membuka phpMyAdmin.</p>
+                </div>
+                <x-ui.badge variant="neutral">{{ $totalResults }} data ditemukan</x-ui.badge>
+            </div>
+
+            <div class="mt-7 grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
+                <fieldset class="min-w-0">
+                    <legend class="type-meta mb-3 font-semibold text-ink">Filter status</legend>
+                    <div class="flex flex-wrap gap-2" role="group" aria-label="Status konten">
+                        @foreach ([
+                            'all' => ['label' => 'Semua', 'count' => $counts[$selected]['published'] + $counts[$selected]['draft']],
+                            'draft' => ['label' => 'Draf', 'count' => $counts[$selected]['draft']],
+                            'published' => ['label' => 'Terbit', 'count' => $counts[$selected]['published']],
+                            'trash' => ['label' => 'Sampah', 'count' => $counts[$selected]['trash']],
+                        ] as $filter => $definition)
+                            <button
+                                type="button"
+                                wire:key="status-{{ $selected }}-{{ $filter }}"
+                                wire:click="setStatusFilter('{{ $filter }}')"
+                                aria-pressed="{{ $statusFilter === $filter ? 'true' : 'false' }}"
+                                class="type-action min-h-11 rounded-sm border px-4 py-2 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink {{ $statusFilter === $filter ? 'border-ink bg-ink text-white' : 'border-line bg-paper text-ink hover:border-slate-400' }}"
+                            >
+                                {{ $definition['label'] }} <span class="type-meta ml-1 opacity-80">{{ $definition['count'] }}</span>
+                            </button>
+                        @endforeach
+                    </div>
+                </fieldset>
+                <div>
+                    <label for="admin-content-search" class="type-meta mb-3 block font-semibold text-ink">Cari judul, sumber, atau ringkasan</label>
+                    <input id="admin-content-search" type="search" wire:model.live.debounce.350ms="search" placeholder="Cari konten…" autocomplete="off" class="type-form-control min-h-12 w-full rounded-sm border border-line bg-paper px-4 py-3 text-ink outline-none transition focus:border-slate-500 focus:bg-white focus:ring-2 focus:ring-slate-200">
+                </div>
+            </div>
+
+            @if ($details)
+                <aside class="mt-7 border-l-2 border-accent bg-paper p-5 sm:p-7" aria-labelledby="admin-details-title">
+                    <div class="flex flex-wrap items-start justify-between gap-4">
+                        <div class="min-w-0">
+                            <p class="type-eyebrow text-accent">Detail metadata · Hanya admin</p>
+                            <h4 id="admin-details-title" class="type-card-title mt-3 break-words text-ink">{{ $details->title }}</h4>
+                        </div>
+                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="closeDetails">Tutup</x-ui.button>
+                    </div>
+                    <dl class="mt-5 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                        <div>
+                            <dt class="type-meta text-slate-500">Status</dt>
+                            <dd class="type-body mt-1 font-semibold text-ink">{{ $details->trashed() ? 'Sampah' : ($details->is_published ? 'Terbit' : 'Draf') }}</dd>
+                        </div>
+                        <div>
+                            <dt class="type-meta text-slate-500">Kategori / jenis</dt>
+                            <dd class="type-body mt-1 text-ink">
+                                {{ $selected === 'articles' ? $details->category_label : ($selected === 'library' ? $details->type_label : $details->category_label) }}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="type-meta text-slate-500">Sumber / institusi</dt>
+                            <dd class="type-body mt-1 text-ink">
+                                {{ $selected === 'articles' ? $details->source : ($selected === 'library' ? $details->institution_label : $details->outlet) }}
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="type-meta text-slate-500">Tanggal / tahun</dt>
+                            <dd class="type-body mt-1 text-ink">
+                                {{ $selected === 'library' ? $details->year_label : $details->date_label }}
+                            </dd>
+                        </div>
+                    </dl>
+                    <p class="type-body mt-5 whitespace-pre-line text-ink">
+                        {{ $selected === 'articles' ? $details->excerpt : $details->summary }}
+                    </p>
+                    @if ($selected !== 'articles')
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            @foreach ($details->topic_labels ?? $details->topics ?? [] as $topic)
+                                <span class="type-meta rounded-full border border-line bg-white px-3 py-1 text-ink">{{ $topic }}</span>
+                            @endforeach
+                        </div>
+                    @endif
+                    @if ($details->source_note)
+                        <div class="mt-5 border-t border-line pt-4">
+                            <p class="type-meta font-semibold text-ink">Catatan sumber / atribusi</p>
+                            <p class="type-support mt-2 whitespace-pre-line text-slate-500">{{ $details->source_note }}</p>
+                        </div>
+                    @endif
+                    <div class="mt-5">
+                        <a href="{{ $details->url }}" target="_blank" rel="noopener noreferrer" class="type-action inline-flex min-h-11 items-center gap-2 font-semibold text-accent underline underline-offset-4">
+                            Buka sumber asli <span aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+                </aside>
+            @endif
+
+            <div class="mt-7 divide-y divide-line border-y border-line" wire:loading.class="opacity-60" wire:target="search,setStatusFilter,goToPage">
+                @forelse ($records as $record)
+                    <article wire:key="manage-{{ $selected }}-{{ $record->id }}" class="py-6">
+                        <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                            <div class="min-w-0 max-w-3xl flex-1">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <x-ui.badge variant="neutral">
+                                        {{ $record->trashed() ? 'Sampah' : ($record->is_published ? 'Terbit' : 'Draf') }}
+                                    </x-ui.badge>
+                                    <span class="type-meta text-slate-500">
+                                        {{ $selected === 'articles' ? $record->category_label : ($selected === 'library' ? $record->collection_label : $record->category_label) }}
+                                    </span>
+                                </div>
+                                <h4 class="type-card-title mt-3 break-words text-ink">{{ $record->title }}</h4>
+                                <p class="type-support mt-2 text-slate-500">
+                                    {{ $selected === 'articles' ? $record->source : ($selected === 'library' ? $record->institution_label : $record->outlet) }}
+                                    · {{ $selected === 'library' ? $record->year_label : $record->date_label }}
+                                </p>
+                                <p class="type-body mt-3 text-ink">{{ \Illuminate\Support\Str::limit($selected === 'articles' ? $record->excerpt : $record->summary, 180) }}</p>
+                            </div>
+                            <div class="flex shrink-0 flex-wrap gap-2 lg:max-w-60 lg:justify-end">
+                                <x-ui.button type="button" variant="secondary" size="sm" wire:click="viewRecord({{ $record->id }})">Detail</x-ui.button>
+                                @if ($record->trashed())
+                                    <x-ui.button type="button" variant="outline" size="sm" wire:click="restoreRecord({{ $record->id }})">Pulihkan</x-ui.button>
+                                @else
+                                    <x-ui.button type="button" variant="secondary" size="sm" wire:click="editRecord({{ $record->id }})">Edit</x-ui.button>
+                                    <x-ui.button
+                                        type="button"
+                                        variant="outline"
+                                        size="sm"
+                                        wire:click="updatePublication({{ $record->id }}, {{ $record->is_published ? 'false' : 'true' }})"
+                                    >
+                                        {{ $record->is_published ? 'Jadikan Draf' : 'Publikasikan' }}
+                                    </x-ui.button>
+                                    <x-ui.button type="button" variant="secondary" size="sm" wire:click="requestDelete({{ $record->id }})">Hapus</x-ui.button>
+                                @endif
+                            </div>
+                        </div>
+                        @if ($pendingDeleteId === $record->id && ! $record->trashed())
+                            <div role="alert" class="mt-5 border border-rose-200 bg-rose-50 p-5">
+                                <p class="type-body font-semibold text-ink">Pindahkan “{{ $record->title }}” ke Sampah?</p>
+                                <p class="type-support mt-2 text-slate-500">Konten akan hilang dari website publik, tetapi dapat dipulihkan sebagai draf. File foto tetap disimpan.</p>
+                                <div class="mt-4 flex flex-wrap gap-3">
+                                    <x-ui.button type="button" variant="outline" size="sm" wire:click="confirmDelete">Ya, pindahkan ke Sampah</x-ui.button>
+                                    <x-ui.button type="button" variant="secondary" size="sm" wire:click="cancelDelete">Batal</x-ui.button>
+                                </div>
+                            </div>
+                        @endif
+                    </article>
+                @empty
+                    <div class="py-12 text-center">
+                        <p class="type-card-title text-ink">Belum ada konten pada pilihan ini</p>
+                        <p class="type-body mt-3 text-slate-500">Coba ubah status atau kata pencarian. Untuk data baru, gunakan formulir di atas.</p>
+                    </div>
+                @endforelse
+            </div>
+
+            @if ($totalPages > 1)
+                <nav class="mt-7 flex flex-wrap items-center justify-between gap-3" aria-label="Navigasi halaman daftar konten">
+                    <p class="type-meta text-slate-500">Halaman {{ $page }} dari {{ $totalPages }} · {{ $totalResults }} data</p>
+                    <div class="flex gap-2">
+                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page - 1 }})" @disabled($page <= 1)>Sebelumnya</x-ui.button>
+                        <x-ui.button type="button" variant="secondary" size="sm" wire:click="goToPage({{ $page + 1 }})" @disabled($page >= $totalPages)>Berikutnya</x-ui.button>
+                    </div>
+                </nav>
+            @endif
+        </section>
+    @endif
 </div>
