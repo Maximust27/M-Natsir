@@ -52,5 +52,24 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
+      - name: Diagnose Blade compilation during CRUD development
+        run: |
+          php artisan view:cache
+          FILE=$(grep -l 'admin-content-list' storage/framework/views/*.php | head -n 1)
+          if [ -n "$FILE" ]; then
+            php -l "$FILE" || true
+            python3 - "$FILE" <<'PY'
+          import re,sys
+          src=open(sys.argv[1]).read()
+          counts={}
+          for x in ['<?php if(', '<?php endif;', '<?php foreach(', '<?php endforeach;', '<?php for(', '<?php endfor;', '<?php while(', '<?php endwhile;']:
+              counts[x]=src.count(x)
+          print('Blade compiled control-flow counts',counts)
+          for i,line in enumerate(src.splitlines(),1):
+              if ('<?php if(' in line or '<?php endif;' in line or '<?php foreach(' in line or '<?php endforeach;' in line) and (i > 480):
+                  print(str(i)+': '+line[:240])
+          PY
+          fi
+
       - name: Run tests
         run: php artisan test
