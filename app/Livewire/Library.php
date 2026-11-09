@@ -4,8 +4,6 @@ namespace App\Livewire;
 
 use App\Models\LibraryResource;
 
-use App\Models\LibraryResource;
-
 use Illuminate\Contracts\View\View;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
