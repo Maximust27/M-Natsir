@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\SeoController;
 use App\Livewire\About;
 use App\Livewire\Articles;
-use App\Livewire\Contact;
 use App\Livewire\Home;
 use App\Livewire\Library;
 use App\Livewire\Media;
@@ -22,7 +21,7 @@ Route::livewire('/topik/{slug}', Topic::class)->name('topics.show');
 Route::livewire('/library', Library::class)->name('library');
 Route::livewire('/media', Media::class)->name('media');
 
-Route::get('/contact/cv', function () {
+Route::get('/cv/download', function () {
     $path = public_path('files/m-natsir-kongah-cv.pdf');
 
     abort_unless(is_file($path), 404);
@@ -44,9 +43,7 @@ Route::get('/contact/cv', function () {
             'Cache-Control' => 'no-store, no-cache, must-revalidate',
         ],
     );
-})->name('contact.cv.download');
-
-Route::livewire('/contact', Contact::class)->name('contact');
+})->name('cv.download');
 
 // Authentication remains session-based. There is deliberately no registration route.
 Route::prefix('admin')->name('admin.')->middleware('admin.no-cache')->group(function (): void {
