@@ -123,11 +123,6 @@ class About extends Component
                 'url' => 'https://id.linkedin.com/in/m-natsir-kongah-221615130',
             ],
             [
-                'source' => 'PPID PPATK',
-                'title' => 'Rekam peran kehumasan, keterbukaan informasi, dan layanan informasi publik.',
-                'url' => 'https://ppid.ppatk.go.id/?p=15022',
-            ],
-            [
                 'source' => 'Kumparan',
                 'title' => 'Tulisan mengenai professional money laundering dan perlindungan hak dalam asset recovery.',
                 'url' => 'https://kumparan.com/natsir-kongah',
