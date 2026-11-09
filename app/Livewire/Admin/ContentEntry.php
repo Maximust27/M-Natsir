@@ -211,6 +211,263 @@ class ContentEntry extends Component
         $this->notice = "Data {$module} berhasil {$operation}{$status}.";
     }
 
+    public function editRecord(int $id): void
+    {
+        $this->assertAdmin();
+        $record = $this->recordQuery()->findOrFail($id);
+        $this->editingId = $id;
+        $this->viewingId = null;
+        $this->pendingDeleteId = null;
+        $this->entry = $this->formValues($record);
+        $this->removeThumbnail = false;
+        $this->thumbnail = null;
+        $this->notice = null;
+        $this->resetValidation();
+    }
+
+    public function cancelEdit(): void
+    {
+        $this->assertAdmin();
+        $this->resetEditor();
+        $this->notice = null;
+    }
+
+    public function viewRecord(int $id): void
+    {
+        $this->assertAdmin();
+        $this->recordQuery()->withTrashed()->findOrFail($id);
+        $this->viewingId = $id;
+        $this->pendingDeleteId = null;
+    }
+
+    public function closeDetails(): void
+    {
+        $this->assertAdmin();
+        $this->viewingId = null;
+    }
+
+    public function updatePublication(int $id, bool $publish): void
+    {
+        $this->assertAdmin();
+
+        $record = $this->recordQuery()->findOrFail($id);
+        $record->is_published = $publish;
+        $record->save();
+
+        if ($this->editingId === $id) {
+            $this->entry['is_published'] = $publish;
+        }
+
+        $this->pendingDeleteId = null;
+        $this->notice = $publish ? 'Konten berhasil dipublikasikan.' : 'Konten berhasil dijadikan draf.';
+    }
+
+    public function requestDelete(int $id): void
+    {
+        $this->assertAdmin();
+        $this->recordQuery()->findOrFail($id);
+        $this->pendingDeleteId = $id;
+        $this->notice = null;
+    }
+
+    public function cancelDelete(): void
+    {
+        $this->assertAdmin();
+        $this->pendingDeleteId = null;
+    }
+
+    public function confirmDelete(): void
+    {
+        $this->assertAdmin();
+
+        if ($this->pendingDeleteId === null) {
+            abort(422);
+        }
+
+        $record = $this->recordQuery()->findOrFail($this->pendingDeleteId);
+        $record->delete(); // Soft delete keeps history, seed key, and uploaded files.
+
+        if ($this->editingId === $record->getKey()) {
+            $this->resetEditor();
+        }
+
+        if ($this->viewingId === $record->getKey()) {
+            $this->viewingId = null;
+        }
+
+        $this->pendingDeleteId = null;
+        $this->notice = 'Konten dipindahkan ke Sampah. Kamu masih bisa memulihkannya.';
+    }
+
+    public function restoreRecord(int $id): void
+    {
+        $this->assertAdmin();
+        $record = $this->recordQuery()->onlyTrashed()->findOrFail($id);
+        $record->is_published = false;
+        $record->restore(); // Always restore as draft to avoid accidental exposure.
+        $record->save();
+
+        $this->viewingId = null;
+        $this->notice = 'Konten berhasil dipulihkan sebagai draf.';
+    }
+
+    public function setStatusFilter(string $filter): void
+    {
+        $this->assertAdmin();
+
+        if (! in_array($filter, ['all', 'draft', 'published', 'trash'], true)) {
+            return;
+        }
+
+        $this->statusFilter = $filter;
+        $this->page = 1;
+        $this->pendingDeleteId = null;
+        $this->viewingId = null;
+    }
+
+    public function updatedSearch(): void
+    {
+        $this->page = 1;
+    }
+
+    public function goToPage(int $page): void
+    {
+        $this->assertAdmin();
+        $this->page = max(1, min($page, $this->resultPages()));
+    }
+
+    private function resultPages(): int
+    {
+        return max(1, (int) ceil($this->filteredQuery()->count() / self::PAGE_SIZE));
+    }
+
+    private function resetEditor(): void
+    {
+        $this->editingId = null;
+        $this->entry = $this->selected === '' ? [] : $this->defaults($this->selected);
+        $this->thumbnail = null;
+        $this->removeThumbnail = false;
+        $this->resetValidation();
+    }
+
+    /**
+     * Populate edit fields without changing the published date precision.
+     *
+     * The original catalogs include month-only dates such as "Agustus 2026".
+     * Keeping the date picker blank on edit avoids introducing a fake day.
+     *
+     * @return array<string, mixed>
+     */
+    private function formValues(Model $record): array
+    {
+        $common = [
+            'title' => $record->title,
+            'url' => $record->url,
+            'is_published' => $record->is_published,
+            'source_note' => $record->source_note ?? '',
+        ];
+
+        $specific = match ($this->selected) {
+            'articles' => [
+                'category' => $record->category,
+                'date' => '',
+                'source' => $record->source,
+                'excerpt' => $record->excerpt,
+                'is_primary_source' => $record->is_primary_source,
+            ],
+            'library' => [
+                'collection' => $record->collection,
+                'type' => $record->document_type,
+                'institution' => array_key_exists($record->institution, self::INSTITUTIONS)
+                    ? $record->institution : 'other',
+                'institution_other' => array_key_exists($record->institution, self::INSTITUTIONS)
+                    ? '' : $record->institution_label,
+                'year' => $record->year_label,
+                'topics' => $record->topics ?? [],
+                'author' => $record->author_label ?? '',
+                'role' => $record->role_label ?? '',
+                'summary' => $record->summary,
+                'language' => $record->language,
+            ],
+            'media' => [
+                'category' => $record->category,
+                'date' => '',
+                'outlet' => $record->outlet,
+                'role' => $record->role,
+                'summary' => $record->summary,
+                'topics_text' => implode(', ', $record->topics ?? []),
+                'thumbnail_url' => str_starts_with($record->thumbnail_url ?? '', 'https://')
+                    || str_starts_with($record->thumbnail_url ?? '', 'http://')
+                    ? $record->thumbnail_url : '',
+            ],
+        };
+
+        return array_replace($this->defaults($this->selected), $common, $specific);
+    }
+
+    private function tableName(): string
+    {
+        return match ($this->selected) {
+            'articles' => 'articles',
+            'library' => 'library_resources',
+            'media' => 'media_appearances',
+            default => abort(422),
+        };
+    }
+
+    private function recordQuery(): Builder
+    {
+        $model = match ($this->selected) {
+            'articles' => Article::class,
+            'library' => LibraryResource::class,
+            'media' => MediaAppearance::class,
+            default => abort(422),
+        };
+
+        return $model::query();
+    }
+
+    private function filteredQuery(): Builder
+    {
+        $query = $this->recordQuery();
+
+        match ($this->statusFilter) {
+            'draft' => $query->where('is_published', false),
+            'published' => $query->where('is_published', true),
+            'trash' => $query->onlyTrashed(),
+            default => null,
+        };
+
+        $search = trim($this->search);
+
+        if ($search !== '') {
+            $columns = match ($this->selected) {
+                'articles' => ['title', 'excerpt', 'source', 'url'],
+                'library' => ['title', 'summary', 'institution_label', 'author_label', 'url'],
+                'media' => ['title', 'summary', 'outlet', 'role', 'url'],
+            };
+
+            $term = '%'.mb_substr($search, 0, 120).'%';
+
+            $query->where(function (Builder $builder) use ($columns, $term): void {
+                foreach ($columns as $column) {
+                    $builder->orWhere($column, 'like', $term);
+                }
+            });
+        }
+
+        return $query;
+    }
+
+    private function deleteManagedThumbnail(string $url): void
+    {
+        $prefix = '/storage/media/thumbnails/';
+
+        if (str_starts_with($url, $prefix)) {
+            Storage::disk('public')->delete('media/thumbnails/'.basename($url));
+        }
+    }
+
     /**
      * @return array<string, mixed>
      */
