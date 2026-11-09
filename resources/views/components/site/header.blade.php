@@ -57,9 +57,9 @@
             <x-ui.nav-link :href="route('library')" :active="request()->routeIs('library')" wire:navigate>Library</x-ui.nav-link>
             <x-ui.nav-link :href="route('media')" :active="request()->routeIs('media')" wire:navigate>Media</x-ui.nav-link>
 
-            <x-ui.button :href="route('contact')" variant="primary" size="md" class="ml-2" wire:navigate>
-                Contact
-                <span aria-hidden="true">→</span>
+            <x-ui.button :href="route('cv.download')" variant="primary" size="md" class="ml-2" download="M-Natsir-Kongah-CV.pdf">
+                Unduh CV
+                <span aria-hidden="true">↓</span>
             </x-ui.button>
         </nav>
 
@@ -96,9 +96,9 @@
             <x-ui.nav-link :href="route('library')" :active="request()->routeIs('library')" wire:navigate class="w-full justify-start px-3" @click="mobileOpen = false">Library</x-ui.nav-link>
             <x-ui.nav-link :href="route('media')" :active="request()->routeIs('media')" wire:navigate class="w-full justify-start px-3" @click="mobileOpen = false">Media</x-ui.nav-link>
 
-            <x-ui.button :href="route('contact')" class="mt-2 w-full justify-between" wire:navigate @click="mobileOpen = false">
-                Contact
-                <span aria-hidden="true">→</span>
+            <x-ui.button :href="route('cv.download')" class="mt-2 w-full justify-between" download="M-Natsir-Kongah-CV.pdf" @click="mobileOpen = false">
+                Unduh CV
+                <span aria-hidden="true">↓</span>
             </x-ui.button>
         </div>
     </nav>

@@ -35,3 +35,6 @@ Audit dilakukan terhadap source code pada branch `main` sebelum perubahan fondas
 ## Verifikasi
 
 Jalankan `php artisan test --filter=SeoMetadataTest` atau `php artisan test`. Setelah domain production tersedia, periksa hasil HTML dan pratinjau berbagi tautan dengan URL HTTPS publik. URL localhost tidak dapat diindeks Google.
+
+
+> **Pembaruan 9 November 2026:** Tabel rute di atas adalah rekaman audit awal. Situs sekarang memiliki lima halaman publik utama; `/contact` dihapus (404). Unduhan CV berpindah ke `/cv`, sementara `/contact/cv` tetap mengarah ke `/cv` untuk kompatibilitas tautan lama. Lihat [perubahan Unduh CV](cv-download-contact-removal.md).

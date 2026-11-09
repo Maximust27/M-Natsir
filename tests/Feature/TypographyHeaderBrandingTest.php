@@ -91,7 +91,7 @@ it('enlarges every topic hub card while preserving its crawlable link', function
     }
 });
 
-it('replaces only the footer contact link with an admin placeholder', function () {
+it('retains the admin footer and removes Contact navigation without losing the CV action', function () {
     $html = $this->get(route('home'))->assertOk()->getContent();
 
     preg_match('/<footer\b.*?<\/footer>/s', $html, $match);
@@ -102,10 +102,11 @@ it('replaces only the footer contact link with an admin placeholder', function (
         ->toContain('Admin Page')
         ->not->toContain('>Contact</a>');
 
-    // The existing Contact page stays available until the admin/auth revision.
-    $this->get(route('contact'))->assertOk();
+    // The retired Contact page no longer exists, but the CV download remains accessible.
+    $this->get('/contact')->assertNotFound();
+    $this->get(route('home'))->assertSee('href="'.route('cv.download').'"', false);
 });
 
 it('still renders the article library media and about pages', function (string $page) {
     $this->get(route($page))->assertOk();
-})->with(['about', 'articles', 'library', 'media', 'contact']);
+})->with(['about', 'articles', 'library', 'media']);

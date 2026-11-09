@@ -205,15 +205,15 @@
     <section class="site-container pb-16 lg:pb-24">
         <div class="flex flex-col gap-7 bg-ink px-7 py-9 text-white sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:px-12">
             <div>
-                <h2 class="type-section-title ">Keperluan Akademik &amp; Media?</h2>
+                <h2 class="type-section-title">Keperluan Akademik &amp; Media?</h2>
                 <p class="type-body mt-3 max-w-2xl text-slate-300">
-                    Untuk kebutuhan wawancara, diskusi akademik, atau pengenalan narasumber, gunakan Media Hub agar permintaan dapat diarahkan dengan konteks yang tepat.
+                    Untuk kebutuhan wawancara, diskusi akademik, atau pengenalan narasumber, unduh Curriculum Vitae M. Natsir Kongah dalam format PDF.
                 </p>
             </div>
 
-            <x-ui.button :href="route('home') . '#contact'" variant="secondary" size="lg" class="shrink-0">
-                Buka Contact &amp; Media Hub
-                <span aria-hidden="true">→</span>
+            <x-ui.button :href="route('cv.download')" variant="secondary" size="lg" class="shrink-0" download="M-Natsir-Kongah-CV.pdf">
+                Unduh CV (PDF)
+                <span aria-hidden="true">↓</span>
             </x-ui.button>
         </div>
     </section>

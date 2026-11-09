@@ -71,7 +71,7 @@ it('renders one valid WebPage JSON-LD graph on other public routes', function (s
         ->and($page['description'])->toBe(config('seo.pages.'.$routeName.'.description'))
         ->and($page['inLanguage'])->toBe('id-ID')
         ->and($page['isPartOf']['@id'])->toBe(route('home').'#website');
-})->with(['articles', 'library', 'media', 'contact']);
+})->with(['articles', 'library', 'media']);
 
 it('uses the same canonical URL for JSON-LD on paginated and filtered pages', function () {
     foreach ([

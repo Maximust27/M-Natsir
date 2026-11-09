@@ -17,7 +17,7 @@ Perubahan ini dibuat **dari branch `feat/seo-topic-hubs`**, tanpa mengambil PR #
 - Menu desktop aktif mulai lebar `xl` (1280 px) untuk mencegah tabrakan ketika teks navigasi diperbesar. Menu mobile tetap tersedia di bawah lebar itu.
 
 ## Cek manual
-1. Buka Home, About, Articles, Library, Media, Contact dan halaman topik pada lebar 320, 375, 768, 1024, 1280 px.
+1. Buka Home, About, Articles, Library, Media, dan halaman topik pada lebar 320, 375, 768, 1024, 1280 px. Periksa tombol Unduh CV pada desktop dan mobile.
 2. Uji zoom browser 200%, tombol menu mobile, teks yang panjang, card, badges, footer, dan filter agar tidak terpotong.
 3. Cek logo SVG dengan zoom 200–300%: harus tetap tajam.
 4. Jalankan `npm run build` dan `php artisan test`.
@@ -40,3 +40,6 @@ Hanya memperbaiki copy dan layout homepage serta tautan footer. Fitur admin/data
 ## Kontrak lintas halaman
 
 Seluruh elemen konten kini mengikuti panduan pusat di [Sistem Tipografi](design-system-typography.md). Ukuran judul section **36–42 px** dan judul kartu **26–30 px** berlaku di Home, Articles, Library, Media, About, Topic dan halaman lainnya; bukan hanya Peta Kajian.
+
+
+> **Pembaruan 9 November 2026:** Catatan Contact di atas menjelaskan kondisi pada tahap desain lama. Pada versi terbaru, navbar tidak lagi menampilkan Contact; tombolnya diganti **Unduh CV**, halaman Contact dihapus, dan Admin Page tetap ada di footer. Lihat [revisi CV](cv-download-contact-removal.md).

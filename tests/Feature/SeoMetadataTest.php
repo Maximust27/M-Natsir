@@ -28,13 +28,12 @@ it('renders unique page metadata and social previews for all public pages', func
     'articles' => ['articles', 'Artikel Anti Pencucian Uang | M. Natsir Kongah'],
     'library' => ['library', 'Referensi Intelijen Keuangan | M. Natsir Kongah'],
     'media' => ['media', 'Wawancara & Media | M. Natsir Kongah'],
-    'contact' => ['contact', 'Kontak M. Natsir Kongah | Wawancara & Diskusi'],
 ]);
 
 it('keeps page descriptions distinct', function () {
     $descriptions = array_column(config('seo.pages'), 'description');
 
-    expect($descriptions)->toHaveCount(6);
+    expect($descriptions)->toHaveCount(5);
     expect(array_unique($descriptions))->toHaveCount(count($descriptions));
 });
 
