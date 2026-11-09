@@ -210,14 +210,14 @@
                 </a>
             </article>
 
-            <x-ui.card  :interactive="false" class="flex lg:min-h-[22rem] lg:flex-col lg:justify-center">
+            <x-ui.card :interactive="false" class="flex lg:min-h-[22rem] lg:flex-col lg:justify-center">
                 <x-ui.section-heading
                     title="Profil Profesional"
                     description="Kenali rekam pengalaman dan latar belakang profesional M. Natsir Kongah melalui curriculum vitae."
                 />
 
                 <div class="mt-8">
-                    <x-ui.button  :href="route('cv.download')" variant="outline" size="lg"  >
+                    <x-ui.button :href="route('cv.download')" variant="outline" size="lg">
                         Download CV
                         <span aria-hidden="true">→</span>
                     </x-ui.button>
