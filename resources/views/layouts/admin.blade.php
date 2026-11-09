@@ -24,9 +24,17 @@
                         <span class="type-meta mt-1 block text-slate-500">M. Natsir Kongah · Admin</span>
                     </span>
                 </a>
-                <a href="{{ route('home') }}" class="type-action inline-flex min-h-11 items-center gap-2 rounded-sm text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink">
-                    <span aria-hidden="true">←</span> Kembali ke website
-                </a>
+                <nav class="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="Navigasi admin">
+                    <a href="{{ route('home') }}" class="type-action inline-flex min-h-11 items-center gap-2 rounded-sm text-ink transition hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink">
+                        <span aria-hidden="true">←</span> Kembali ke website
+                    </a>
+                    @if (auth()->user()?->is_admin === true)
+                        <form method="POST" action="{{ route('admin.logout') }}">
+                            @csrf
+                            <x-ui.button type="submit" variant="outline" size="sm">Keluar</x-ui.button>
+                        </form>
+                    @endif
+                </nav>
             </div>
         </header>
 
