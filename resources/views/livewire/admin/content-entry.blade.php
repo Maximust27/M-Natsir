@@ -312,7 +312,14 @@
                     <h3 id="admin-list-heading" class="type-section-title mt-3 text-ink">Daftar {{ $modules[$selected]['title'] }}</h3>
                     <p class="type-body mt-3 text-slate-500">Lihat, cari, edit, terbitkan, jadikan draf, atau pindahkan konten ke Sampah tanpa membuka phpMyAdmin.</p>
                 </div>
-                <x-ui.badge variant="neutral">{{ $totalResults }} data ditemukan</x-ui.badge>
+                <div class="flex flex-wrap items-center gap-3">
+                    <x-ui.badge variant="neutral">{{ $totalResults }} data ditemukan</x-ui.badge>
+                    @if ($editingId)
+                        <a href="#admin-content-form" class="type-action inline-flex min-h-11 items-center gap-2 font-semibold text-accent underline underline-offset-4">↑ Ke form edit</a>
+                    @elseif ($viewingId)
+                        <a href="#admin-content-details" class="type-action inline-flex min-h-11 items-center gap-2 font-semibold text-accent underline underline-offset-4">↑ Ke detail</a>
+                    @endif
+                </div>
             </div>
 
             <div class="mt-7 grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
@@ -347,7 +354,7 @@
             </div>
 
             @if ($details)
-                <aside class="mt-7 border-l-2 border-accent bg-paper p-5 sm:p-7" aria-labelledby="admin-details-title">
+                <aside id="admin-content-details" class="mt-7 scroll-mt-12 border-l-2 border-accent bg-paper p-5 sm:p-7" aria-labelledby="admin-details-title">
                     <div class="flex flex-wrap items-start justify-between gap-4">
                         <div class="min-w-0">
                             <p class="type-eyebrow text-accent">Detail metadata · Hanya admin</p>
