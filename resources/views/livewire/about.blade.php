@@ -198,13 +198,13 @@
     <section class="site-container pb-16 lg:pb-24">
         <div class="flex flex-col gap-7 bg-ink px-7 py-9 text-white sm:px-10 lg:flex-row lg:items-center lg:justify-between lg:px-12">
             <div>
-                <h2 class="type-section-title ">Unduh Curriculum Vitae</h2>
+                <h2 class="type-section-title">Unduh Curriculum Vitae</h2>
                 <p class="type-body mt-3 max-w-2xl text-slate-300">
                     Lihat riwayat profesional, pengalaman, dan informasi akademik M. Natsir Kongah melalui dokumen CV yang dapat diunduh dalam format PDF.
                 </p>
             </div>
 
-            <x-ui.button  :href="route('cv.download')" variant="secondary" size="lg" class="shrink-0">
+            <x-ui.button :href="route('cv.download')" variant="secondary" size="lg" class="shrink-0">
                 Download CV
                 <span aria-hidden="true">→</span>
             </x-ui.button>
