@@ -1,58 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# M-Natsir — Content Website and Admin CMS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel + Livewire site with public content, an authenticated admin area, and dedicated SEO/performance work.
 
-## About Laravel
+**Public demo:** Not currently provided. Review the code on GitHub or follow the local setup instructions below. This repository is a portfolio project, not a claim of production deployment.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## What it demonstrates
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Area | Evidence in source code |
+| --- | --- |
+| Public content | Home, About, Articles, Topic, Library and Media Livewire routes (`routes/web.php`) |
+| Admin area | Protected login and admin dashboard routes (`routes/web.php`) |
+| SEO | Sitemap, robots, metadata and structured-data implementation with related tests |
+| Quality evidence | Dedicated tests for admin authentication, content CRUD, SEO metadata and performance (`tests/Feature`) |
+| Documentation | Specific engineering notes under `docs/` including `docs/admin-content-crud.md` |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Stack
 
-## Learning Laravel
+PHP, Laravel 13, Livewire, Blade, Tailwind CSS, Vite, Pest
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Architecture
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```text
+Browser
+  -> UI (React/Inertia or Blade/Livewire, depending on this project)
+  -> Laravel routes / middleware
+  -> Controllers or Livewire components
+  -> Eloquent models and database
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Refer to `routes/web.php` and `app/` for this project's implementation details.
 
-## Contributing
+## Local development
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Requirements: a compatible PHP/Composer environment, Node.js/npm, and a database configured for Laravel.
 
-## Code of Conduct
+```bash
+git clone https://github.com/Maximust27/M-Natsir.git
+cd M-Natsir
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Configure your `.env` database settings and run:
 
-## Security Vulnerabilities
+```bash
+php artisan migrate
+php artisan serve
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+In another terminal run `npm run dev`. Run tests with `php artisan test` and check production asset compilation using `npm run build`.
 
-## License
+**Verification:** These commands are a standard starting point, not evidence that this repository was installed or tested during this documentation change. Project-specific seed data or configuration may be needed. Do not commit secrets or real personal data.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Source code walkthrough
+
+- [`routes/web.php`](./routes/web.php)
+- [`tests/Feature/AdminContentCrudTest.php`](./tests/Feature/AdminContentCrudTest.php)
+- [`tests/Feature/TechnicalSeoTest.php`](./tests/Feature/TechnicalSeoTest.php)
+- [`docs/admin-content-crud.md`](./docs/admin-content-crud.md)
+- [`docs/performance.md`](./docs/performance.md)
+
+Read [PORTFOLIO_CASE_STUDY.md](./docs/PORTFOLIO_CASE_STUDY.md) for engineering decisions, current limitations, and proposed verification tasks.
+
+## Engineering next steps
+
+- Avoid publishing production admin credentials or private content. Performance and SEO claims should cite actual dated results only after rerunning the audits.
+- Review and run existing Pest tests; validate the current SEO/performance results rather than presenting unverified numeric improvements.
+- Capture screenshots using fictional sample data and record a short walkthrough.
+- Add a verified demo and reproducible setup instructions when available.
+
+## Recruiter note
+
+The documentation describes code that is visible in this repository. It does **not** claim real deployments, production users, validated performance gains, or a completed security assessment. Any team contribution should be described accurately before including it on a CV.
+
+**Maintained by:** [@Maximust27](https://github.com/Maximust27) · [Portfolio](https://maximust27.github.io/)
